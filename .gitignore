@@ -1,14 +1,19 @@
-# Python
+# Python / Django
+__pycache__/
+*.py[cod]
+*$py.class
 .venv/
 venv/
 env/
-*.pyc
-__pycache__/
+*.sqlite3
+*.log
 *.egg-info/
 dist/
 build/
+staticfiles/
+media/
 
-# Android/Gradle
+# Android / Gradle
 .gradle/
 .kotlin/
 build/
@@ -16,31 +21,40 @@ app/build/
 *.apk
 *.aab
 *.jks
+*.keystore
 local.properties
 secrets.properties
+*.iml
+/captures/
+.externalNativeBuild/
+.cxx/
 
-# IDE
+# IDEs and Editors
 .idea/
 .vscode/
 *.swp
 *.swo
 *~
 
-# OS
+# Operating System
 .DS_Store
 Thumbs.db
 
-# Backup files
+# Backups and Temporary files
 *.zip
 *.bak
 *.tmp
-
-# Test/Build artifacts
-**/test*.html
 vocabulary_backup.ab
 diatree_extracted/
 plans/
+android/*.html
 
-# Environment
+# Test / Build artifacts
+**/test*.html
+!**/src/test/resources/**/test*.html
+
+
+# Environment Files
 .env
 .env.local
+.env.*

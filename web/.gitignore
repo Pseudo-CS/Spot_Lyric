@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.log
+*.egg-info/
+.env
+venv/
+.venv/
+staticfiles/
+media/

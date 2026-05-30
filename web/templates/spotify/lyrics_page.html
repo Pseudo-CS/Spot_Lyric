@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ song_name }} - {{ artist_name }} | SpotLyric</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --spotify-green: #1DB954;
+            --spotify-green-hover: #1ed760;
+            --spotify-black: #191414;
+            --spotify-dark-gray: #121212;
+            --spotify-gray: #282828;
+            --spotify-light-gray: #404040;
+            --spotify-text: #ffffff;
+            --spotify-text-secondary: #b3b3b3;
+            --spotify-accent: #1f2937;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--spotify-text);
+            background: linear-gradient(135deg, var(--spotify-dark-gray) 0%, var(--spotify-black) 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2rem 0;
+        }
+
+        .song-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--spotify-green), var(--spotify-green-hover));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-shadow: none;
+        }
+
+        .artist-name {
+            font-size: 1.5rem;
+            color: var(--spotify-text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .metadata {
+            background: rgba(40, 40, 40, 0.6);
+            padding: 1rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .lyrics-container {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Layout - Single format for all devices */
+        .lyrics-container {
+            max-height: 80vh;
+            overflow-y: auto;
+            padding-right: 1rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--spotify-green) var(--spotify-gray);
+        }
+
+        .lyrics-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .lyrics-container::-webkit-scrollbar-track {
+            background: var(--spotify-gray);
+            border-radius: 4px;
+        }
+
+        .lyrics-container::-webkit-scrollbar-thumb {
+            background: var(--spotify-green);
+            border-radius: 4px;
+        }
+
+        .lyrics-container::-webkit-scrollbar-thumb:hover {
+            background: var(--spotify-green-hover);
+        }
+
+        /* Interleaved Layout for all devices */
+        .interleaved-lyrics {
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .lyrics-line {
+            margin-bottom: 1rem;
+        }
+
+        .original-line {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .translated-line {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            padding-left: 1rem;
+            border-left: 3px solid var(--spotify-green);
+            margin-bottom: 0.8rem;
+        }
+
+        /* AI Translation View - Equal font sizes for alignment */
+        #ai-view .original-line,
+        #ai-view .translated-line {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+        }
+
+        #ai-view .original-line {
+            color: var(--spotify-green);
+            font-style: normal;
+        }
+
+        #ai-view .translated-line {
+            color: var(--text-secondary);
+            font-style: normal;
+            padding-left: 1rem;
+            border-left: 3px solid var(--spotify-green);
+        }
+
+        .lyrics-section {
+            background: rgba(40, 40, 40, 0.8);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .lyrics-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .lyrics-section.active {
+            border-color: var(--spotify-green);
+            box-shadow: 0 0 20px rgba(29, 185, 84, 0.2);
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--spotify-green);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .lyrics-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--spotify-text);
+            white-space: pre-line;
+        }
+
+        .empty-lyrics {
+            color: var(--spotify-text-secondary);
+            font-style: italic;
+            text-align: center;
+            padding: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .manage-button {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(29, 185, 84, 0.1);
+            color: var(--spotify-green);
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            margin-left: 1rem;
+            border: 2px solid var(--spotify-green);
+        }
+
+        .manage-button:hover {
+            background: var(--spotify-green);
+            color: var(--spotify-black);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(29, 185, 84, 0.3);
+        }
+
+        .btn-spotify {
+            background: var(--spotify-green);
+            color: var(--spotify-black);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .btn-spotify:hover {
+            background: var(--spotify-green-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(29, 185, 84, 0.3);
+        }
+
+        .btn-spotify:disabled {
+            background: #666;
+            color: #999;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .bottom-navigation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(25, 20, 20, 0.5);
+            border-radius: 15px;
+            border: 1px solid rgba(29, 185, 84, 0.2);
+        }
+
+        .bottom-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--spotify-green);
+            color: var(--spotify-black);
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            gap: 0.5rem;
+            min-width: 140px;
+        }
+
+        .bottom-button:hover {
+            background: var(--spotify-green-hover);
+            color: var(--spotify-black);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(29, 185, 84, 0.3);
+            text-decoration: none;
+        }
+
+        .bottom-button.source-button {
+            background: rgba(29, 185, 84, 0.1);
+            color: var(--spotify-green);
+            border: 2px solid var(--spotify-green);
+        }
+
+        .bottom-button.source-button:hover {
+            background: var(--spotify-green);
+            color: var(--spotify-black);
+        }
+
+        .button-text {
+            font-size: 0.95rem;
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0.5rem;
+            }
+
+            .song-title {
+                font-size: 2rem;
+            }
+
+            .artist-name {
+                font-size: 1.3rem;
+            }
+
+            .lyrics-section {
+                padding: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+            }
+
+            .lyrics-content {
+                font-size: 1rem;
+                max-height: 400px;
+            }
+
+            .back-button {
+                width: 56px;
+                height: 56px;
+                margin: 1.5rem auto;
+            }
+
+            .back-button i {
+                font-size: 1.4rem;
+            }
+
+            .manage-button {
+                margin-left: 0;
+                margin-top: 1rem;
+                display: block;
+                text-align: center;
+                width: auto;
+                max-width: 200px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            /* AI view alignment for mobile */
+            #ai-view .original-line,
+            #ai-view .translated-line {
+                font-size: 1.1rem;
+                margin-bottom: 0.3rem;
+            }
+
+            /* Mobile tooltip adjustments */
+            .word-tooltip {
+                font-size: 0.8rem;
+                padding: 6px 10px;
+                max-width: 200px;
+                white-space: normal;
+                word-wrap: break-word;
+            }
+
+            .clickable-word {
+                padding: 3px 6px;
+                margin: 1px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .back-button {
+                width: 52px;
+                height: 52px;
+                margin: 1rem auto;
+            }
+
+            .back-button i {
+                font-size: 1.3rem;
+            }
+
+            .back-button-label {
+                font-size: 0.8rem;
+            }
+
+            .manage-button {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .toggle-container {
+                margin-bottom: 1.5rem;
+                gap: 0.8rem;
+            }
+
+            .toggle-label {
+                font-size: 0.9rem;
+            }
+
+            /* AI view alignment for smallest screens */
+            #ai-view .original-line,
+            #ai-view .translated-line {
+                font-size: 1rem;
+            }
+
+            /* Smaller tooltip for mobile */
+            .word-tooltip {
+                font-size: 0.75rem;
+                padding: 4px 8px;
+                max-width: 150px;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Toggle Switch Styles */
+        .toggle-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--spotify-gray);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .toggle-switch.active {
+            background: var(--spotify-green);
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--spotify-text);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(30px);
+            background: var(--spotify-black);
+        }
+
+        .toggle-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--spotify-text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .toggle-label.active {
+            color: var(--spotify-green);
+        }
+
+        /* Content sections visibility */
+        .lyrics-view {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .lyrics-view.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Click-to-translate feature for romanized words */
+        .clickable-word {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 2px 4px;
+            border-radius: 4px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .clickable-word:hover {
+            background: rgba(29, 185, 84, 0.2);
+            color: var(--spotify-green);
+        }
+
+        .clickable-word.active {
+            background: var(--spotify-green);
+            color: var(--spotify-black);
+        }
+
+        /* Translation tooltip */
+        .word-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--spotify-dark-gray);
+            color: var(--spotify-text);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--spotify-green);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .word-tooltip.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .word-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: var(--spotify-green);
+        }
+    </style>
+</head>
+<body>
+    <div class="container fade-in">
+        <div class="header">
+            <h1 class="song-title">{{ song_name }}</h1>
+            <p class="artist-name">by {{ artist_name }}</p>
+
+            {% if lyrics %}
+            <div class="metadata">
+                <i class="bi bi-music-note-beamed me-2"></i>
+                Lyrics Available
+            </div>
+            {% endif %}
+        </div>
+
+        <a href="/spotify/manage/" class="manage-button">
+            <i class="bi bi-gear me-2"></i>
+            Manage Songs
+        </a>
+
+        {% if not lyrics or not lyrics.has_lyrics %}
+            <div class="lyrics-section">
+                <div class="empty-lyrics">
+                    <i class="bi bi-music-note-list display-4 mb-3"></i>
+                    <h3>No lyrics available</h3>
+                    <p>We couldn't find lyrics for this song in our database.</p>
+                </div>
+            </div>
+
+            <!-- Bottom navigation for no lyrics case -->
+            <div class="bottom-navigation">
+                <a href="/spotify/" class="bottom-button back-button">
+                    <i class="bi bi-arrow-left"></i>
+                    <span class="button-text">Back to SpotLyric</span>
+                </a>
+            </div>
+        {% else %}
+            <!-- Toggle Switch -->
+            {% if lyrics.ai_translation or lyrics.ai_romanized %}
+            <div class="toggle-container">
+                <span class="toggle-label active" id="normal-label">Original Lyrics</span>
+                <div class="toggle-switch" id="lyrics-toggle">
+                    <div class="toggle-slider"></div>
+                </div>
+                <span class="toggle-label" id="ai-label">AI Translation</span>
+            </div>
+            {% endif %}
+
+            <!-- Normal Lyrics View (Default) -->
+            <div class="lyrics-container lyrics-view active" id="normal-view">
+                <div class="lyrics-section">
+                    <div class="section-title">
+                        <i class="bi bi-music-note-beamed"></i>
+                        Lyrics with Translation
+                    </div>
+                    <div class="interleaved-lyrics" id="interleaved-content">
+                        <!-- Content will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Translation View -->
+            {% if lyrics.ai_translation or lyrics.ai_romanized %}
+            <div class="lyrics-container lyrics-view" id="ai-view">
+                <div class="lyrics-section">
+                    <div class="section-title">
+                        <i class="bi bi-translate"></i>
+                        AI Translation & Romanization
+                    </div>
+                    <div class="interleaved-lyrics" id="ai-interleaved-content">
+                        <!-- Content will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <!-- Show message if AI translations are not available -->
+            <div class="lyrics-container">
+                <div class="lyrics-section">
+                    <div class="section-title">
+                        <i class="bi bi-music-note-beamed"></i>
+                        Lyrics with Translation
+                    </div>
+                    <div class="interleaved-lyrics" id="interleaved-content">
+                        <!-- Content will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="lyrics-section" style="background: rgba(29, 185, 84, 0.1); border-color: var(--spotify-green);">
+                    <div class="section-title" style="color: var(--spotify-green);">
+                        <i class="bi bi-translate"></i>
+                        AI Translation & Romanization
+                    </div>
+                    <div class="empty-lyrics">
+                        <p>AI translation and romanization are not yet available for this song.</p>
+                        {% if bookmark_id %}
+                        <button id="ai-translate-btn" class="btn btn-spotify"
+                                data-bookmark-id="{{ bookmark_id }}"
+                                data-song="{{ song_name }}"
+                                data-artist="{{ artist_name }}">
+                            <i class="bi bi-translate"></i>
+                            Generate AI Translation
+                        </button>
+                        {% else %}
+                        <p>Use the "AI Translate" button in the <a href="/spotify/manage/" style="color: var(--spotify-green);">Manage Songs</a> page to generate them.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Bottom navigation with source link and back button -->
+            <div class="bottom-navigation">
+                {% if lyrics.source_url %}
+                    <a href="{{ lyrics.source_url }}" target="_blank" rel="noopener" class="bottom-button source-button">
+                        <i class="bi bi-link-45deg"></i>
+                        <span class="button-text">View Source</span>
+                    </a>
+                {% endif %}
+
+                <a href="/spotify/" class="bottom-button back-button">
+                    <i class="bi bi-arrow-left"></i>
+                    <span class="button-text">Back to SpotLyric</span>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) {
+                return parts.pop().split(';').shift();
+            }
+            return '';
+        }
+
+        // Create interleaved lyrics for normal view with clickable words
+        function createInterleavedLyrics() {
+            const originalLyrics = `{{ lyrics.original_lyrics|escapejs }}`;
+            const translatedLyrics = `{{ lyrics.translated_lyrics|escapejs }}`;
+            const aiRomanized = `{{ lyrics.ai_romanized|escapejs }}`;
+            const aiTranslation = `{{ lyrics.ai_translation|escapejs }}`;
+
+            if (!originalLyrics || !translatedLyrics) {
+                return;
+            }
+
+            const originalLines = originalLyrics.split('\n').filter(line => line.trim());
+            const translatedLines = translatedLyrics.split('\n').filter(line => line.trim());
+
+            // Use AI data for word mapping if available
+            const aiRomanizedLines = aiRomanized ? aiRomanized.split('\n').filter(line => line.trim()) : [];
+            const aiTranslationLines = aiTranslation ? aiTranslation.split('\n').filter(line => line.trim()) : [];
+
+            const interleavedContainer = document.getElementById('interleaved-content');
+            if (!interleavedContainer) return;
+
+            interleavedContainer.innerHTML = '';
+
+            const maxLines = Math.max(originalLines.length, translatedLines.length);
+
+            for (let i = 0; i < maxLines; i++) {
+                const lineContainer = document.createElement('div');
+                lineContainer.className = 'lyrics-line';
+
+                if (i < originalLines.length && originalLines[i].trim()) {
+                    const originalDiv = document.createElement('div');
+                    originalDiv.className = 'original-line';
+
+                    // Use AI translation for word mapping if available, otherwise fall back to original translation
+                    const translationForMapping = (i < aiTranslationLines.length && aiTranslationLines[i]) ?
+                        aiTranslationLines[i] : (translatedLines[i] || '');
+
+                    // Make words clickable for translation lookup
+                    const clickableContent = makeWordsClickable(originalLines[i], translationForMapping);
+                    originalDiv.innerHTML = clickableContent;
+
+                    lineContainer.appendChild(originalDiv);
+                }
+
+                if (i < translatedLines.length && translatedLines[i].trim()) {
+                    const translatedDiv = document.createElement('div');
+                    translatedDiv.className = 'translated-line';
+                    translatedDiv.textContent = translatedLines[i];
+                    lineContainer.appendChild(translatedDiv);
+                }
+
+                if (lineContainer.children.length > 0) {
+                    interleavedContainer.appendChild(lineContainer);
+                }
+            }
+        }
+
+        // Make individual words clickable and create word-to-word mapping
+        function makeWordsClickable(originalLine, translatedLine) {
+            const originalWords = originalLine.trim().split(/\s+/);
+            const translatedWords = translatedLine.trim().split(/\s+/);
+
+            return originalWords.map((word, index) => {
+                const cleanWord = word.replace(/[.,!?;:()"']/g, ''); // Remove punctuation for matching
+                const correspondingTranslation = translatedWords[index] || 'No translation';
+
+                return `<span class="clickable-word" data-translation="${correspondingTranslation}" onclick="showWordTranslation(this)">${word}</span>`;
+            }).join(' ');
+        }
+
+        // Show translation tooltip for clicked word
+        function showWordTranslation(wordElement) {
+            // Remove any existing tooltips
+            document.querySelectorAll('.word-tooltip').forEach(tooltip => tooltip.remove());
+
+            // Remove active state from other words
+            document.querySelectorAll('.clickable-word.active').forEach(word => word.classList.remove('active'));
+
+            const translation = wordElement.getAttribute('data-translation');
+
+            // Create tooltip
+            const tooltip = document.createElement('div');
+            tooltip.className = 'word-tooltip';
+            tooltip.textContent = translation;
+
+            // Position tooltip
+            wordElement.appendChild(tooltip);
+            wordElement.classList.add('active');
+
+            // Show tooltip with animation
+            setTimeout(() => {
+                tooltip.classList.add('show');
+            }, 10);
+
+            // Auto-hide tooltip after 3 seconds
+            setTimeout(() => {
+                if (tooltip.parentNode) {
+                    tooltip.classList.remove('show');
+                    setTimeout(() => {
+                        if (tooltip.parentNode) {
+                            tooltip.remove();
+                            wordElement.classList.remove('active');
+                        }
+                    }, 200);
+                }
+            }, 3000);
+        }
+
+        // Hide tooltip when clicking elsewhere
+        document.addEventListener('click', function(event) {
+            if (!event.target.classList.contains('clickable-word')) {
+                document.querySelectorAll('.word-tooltip').forEach(tooltip => {
+                    tooltip.classList.remove('show');
+                    setTimeout(() => {
+                        if (tooltip.parentNode) {
+                            tooltip.remove();
+                        }
+                    }, 200);
+                });
+                document.querySelectorAll('.clickable-word.active').forEach(word => {
+                    word.classList.remove('active');
+                });
+            }
+        });
+
+        // Create interleaved AI translations (romanized + word-to-word translation)
+        function createAIInterleavedLyrics() {
+            const romanizedLyrics = `{{ lyrics.ai_romanized|escapejs }}`;
+            const aiTranslation = `{{ lyrics.ai_translation|escapejs }}`;
+
+            if (!romanizedLyrics && !aiTranslation) {
+                return;
+            }
+
+            const romanizedLines = romanizedLyrics ? romanizedLyrics.split('\n').filter(line => line.trim()) : [];
+            const translationLines = aiTranslation ? aiTranslation.split('\n').filter(line => line.trim()) : [];
+
+            const aiInterleavedContainer = document.getElementById('ai-interleaved-content');
+            if (!aiInterleavedContainer) return;
+
+            aiInterleavedContainer.innerHTML = '';
+
+            const maxLines = Math.max(romanizedLines.length, translationLines.length);
+
+            for (let i = 0; i < maxLines; i++) {
+                const lineContainer = document.createElement('div');
+                lineContainer.className = 'lyrics-line';
+
+                // Add romanized line first (acts as the "original" line)
+                if (i < romanizedLines.length && romanizedLines[i].trim()) {
+                    const romanizedDiv = document.createElement('div');
+                    romanizedDiv.className = 'original-line';
+                    romanizedDiv.textContent = romanizedLines[i];
+                    lineContainer.appendChild(romanizedDiv);
+                }
+
+                // Add English word-to-word translation (acts as the "translated" line)
+                if (i < translationLines.length && translationLines[i].trim()) {
+                    const translationDiv = document.createElement('div');
+                    translationDiv.className = 'translated-line';
+                    translationDiv.textContent = translationLines[i];
+                    lineContainer.appendChild(translationDiv);
+                }
+
+                if (lineContainer.children.length > 0) {
+                    aiInterleavedContainer.appendChild(lineContainer);
+                }
+            }
+        }
+
+        // Toggle functionality between normal and AI translations
+        function initializeToggle() {
+            const toggle = document.getElementById('lyrics-toggle');
+            const normalView = document.getElementById('normal-view');
+            const aiView = document.getElementById('ai-view');
+            const normalLabel = document.getElementById('normal-label');
+            const aiLabel = document.getElementById('ai-label');
+
+            if (!toggle || !normalView || !aiView) {
+                return; // Toggle not available
+            }
+
+            let isAiView = false;
+
+            toggle.addEventListener('click', function() {
+                isAiView = !isAiView;
+
+                // Update toggle appearance
+                toggle.classList.toggle('active', isAiView);
+
+                // Update label styles
+                normalLabel.classList.toggle('active', !isAiView);
+                aiLabel.classList.toggle('active', isAiView);
+
+                // Switch views with fade effect
+                if (isAiView) {
+                    normalView.style.opacity = '0';
+                    setTimeout(() => {
+                        normalView.classList.remove('active');
+                        aiView.classList.add('active');
+                        aiView.style.opacity = '0';
+                        setTimeout(() => {
+                            aiView.style.opacity = '1';
+                        }, 50);
+                    }, 200);
+                } else {
+                    aiView.style.opacity = '0';
+                    setTimeout(() => {
+                        aiView.classList.remove('active');
+                        normalView.classList.add('active');
+                        normalView.style.opacity = '0';
+                        setTimeout(() => {
+                            normalView.style.opacity = '1';
+                        }, 50);
+                    }, 200);
+                }
+            });
+        }
+
+        // AI Translate functionality
+        function initializeAITranslate() {
+            const aiTranslateBtn = document.getElementById('ai-translate-btn');
+            if (!aiTranslateBtn) return;
+
+            aiTranslateBtn.addEventListener('click', function() {
+                const songName = this.dataset.song;
+                const artistName = this.dataset.artist;
+
+                // Show modal to search for lyrics sources
+                showAITranslateModal(songName, artistName);
+            });
+        }
+
+        function showAITranslateModal(songName, artistName) {
+            // Create modal for source selection
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.9);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                backdrop-filter: blur(5px);
+            `;
+            modal.id = 'ai-translate-modal';
+
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: var(--spotify-gray);
+                border-radius: 20px;
+                padding: 2rem;
+                max-width: 900px;
+                width: 90%;
+                max-height: 85vh;
+                overflow-y: auto;
+                border: 2px solid var(--spotify-green);
+                box-shadow: 0 10px 50px rgba(29, 185, 84, 0.3);
+            `;
+
+            modalContent.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h3 style="color: var(--spotify-green); margin: 0; font-size: 1.5rem;">
+                        <i class="bi bi-translate me-2"></i>
+                        AI Translate: ${songName} - ${artistName}
+                    </h3>
+                    <button onclick="document.getElementById('ai-translate-modal').remove()"
+                            style="background: none; border: none; color: var(--spotify-text); font-size: 1.5rem; cursor: pointer; padding: 0.5rem;">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+                <div id="ai-translate-content" style="min-height: 200px;">
+                    <div style="text-align: center; padding: 3rem;">
+                        <div style="display: inline-block; width: 50px; height: 50px; border: 4px solid var(--spotify-green); border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                        <p style="margin-top: 1rem; color: var(--spotify-text-secondary);">Searching for lyrics sources...</p>
+                    </div>
+                </div>
+            `;
+
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+
+            // Small delay to ensure DOM is ready
+            setTimeout(() => {
+                // Search for lyrics sources
+            fetch('{% url "spotify:ai-translate-search" %}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    song_name: songName,
+                    artist_name: artistName
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    displayLyricsSources(data.sources, songName, artistName);
+                } else {
+                    const contentElement = document.getElementById('ai-translate-content');
+                    if (contentElement) {
+                        contentElement.innerHTML = `
+                            <div style="padding: 2rem; text-align: center; background: rgba(220, 53, 69, 0.1); border-radius: 15px; border: 1px solid #dc3545;">
+                                <i class="bi bi-exclamation-triangle" style="font-size: 3rem; color: #dc3545;"></i>
+                                <h5 style="color: #dc3545; margin-top: 1rem;">Search Failed</h5>
+                                <p style="color: var(--spotify-text-secondary);">${data.error || 'Failed to search for lyrics sources'}</p>
+                            </div>
+                        `;
+                    } else {
+                        console.error('ai-translate-content element not found');
+                    }
+                }
+            })
+            .catch(error => {
+                const contentElement = document.getElementById('ai-translate-content');
+                if (contentElement) {
+                    contentElement.innerHTML = `
+                        <div style="padding: 2rem; text-align: center; background: rgba(220, 53, 69, 0.1); border-radius: 15px; border: 1px solid #dc3545;">
+                            <i class="bi bi-exclamation-triangle" style="font-size: 3rem; color: #dc3545;"></i>
+                            <h5 style="color: #dc3545; margin-top: 1rem;">Network Error</h5>
+                            <p style="color: var(--spotify-text-secondary);">Failed to search: ${error.message}</p>
+                        </div>
+                    `;
+                } else {
+                    console.error('ai-translate-content element not found');
+                }
+            });
+            }, 100); // 100ms delay to ensure DOM is ready
+        }
+
+        function displayLyricsSources(sources, songName, artistName) {
+            const content = document.getElementById('ai-translate-content');
+            if (!content) return;
+
+            // Show AI generation option for new songs
+            const aiGenerationCard = `
+                <div style="background: var(--spotify-light-gray); padding: 1.5rem; border-radius: 15px; margin-bottom: 1rem; border: 1px solid var(--spotify-green); transition: all 0.3s ease;">
+                    <h6 style="color: var(--spotify-green); margin-bottom: 0.75rem; font-size: 1.1rem;">
+                        <i class="bi bi-robot me-2"></i>
+                        AI Lyrics Generation
+                    </h6>
+                    <p style="font-size: 0.9rem; color: var(--spotify-text-secondary); margin-bottom: 0.75rem; line-height: 1.5;">
+                        Generate AI-powered lyrics for this song using advanced language models.
+                    </p>
+                    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                        <button onclick="generateAILyrics('${songName}', '${artistName}', '')"
+                                style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; width: 100%;"
+                                onmouseover="this.style.background='linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%)'; this.style.transform='translateY(-2px)'"
+                                onmouseout="this.style.background='linear-gradient(135deg, #667eea 0%, #764ba2 100%)'; this.style.transform='translateY(0)'">
+                            <i class="bi bi-robot me-1"></i>
+                            Generate AI Lyrics
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            if (!sources || sources.length === 0) {
+                content.innerHTML = `
+                    <div style="padding: 2rem; text-align: center; background: rgba(13, 110, 253, 0.1); border-radius: 15px; border: 1px solid #0d6efd;">
+                        <i class="bi bi-info-circle" style="font-size: 3rem; color: #0d6efd;"></i>
+                        <h5 style="color: #0d6efd; margin-top: 1rem;">No Sources Found</h5>
+                        <p style="color: var(--spotify-text-secondary);">No lyrics sources found for translation.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const sourcesHtml = sources.map((source, index) => `
+                <div style="background: var(--spotify-light-gray); padding: 1.5rem; border-radius: 15px; margin-bottom: 1rem; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease;" onmouseover="this.style.borderColor='var(--spotify-green)'" onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.1)'">
+                    <h6 style="color: var(--spotify-green); margin-bottom: 0.75rem; font-size: 1.1rem;">
+                        <i class="bi bi-music-note-beamed me-2"></i>
+                        ${source.title}
+                    </h6>
+                    <p style="font-size: 0.9rem; color: var(--spotify-text-secondary); margin-bottom: 0.75rem; line-height: 1.5;">
+                        ${source.snippet || 'No description available'}
+                    </p>
+                    <small style="color: var(--spotify-text-secondary); display: block; margin-bottom: 1rem; word-break: break-all;">
+                        <i class="bi bi-link-45deg me-1"></i>
+                        ${source.url}
+                    </small>
+                    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                        <button onclick="window.open('${source.url}', '_blank')"
+                                style="background: rgba(255, 255, 255, 0.1); color: var(--spotify-text); border: 1px solid rgba(255, 255, 255, 0.2); padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; font-weight: 500; transition: all 0.3s ease;"
+                                onmouseover="this.style.background='rgba(255, 255, 255, 0.2)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.1)'">
+                            <i class="bi bi-box-arrow-up-right me-1"></i>
+                            Visit Source
+                        </button>
+                        <button onclick="extractAndTranslate('${songName}', '${artistName}', '${source.url}')"
+                                style="background: var(--spotify-green); color: var(--spotify-black); border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; font-weight: 600; transition: all 0.3s ease;"
+                                onmouseover="this.style.background='var(--spotify-green-hover)'" onmouseout="this.style.background='var(--spotify-green)'">
+                            <i class="bi bi-check-circle me-1"></i>
+                            Select & Extract
+                        </button>
+                        <button onclick="generateAILyrics('${songName}', '${artistName}', '${source.url}')"
+                                style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; font-weight: 600; transition: all 0.3s ease;"
+                                onmouseover="this.style.background='linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%)'; this.style.transform='translateY(-2px)'"
+                                onmouseout="this.style.background='linear-gradient(135deg, #667eea 0%, #764ba2 100%)'; this.style.transform='translateY(0)'">
+                            <i class="bi bi-robot me-1"></i>
+                            AI Generate Lyrics
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            content.innerHTML = `
+                <div style="margin-bottom: 1.5rem;">
+                    <h6 style="color: var(--spotify-text); font-size: 1.1rem;">Available Sources</h6>
+                    <p style="color: var(--spotify-text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">
+                        Choose a source for lyrics translation.
+                    </p>
+                </div>
+                <div style="max-height: 50vh; overflow-y: auto; padding-right: 0.5rem;">
+                    ${sourcesHtml}
+                </div>
+            `;
+        }
+
+        function extractAndTranslate(songName, artistName, selectedUrl) {
+            const content = document.getElementById('ai-translate-content');
+            if (!content) return;
+
+            content.innerHTML = `
+                <div style="text-align: center; padding: 3rem;">
+                    <div style="display: inline-block; width: 60px; height: 60px; border: 5px solid var(--spotify-green); border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                    <h5 style="margin-top: 1.5rem; color: var(--spotify-green);">Processing Lyrics...</h5>
+                    <div style="background: rgba(29, 185, 84, 0.1); border-radius: 10px; padding: 1rem; margin-top: 1.5rem; border: 1px solid var(--spotify-green);">
+                        <div style="height: 25px; background: var(--spotify-gray); border-radius: 5px; overflow: hidden;">
+                            <div style="height: 100%; width: 100%; background: linear-gradient(90deg, var(--spotify-green), var(--spotify-green-hover)); animation: progress-bar 2s infinite;"></div>
+                        </div>
+                        <p style="margin-top: 0.75rem; color: var(--spotify-text-secondary); font-size: 0.95rem;">
+                            Extracting lyrics and generating AI translation
+                        </p>
+                    </div>
+                    <p style="margin-top: 1.5rem; color: var(--spotify-text-secondary); font-size: 0.9rem;">
+                        <i class="bi bi-info-circle me-2"></i>
+                        This may take a minute. We're fetching the page, extracting lyrics, and generating romanization and translation using AI.
+                    </p>
+                </div>
+            `;
+
+            // Add progress bar animation if not already present
+            if (!document.getElementById('progress-bar-style')) {
+                const style = document.createElement('style');
+                style.id = 'progress-bar-style';
+                style.textContent = `
+                    @keyframes progress-bar {
+                        0% { transform: translateX(-100%); }
+                        50% { transform: translateX(0%); }
+                        100% { transform: translateX(100%); }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+
+            // Call the extraction and translation endpoint
+            fetch('{% url "spotify:extract-and-translate" %}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    song_name: songName,
+                    artist_name: artistName,
+                    selected_url: selectedUrl
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    content.innerHTML = `
+                        <div style="padding: 2rem; text-align: center; background: rgba(25, 135, 84, 0.1); border-radius: 15px; border: 2px solid var(--spotify-green);">
+                            <i class="bi bi-check-circle" style="font-size: 4rem; color: var(--spotify-green);"></i>
+                            <h5 style="color: var(--spotify-green); margin-top: 1rem; font-size: 1.5rem;">Success!</h5>
+                            <p style="color: var(--spotify-text); margin: 1rem 0; font-size: 1.1rem;">${data.message}</p>
+                            <div style="background: var(--spotify-gray); border-radius: 10px; padding: 1.5rem; margin-top: 1.5rem; text-align: left;">
+                                <h6 style="color: var(--spotify-green); margin-bottom: 1rem;">Extraction Summary:</h6>
+                                <ul style="list-style: none; padding: 0;">
+                                    <li style="margin-bottom: 0.75rem; color: var(--spotify-text); font-size: 0.95rem;">
+                                        <i class="bi ${data.data.has_original ? 'bi-check-circle text-success' : 'bi-x-circle text-danger'} me-2"></i>
+                                        Original Lyrics: ${data.data.has_original ? 'Extracted' : 'Not found'}
+                                    </li>
+                                    <li style="margin-bottom: 0.75rem; color: var(--spotify-text); font-size: 0.95rem;">
+                                        <i class="bi ${data.data.has_translation ? 'bi-check-circle text-success' : 'bi-x-circle text-danger'} me-2"></i>
+                                        Translation: ${data.data.has_translation ? 'Generated' : 'Not available'}
+                                    </li>
+                                    <li style="margin-bottom: 0.75rem; color: var(--spotify-text); font-size: 0.95rem;">
+                                        <i class="bi ${data.data.has_romanization ? 'bi-check-circle text-success' : 'bi-x-circle text-danger'} me-2"></i>
+                                        Romanization: ${data.data.has_romanization ? 'Generated' : 'Not available'}
+                                    </li>
+                                    ${data.data.detected_language ? `
+                                    <li style="margin-bottom: 0.75rem; color: var(--spotify-text); font-size: 0.95rem;">
+                                        <i class="bi bi-flag me-2"></i>
+                                        Detected Language: ${data.data.detected_language}
+                                    </li>
+                                    ` : ''}
+                                    ${data.data.confidence_score ? `
+                                    <li style="margin-bottom: 0.75rem; color: var(--spotify-text); font-size: 0.95rem;">
+                                        <i class="bi bi-star me-2"></i>
+                                        Confidence: ${(data.data.confidence_score * 100).toFixed(0)}%
+                                    </li>
+                                    ` : ''}
+                                </ul>
+                            </div>
+                            <button onclick="location.reload()"
+                                    style="background: var(--spotify-green); color: var(--spotify-black); border: none; padding: 0.75rem 2rem; border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 1rem; margin-top: 1.5rem; transition: all 0.3s ease;"
+                                    onmouseover="this.style.background='var(--spotify-green-hover)'; this.style.transform='translateY(-2px)'"
+                                    onmouseout="this.style.background='var(--spotify-green)'; this.style.transform='translateY(0)'">
+                                <i class="bi bi-arrow-clockwise me-2"></i>
+                                Refresh Page
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    content.innerHTML = `
+                        <div style="padding: 2rem; text-align: center; background: rgba(220, 53, 69, 0.1); border-radius: 15px; border: 1px solid #dc3545;">
+                            <i class="bi bi-exclamation-triangle" style="font-size: 3rem; color: #dc3545;"></i>
+                            <h5 style="color: #dc3545; margin-top: 1rem;">Extraction Failed</h5>
+                            <p style="color: var(--spotify-text-secondary); margin: 1rem 0;">${data.error || 'Failed to extract and translate lyrics'}</p>
+                            <button onclick="document.getElementById('ai-translate-modal').remove()"
+                                    style="background: #dc3545; color: white; border: none; padding: 0.6rem 1.5rem; border-radius: 20px; cursor: pointer; font-weight: 500; margin-top: 1rem;"
+                                    onmouseover="this.style.background='#bb2d3b'" onmouseout="this.style.background='#dc3545'">
+                                Close
+                            </button>
+                        </div>
+                    `;
+                }
+            })
+            .catch(error => {
+                content.innerHTML = `
+                    <div style="padding: 2rem; text-align: center; background: rgba(220, 53, 69, 0.1); border-radius: 15px; border: 1px solid #dc3545;">
+                        <i class="bi bi-exclamation-triangle" style="font-size: 3rem; color: #dc3545;"></i>
+                        <h5 style="color: #dc3545; margin-top: 1rem;">Network Error</h5>
+                        <p style="color: var(--spotify-text-secondary); margin: 1rem 0;">Failed to process lyrics: ${error.message}</p>
+                        <button onclick="document.getElementById('ai-translate-modal').remove()"
+                                style="background: #dc3545; color: white; border: none; padding: 0.6rem 1.5rem; border-radius: 20px; cursor: pointer; font-weight: 500; margin-top: 1rem;"
+                                onmouseover="this.style.background='#bb2d3b'" onmouseout="this.style.background='#dc3545'">
+                            Close
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        function generateAILyrics(songName, artistName, selectedUrl) {
+            const content = document.getElementById('ai-translate-content');
+            if (!content) return;
+
+            content.innerHTML = `
+                <div style="text-align: center; padding: 3rem;">
+                    <div style="display: inline-block; width: 60px; height: 60px; border: 5px solid #667eea; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                    <h5 style="margin-top: 1.5rem; color: #667eea;">Generating AI Lyrics...</h5>
+                    <div style="background: rgba(102, 126, 234, 0.1); border-radius: 10px; padding: 1rem; margin-top: 1.5rem; border: 1px solid #667eea;">
+                        <div style="height: 25px; background: var(--spotify-gray); border-radius: 5px; overflow: hidden;">
+                            <div style="height: 100%; width: 100%; background: linear-gradient(90deg, #667eea, #764ba2); animation: progress-bar 2s infinite;"></div>
+                        </div>
+                        <p style="margin-top: 0.75rem; color: var(--spotify-text-secondary); font-size: 0.95rem;">
+                            Using AI to generate lyrics based on song information
+                        </p>
+                    </div>
+                    <p style="margin-top: 1.5rem; color: var(--spotify-text-secondary); font-size: 0.9rem;">
+                        <i class="bi bi-info-circle me-2"></i>
+                        This may take a minute. We're using AI to generate lyrics based on the song title, artist, and source information.
+                    </p>
+                </div>
+            `;
+
+            // Add progress bar animation if not already present
+            if (!document.getElementById('progress-bar-style')) {
+                const style = document.createElement('style');
+                style.id = 'progress-bar-style';
+                style.textContent = `
+                    @keyframes progress-bar {
+                        0% { transform: translateX(-100%); }
+                        50% { transform: translateX(0%); }
+                        100% { transform: translateX(100%); }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+
+            // Call the AI lyrics generation endpoint
+            fetch('{% url "spotify:extract-and-translate" %}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify({
+                    song_name: songName,
+                    artist_name: artistName,
+                    source_url: selectedUrl
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    content.innerHTML = `
+                        <div style="padding: 2rem; text-align: center; background: rgba(102, 126, 234, 0.1); border-radius: 15px; border: 2px solid #667eea;">
+                            <i class="bi bi-check-circle" style="font-size: 4rem; color: #667eea;"></i>
+                            <h5 style="color: #667eea; margin-top: 1rem; font-size: 1.5rem;">AI Lyrics Generated!</h5>
+                            <p style="color: var(--spotify-text); margin: 1rem 0; font-size: 1.1rem;">${data.message}</p>
+                            <div style="background: var(--spotify-gray); border-radius: 10px; padding: 1.5rem; margin-top: 1.5rem; text-align: left;">
+                                <h6 style="color: #667eea; margin-bottom: 1rem;">Generation Summary:</h6>
+                                <ul style="list-style: none; padding: 0;">
+                                    <li style="margin-bottom: 0.75rem; color: var(--spotify-text); font-size: 0.95rem;">
+                                        <i class="bi ${data.data.has_lyrics ? 'bi-check-circle text-success' : 'bi-x-circle text-danger'} me-2"></i>
+                                        Generated Lyrics: ${data.data.has_lyrics ? 'Success' : 'Failed'}
+                                    </li>
+                                    <li style="margin-bottom: 0.75rem; color: var(--spotify-text); font-size: 0.95rem;">
+                                        <i class="bi ${data.data.has_translation ? 'bi-check-circle text-success' : 'bi-x-circle text-danger'} me-2"></i>
+                                        Translation: ${data.data.has_translation ? 'Generated' : 'Not available'}
+                                    </li>
+                                    <li style="margin-bottom: 0.75rem; color: var(--spotify-text); font-size: 0.95rem;">
+                                        <i class="bi ${data.data.has_romanization ? 'bi-check-circle text-success' : 'bi-x-circle text-danger'} me-2"></i>
+                                        Romanization: ${data.data.has_romanization ? 'Generated' : 'Not available'}
+                                    </li>
+                                    ${data.data.detected_language ? `
+                                    <li style="margin-bottom: 0.75rem; color: var(--spotify-text); font-size: 0.95rem;">
+                                        <i class="bi bi-flag me-2"></i>
+                                        Detected Language: ${data.data.detected_language}
+                                    </li>
+                                    ` : ''}
+                                    ${data.data.confidence_score ? `
+                                    <li style="margin-bottom: 0.75rem; color: var(--spotify-text); font-size: 0.95rem;">
+                                        <i class="bi bi-star me-2"></i>
+                                        Confidence: ${(data.data.confidence_score * 100).toFixed(0)}%
+                                    </li>
+                                    ` : ''}
+                                </ul>
+                            </div>
+                            <button onclick="location.reload()"
+                                    style="background: #667eea; color: white; border: none; padding: 0.75rem 2rem; border-radius: 25px; cursor: pointer; font-weight: 600; font-size: 1rem; margin-top: 1.5rem; transition: all 0.3s ease;"
+                                    onmouseover="this.style.background='#5a6fd8'; this.style.transform='translateY(-2px)'"
+                                    onmouseout="this.style.background='#667eea'; this.style.transform='translateY(0)'">
+                                <i class="bi bi-arrow-clockwise me-2"></i>
+                                Refresh Page
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    content.innerHTML = `
+                        <div style="padding: 2rem; text-align: center; background: rgba(220, 53, 69, 0.1); border-radius: 15px; border: 1px solid #dc3545;">
+                            <i class="bi bi-exclamation-triangle" style="font-size: 3rem; color: #dc3545;"></i>
+                            <h5 style="color: #dc3545; margin-top: 1rem;">Generation Failed</h5>
+                            <p style="color: var(--spotify-text-secondary); margin: 1rem 0;">${data.error || 'Failed to generate AI lyrics'}</p>
+                            <button onclick="document.getElementById('ai-translate-modal').remove()"
+                                    style="background: #dc3545; color: white; border: none; padding: 0.6rem 1.5rem; border-radius: 20px; cursor: pointer; font-weight: 500; margin-top: 1rem;"
+                                    onmouseover="this.style.background='#bb2d3b'" onmouseout="this.style.background='#dc3545'">
+                                Close
+                            </button>
+                        </div>
+                    `;
+                }
+            })
+            .catch(error => {
+                content.innerHTML = `
+                    <div style="padding: 2rem; text-align: center; background: rgba(220, 53, 69, 0.1); border-radius: 15px; border: 1px solid #dc3545;">
+                        <i class="bi bi-exclamation-triangle" style="font-size: 3rem; color: #dc3545;"></i>
+                        <h5 style="color: #dc3545; margin-top: 1rem;">Network Error</h5>
+                        <p style="color: var(--spotify-text-secondary); margin: 1rem 0;">Failed to generate lyrics: ${error.message}</p>
+                        <button onclick="document.getElementById('ai-translate-modal').remove()"
+                                style="background: #dc3545; color: white; border: none; padding: 0.6rem 1.5rem; border-radius: 20px; cursor: pointer; font-weight: 500; margin-top: 1rem;"
+                                onmouseover="this.style.background='#bb2d3b'" onmouseout="this.style.background='#dc3545'">
+                            Close
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            createInterleavedLyrics();
+            createAIInterleavedLyrics();
+            initializeToggle();
+            initializeAITranslate();
+        });
+    </script>
+</body>
+</html>
