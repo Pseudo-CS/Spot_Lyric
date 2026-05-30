@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "com.spotlyric.app-release-67:/mipmap_ic_launcher.png.flat",
+        "source": "com.spotlyric.app-main-68:/mipmap/ic_launcher.png"
+    },
+    {
+        "merged": "com.spotlyric.app-release-67:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.spotlyric.app-main-68:/mipmap-xxxhdpi/ic_launcher.png"
+    }
+]

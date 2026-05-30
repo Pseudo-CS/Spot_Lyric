@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.spotlyric.app.presentation.manage.ManageViewModelTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-05-30T13:12:14" hostname="pseudo-Dell-G15-5511" time="1.485">
+  <properties/>
+  <testcase name="confirmAiTranslate - failure emits ShowToast event" classname="com.spotlyric.app.presentation.manage.ManageViewModelTest" time="1.401"/>
+  <testcase name="search - updates search query and gets new songs" classname="com.spotlyric.app.presentation.manage.ManageViewModelTest" time="0.006"/>
+  <testcase name="startAiTranslate - updates pending state and searches sources" classname="com.spotlyric.app.presentation.manage.ManageViewModelTest" time="0.011"/>
+  <testcase name="init - observes songs from getSongsUseCase" classname="com.spotlyric.app.presentation.manage.ManageViewModelTest" time="0.004"/>
+  <testcase name="confirmAiTranslate - success calls generateAiTranslation" classname="com.spotlyric.app.presentation.manage.ManageViewModelTest" time="0.04"/>
+  <testcase name="deleteSong - calls deleteSongUseCase" classname="com.spotlyric.app.presentation.manage.ManageViewModelTest" time="0.023"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

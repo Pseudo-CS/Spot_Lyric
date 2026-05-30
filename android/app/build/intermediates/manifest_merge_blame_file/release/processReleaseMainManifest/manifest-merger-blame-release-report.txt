@@ -1,0 +1,196 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.spotlyric.app"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="26"
+9        android:targetSdkVersion="35" />
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:5:5-67
+11-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:5:22-64
+12
+13    <queries>
+13-->[net.openid:appauth:0.11.1] /home/pseudo/.gradle/caches/8.10.2/transforms/6d9a89ef34525dc6169940fe36dbcb0d/transformed/appauth-0.11.1/AndroidManifest.xml:24:5-32:15
+14        <intent>
+14-->[net.openid:appauth:0.11.1] /home/pseudo/.gradle/caches/8.10.2/transforms/6d9a89ef34525dc6169940fe36dbcb0d/transformed/appauth-0.11.1/AndroidManifest.xml:25:9-31:18
+15            <action android:name="android.intent.action.VIEW" />
+15-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:31:17-69
+15-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:31:25-66
+16
+17            <category android:name="android.intent.category.BROWSABLE" />
+17-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:33:17-78
+17-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:33:27-75
+18
+19            <data android:scheme="https" />
+19-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:35:21-62
+20        </intent>
+21    </queries>
+22
+23    <permission
+23-->[androidx.core:core:1.13.1] /home/pseudo/.gradle/caches/8.10.2/transforms/5cfc264bdc7cce13108f5b58d7a9b2e8/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+24        android:name="com.spotlyric.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+24-->[androidx.core:core:1.13.1] /home/pseudo/.gradle/caches/8.10.2/transforms/5cfc264bdc7cce13108f5b58d7a9b2e8/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+25        android:protectionLevel="signature" />
+25-->[androidx.core:core:1.13.1] /home/pseudo/.gradle/caches/8.10.2/transforms/5cfc264bdc7cce13108f5b58d7a9b2e8/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+26
+27    <uses-permission android:name="com.spotlyric.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+27-->[androidx.core:core:1.13.1] /home/pseudo/.gradle/caches/8.10.2/transforms/5cfc264bdc7cce13108f5b58d7a9b2e8/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+27-->[androidx.core:core:1.13.1] /home/pseudo/.gradle/caches/8.10.2/transforms/5cfc264bdc7cce13108f5b58d7a9b2e8/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+28
+29    <application
+29-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:7:5-40:19
+30        android:name="com.spotlyric.app.SpotLyricApp"
+30-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:8:9-37
+31        android:allowBackup="false"
+31-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:9:9-36
+32        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+32-->[androidx.core:core:1.13.1] /home/pseudo/.gradle/caches/8.10.2/transforms/5cfc264bdc7cce13108f5b58d7a9b2e8/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
+33        android:extractNativeLibs="false"
+34        android:icon="@mipmap/ic_launcher"
+34-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:10:9-43
+35        android:label="@string/app_name"
+35-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:11:9-41
+36        android:supportsRtl="true"
+36-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:12:9-35
+37        android:theme="@style/Theme.SpotLyric" >
+37-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:13:9-47
+38        <activity
+38-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:15:9-23:20
+39            android:name="com.spotlyric.app.MainActivity"
+39-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:16:13-41
+40            android:exported="true"
+40-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:17:13-36
+41            android:theme="@style/Theme.SpotLyric" >
+41-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:18:13-51
+42            <intent-filter>
+42-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:19:13-22:29
+43                <action android:name="android.intent.action.MAIN" />
+43-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:20:17-69
+43-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:20:25-66
+44
+45                <category android:name="android.intent.category.LAUNCHER" />
+45-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:21:17-77
+45-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:21:27-74
+46            </intent-filter>
+47        </activity>
+48
+49        <!-- AppAuth redirect activity — intercepts spotlyric://callback -->
+50        <activity
+50-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:26:9-38:20
+51            android:name="net.openid.appauth.RedirectUriReceiverActivity"
+51-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:27:13-74
+52            android:exported="true" >
+52-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:28:13-36
+53            <intent-filter>
+53-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:30:13-37:29
+54                <action android:name="android.intent.action.VIEW" />
+54-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:31:17-69
+54-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:31:25-66
+55
+56                <category android:name="android.intent.category.DEFAULT" />
+56-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:32:17-76
+56-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:32:27-73
+57                <category android:name="android.intent.category.BROWSABLE" />
+57-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:33:17-78
+57-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:33:27-75
+58
+59                <data
+60                    android:host="callback"
+60-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:36:21-44
+61                    android:scheme="spotlyric" />
+61-->/home/pseudo/work/spotlyric-android/app/src/main/AndroidManifest.xml:35:21-62
+62            </intent-filter>
+63        </activity>
+64        <activity
+64-->[net.openid:appauth:0.11.1] /home/pseudo/.gradle/caches/8.10.2/transforms/6d9a89ef34525dc6169940fe36dbcb0d/transformed/appauth-0.11.1/AndroidManifest.xml:35:9-40:77
+65            android:name="net.openid.appauth.AuthorizationManagementActivity"
+65-->[net.openid:appauth:0.11.1] /home/pseudo/.gradle/caches/8.10.2/transforms/6d9a89ef34525dc6169940fe36dbcb0d/transformed/appauth-0.11.1/AndroidManifest.xml:36:13-78
+66            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboard|keyboardHidden"
+66-->[net.openid:appauth:0.11.1] /home/pseudo/.gradle/caches/8.10.2/transforms/6d9a89ef34525dc6169940fe36dbcb0d/transformed/appauth-0.11.1/AndroidManifest.xml:37:13-115
+67            android:exported="false"
+67-->[net.openid:appauth:0.11.1] /home/pseudo/.gradle/caches/8.10.2/transforms/6d9a89ef34525dc6169940fe36dbcb0d/transformed/appauth-0.11.1/AndroidManifest.xml:38:13-37
+68            android:launchMode="singleTask"
+68-->[net.openid:appauth:0.11.1] /home/pseudo/.gradle/caches/8.10.2/transforms/6d9a89ef34525dc6169940fe36dbcb0d/transformed/appauth-0.11.1/AndroidManifest.xml:39:13-44
+69            android:theme="@style/Theme.AppCompat.Translucent.NoTitleBar" />
+69-->[net.openid:appauth:0.11.1] /home/pseudo/.gradle/caches/8.10.2/transforms/6d9a89ef34525dc6169940fe36dbcb0d/transformed/appauth-0.11.1/AndroidManifest.xml:40:13-74
+70
+71        <provider
+71-->[androidx.emoji2:emoji2:1.3.0] /home/pseudo/.gradle/caches/8.10.2/transforms/0e098ce8969051ee6c5b0adadd938669/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+72            android:name="androidx.startup.InitializationProvider"
+72-->[androidx.emoji2:emoji2:1.3.0] /home/pseudo/.gradle/caches/8.10.2/transforms/0e098ce8969051ee6c5b0adadd938669/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+73            android:authorities="com.spotlyric.app.androidx-startup"
+73-->[androidx.emoji2:emoji2:1.3.0] /home/pseudo/.gradle/caches/8.10.2/transforms/0e098ce8969051ee6c5b0adadd938669/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+74            android:exported="false" >
+74-->[androidx.emoji2:emoji2:1.3.0] /home/pseudo/.gradle/caches/8.10.2/transforms/0e098ce8969051ee6c5b0adadd938669/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
+75            <meta-data
+75-->[androidx.emoji2:emoji2:1.3.0] /home/pseudo/.gradle/caches/8.10.2/transforms/0e098ce8969051ee6c5b0adadd938669/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+76                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+76-->[androidx.emoji2:emoji2:1.3.0] /home/pseudo/.gradle/caches/8.10.2/transforms/0e098ce8969051ee6c5b0adadd938669/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+77                android:value="androidx.startup" />
+77-->[androidx.emoji2:emoji2:1.3.0] /home/pseudo/.gradle/caches/8.10.2/transforms/0e098ce8969051ee6c5b0adadd938669/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+78            <meta-data
+78-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/pseudo/.gradle/caches/8.10.2/transforms/7de06b38b8805358e4d133216b63461d/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:29:13-31:52
+79                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+79-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/pseudo/.gradle/caches/8.10.2/transforms/7de06b38b8805358e4d133216b63461d/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:30:17-78
+80                android:value="androidx.startup" />
+80-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/pseudo/.gradle/caches/8.10.2/transforms/7de06b38b8805358e4d133216b63461d/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:31:17-49
+81            <meta-data
+81-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/pseudo/.gradle/caches/8.10.2/transforms/f1c82c074dcf749df351dfbf2f4898e2/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+82                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+82-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/pseudo/.gradle/caches/8.10.2/transforms/f1c82c074dcf749df351dfbf2f4898e2/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+83                android:value="androidx.startup" />
+83-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/pseudo/.gradle/caches/8.10.2/transforms/f1c82c074dcf749df351dfbf2f4898e2/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+84        </provider>
+85
+86        <service
+86-->[androidx.room:room-runtime:2.6.1] /home/pseudo/.gradle/caches/8.10.2/transforms/62dbb72e7e0d901b87df9925df7eb6ee/transformed/room-runtime-2.6.1/AndroidManifest.xml:24:9-28:63
+87            android:name="androidx.room.MultiInstanceInvalidationService"
+87-->[androidx.room:room-runtime:2.6.1] /home/pseudo/.gradle/caches/8.10.2/transforms/62dbb72e7e0d901b87df9925df7eb6ee/transformed/room-runtime-2.6.1/AndroidManifest.xml:25:13-74
+88            android:directBootAware="true"
+88-->[androidx.room:room-runtime:2.6.1] /home/pseudo/.gradle/caches/8.10.2/transforms/62dbb72e7e0d901b87df9925df7eb6ee/transformed/room-runtime-2.6.1/AndroidManifest.xml:26:13-43
+89            android:exported="false" />
+89-->[androidx.room:room-runtime:2.6.1] /home/pseudo/.gradle/caches/8.10.2/transforms/62dbb72e7e0d901b87df9925df7eb6ee/transformed/room-runtime-2.6.1/AndroidManifest.xml:27:13-37
+90
+91        <receiver
+91-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/pseudo/.gradle/caches/8.10.2/transforms/f1c82c074dcf749df351dfbf2f4898e2/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+92            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+92-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/pseudo/.gradle/caches/8.10.2/transforms/f1c82c074dcf749df351dfbf2f4898e2/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+93            android:directBootAware="false"
+93-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/pseudo/.gradle/caches/8.10.2/transforms/f1c82c074dcf749df351dfbf2f4898e2/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+94            android:enabled="true"
+94-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/pseudo/.gradle/caches/8.10.2/transforms/f1c82c074dcf749df351dfbf2f4898e2/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+95            android:exported="true"
+95-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/pseudo/.gradle/caches/8.10.2/transforms/f1c82c074dcf749df351dfbf2f4898e2/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+96            android:permission="android.permission.DUMP" >
+96-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/pseudo/.gradle/caches/8.10.2/transforms/f1c82c074dcf749df351dfbf2f4898e2/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+97            <intent-filter>
+97-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/pseudo/.gradle/caches/8.10.2/transforms/f1c82c074dcf749df351dfbf2f4898e2/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+98                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+98-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/pseudo/.gradle/caches/8.10.2/transforms/f1c82c074dcf749df351dfbf2f4898e2/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+98-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/pseudo/.gradle/caches/8.10.2/transforms/f1c82c074dcf749df351dfbf2f4898e2/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+99            </intent-filter>
+100            <intent-filter>
+100-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/pseudo/.gradle/caches/8.10.2/transforms/f1c82c074dcf749df351dfbf2f4898e2/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+101                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+101-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/pseudo/.gradle/caches/8.10.2/transforms/f1c82c074dcf749df351dfbf2f4898e2/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+101-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/pseudo/.gradle/caches/8.10.2/transforms/f1c82c074dcf749df351dfbf2f4898e2/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+102            </intent-filter>
+103            <intent-filter>
+103-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/pseudo/.gradle/caches/8.10.2/transforms/f1c82c074dcf749df351dfbf2f4898e2/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+104                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+104-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/pseudo/.gradle/caches/8.10.2/transforms/f1c82c074dcf749df351dfbf2f4898e2/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+104-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/pseudo/.gradle/caches/8.10.2/transforms/f1c82c074dcf749df351dfbf2f4898e2/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+105            </intent-filter>
+106            <intent-filter>
+106-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/pseudo/.gradle/caches/8.10.2/transforms/f1c82c074dcf749df351dfbf2f4898e2/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+107                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+107-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/pseudo/.gradle/caches/8.10.2/transforms/f1c82c074dcf749df351dfbf2f4898e2/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+107-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/pseudo/.gradle/caches/8.10.2/transforms/f1c82c074dcf749df351dfbf2f4898e2/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
+108            </intent-filter>
+109        </receiver>
+110    </application>
+111
+112</manifest>

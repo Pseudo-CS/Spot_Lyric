@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.spotlyric.app.domain.util.RelevanceFilterTest" tests="17" skipped="0" failures="0" errors="0" timestamp="2026-05-30T13:12:14" hostname="pseudo-Dell-G15-5511" time="0.012">
+  <properties/>
+  <testcase name="testPartialMatchIsRelevant" classname="com.spotlyric.app.domain.util.RelevanceFilterTest" time="0.002"/>
+  <testcase name="testEmptyQueryEdgeCase" classname="com.spotlyric.app.domain.util.RelevanceFilterTest" time="0.0"/>
+  <testcase name="testArtistOnlyMatchIsNotRelevant" classname="com.spotlyric.app.domain.util.RelevanceFilterTest" time="0.0"/>
+  <testcase name="testCalculateRelevanceScoreRange" classname="com.spotlyric.app.domain.util.RelevanceFilterTest" time="0.0"/>
+  <testcase name="testWithSnippetIncreaseRelevance" classname="com.spotlyric.app.domain.util.RelevanceFilterTest" time="0.0"/>
+  <testcase name="testCompleteMismatchIsNotRelevant" classname="com.spotlyric.app.domain.util.RelevanceFilterTest" time="0.0"/>
+  <testcase name="testMultiWordSongTitles" classname="com.spotlyric.app.domain.util.RelevanceFilterTest" time="0.001"/>
+  <testcase name="testAcronymsAndSpecialChars" classname="com.spotlyric.app.domain.util.RelevanceFilterTest" time="0.0"/>
+  <testcase name="testPreferredSourceRelevanceStrictness" classname="com.spotlyric.app.domain.util.RelevanceFilterTest" time="0.0"/>
+  <testcase name="testCaseInsensitive" classname="com.spotlyric.app.domain.util.RelevanceFilterTest" time="0.001"/>
+  <testcase name="testSongTitleMismatchIsNotRelevant" classname="com.spotlyric.app.domain.util.RelevanceFilterTest" time="0.0"/>
+  <testcase name="testMinimumTitleTokensMatch" classname="com.spotlyric.app.domain.util.RelevanceFilterTest" time="0.0"/>
+  <testcase name="testThresholdBoundary" classname="com.spotlyric.app.domain.util.RelevanceFilterTest" time="0.001"/>
+  <testcase name="testPerfectMatchIsRelevant" classname="com.spotlyric.app.domain.util.RelevanceFilterTest" time="0.001"/>
+  <testcase name="testSpecialCharactersHandled" classname="com.spotlyric.app.domain.util.RelevanceFilterTest" time="0.0"/>
+  <testcase name="testTranslationQueryVariations" classname="com.spotlyric.app.domain.util.RelevanceFilterTest" time="0.001"/>
+  <testcase name="testStopwordsIgnored" classname="com.spotlyric.app.domain.util.RelevanceFilterTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

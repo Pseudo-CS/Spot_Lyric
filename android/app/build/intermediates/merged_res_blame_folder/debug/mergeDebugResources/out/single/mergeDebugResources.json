@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "com.spotlyric.app-debug-71:/mipmap_ic_launcher.png.flat",
+        "source": "com.spotlyric.app-main-73:/mipmap/ic_launcher.png"
+    },
+    {
+        "merged": "com.spotlyric.app-debug-71:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.spotlyric.app-main-73:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/pseudo/.gradle/daemon/8.10.2/com.spotlyric.app-debug-71:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/home/pseudo/.gradle/daemon/8.10.2/com.spotlyric.app-main-73:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/pseudo/.gradle/daemon/8.10.2/com.spotlyric.app-debug-71:/mipmap_ic_launcher.png.flat",
+        "source": "/home/pseudo/.gradle/daemon/8.10.2/com.spotlyric.app-main-73:/mipmap/ic_launcher.png"
+    }
+]

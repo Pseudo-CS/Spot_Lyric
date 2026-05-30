@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head><meta charset="UTF-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>(()=>{class RocketLazyLoadScripts{constructor(){this.v="2.0.5",this.userEvents=["keydown","keyup","mousedown","mouseup","mousemove","mouseover","mouseout","touchmove","touchstart","touchend","touchcancel","wheel","click","dblclick","input"],this.attributeEvents=["onblur","onclick","oncontextmenu","ondblclick","onfocus","onmousedown","onmouseenter","onmouseleave","onmousemove","onmouseout","onmouseover","onmouseup","onmousewheel","onscroll","onsubmit"]}async t(){this.i(),this.o(),/iP(ad|hone)/.test(navigator.userAgent)&&this.h(),this.u(),this.l(this),this.m(),this.k(this),this.p(this),this._(),await Promise.all([this.R(),this.L()]),this.lastBreath=Date.now(),this.S(this),this.P(),this.D(),this.O(),this.M(),await this.C(this.delayedScripts.normal),await this.C(this.delayedScripts.defer),await this.C(this.delayedScripts.async),await this.T(),await this.F(),await this.j(),await this.A(),window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this.everythingLoaded=!0,this.lastTouchEnd&&await new Promise(t=>setTimeout(t,500-Date.now()+this.lastTouchEnd)),this.I(),this.H(),this.U(),this.W()}i(){this.CSPIssue=sessionStorage.getItem("rocketCSPIssue"),document.addEventListener("securitypolicyviolation",t=>{this.CSPIssue||"script-src-elem"!==t.violatedDirective||"data"!==t.blockedURI||(this.CSPIssue=!0,sessionStorage.setItem("rocketCSPIssue",!0))},{isRocket:!0})}o(){window.addEventListener("pageshow",t=>{this.persisted=t.persisted,this.realWindowLoadedFired=!0},{isRocket:!0}),window.addEventListener("pagehide",()=>{this.onFirstUserAction=null},{isRocket:!0})}h(){let t;function e(e){t=e}window.addEventListener("touchstart",e,{isRocket:!0}),window.addEventListener("touchend",function i(o){o.changedTouches[0]&&t.changedTouches[0]&&Math.abs(o.changedTouches[0].pageX-t.changedTouches[0].pageX)<10&&Math.abs(o.changedTouches[0].pageY-t.changedTouches[0].pageY)<10&&o.timeStamp-t.timeStamp<200&&(window.removeEventListener("touchstart",e,{isRocket:!0}),window.removeEventListener("touchend",i,{isRocket:!0}),"INPUT"===o.target.tagName&&"text"===o.target.type||(o.target.dispatchEvent(new TouchEvent("touchend",{target:o.target,bubbles:!0})),o.target.dispatchEvent(new MouseEvent("mouseover",{target:o.target,bubbles:!0})),o.target.dispatchEvent(new PointerEvent("click",{target:o.target,bubbles:!0,cancelable:!0,detail:1,clientX:o.changedTouches[0].clientX,clientY:o.changedTouches[0].clientY})),event.preventDefault()))},{isRocket:!0})}q(t){this.userActionTriggered||("mousemove"!==t.type||this.firstMousemoveIgnored?"keyup"===t.type||"mouseover"===t.type||"mouseout"===t.type||(this.userActionTriggered=!0,this.onFirstUserAction&&this.onFirstUserAction()):this.firstMousemoveIgnored=!0),"click"===t.type&&t.preventDefault(),t.stopPropagation(),t.stopImmediatePropagation(),"touchstart"===this.lastEvent&&"touchend"===t.type&&(this.lastTouchEnd=Date.now()),"click"===t.type&&(this.lastTouchEnd=0),this.lastEvent=t.type,t.composedPath&&t.composedPath()[0].getRootNode()instanceof ShadowRoot&&(t.rocketTarget=t.composedPath()[0]),this.savedUserEvents.push(t)}u(){this.savedUserEvents=[],this.userEventHandler=this.q.bind(this),this.userEvents.forEach(t=>window.addEventListener(t,this.userEventHandler,{passive:!1,isRocket:!0})),document.addEventListener("visibilitychange",this.userEventHandler,{isRocket:!0})}U(){this.userEvents.forEach(t=>window.removeEventListener(t,this.userEventHandler,{passive:!1,isRocket:!0})),document.removeEventListener("visibilitychange",this.userEventHandler,{isRocket:!0}),this.savedUserEvents.forEach(t=>{(t.rocketTarget||t.target).dispatchEvent(new window[t.constructor.name](t.type,t))})}m(){const t="return false",e=Array.from(this.attributeEvents,t=>"data-rocket-"+t),i="["+this.attributeEvents.join("],[")+"]",o="[data-rocket-"+this.attributeEvents.join("],[data-rocket-")+"]",s=(e,i,o)=>{o&&o!==t&&(e.setAttribute("data-rocket-"+i,o),e["rocket"+i]=new Function("event",o),e.setAttribute(i,t))};new MutationObserver(t=>{for(const n of t)"attributes"===n.type&&(n.attributeName.startsWith("data-rocket-")||this.everythingLoaded?n.attributeName.startsWith("data-rocket-")&&this.everythingLoaded&&this.N(n.target,n.attributeName.substring(12)):s(n.target,n.attributeName,n.target.getAttribute(n.attributeName))),"childList"===n.type&&n.addedNodes.forEach(t=>{if(t.nodeType===Node.ELEMENT_NODE)if(this.everythingLoaded)for(const i of[t,...t.querySelectorAll(o)])for(const t of i.getAttributeNames())e.includes(t)&&this.N(i,t.substring(12));else for(const e of[t,...t.querySelectorAll(i)])for(const t of e.getAttributeNames())this.attributeEvents.includes(t)&&s(e,t,e.getAttribute(t))})}).observe(document,{subtree:!0,childList:!0,attributeFilter:[...this.attributeEvents,...e]})}I(){this.attributeEvents.forEach(t=>{document.querySelectorAll("[data-rocket-"+t+"]").forEach(e=>{this.N(e,t)})})}N(t,e){const i=t.getAttribute("data-rocket-"+e);i&&(t.setAttribute(e,i),t.removeAttribute("data-rocket-"+e))}k(t){Object.defineProperty(HTMLElement.prototype,"onclick",{get(){return this.rocketonclick||null},set(e){this.rocketonclick=e,this.setAttribute(t.everythingLoaded?"onclick":"data-rocket-onclick","this.rocketonclick(event)")}})}S(t){function e(e,i){let o=e[i];e[i]=null,Object.defineProperty(e,i,{get:()=>o,set(s){t.everythingLoaded?o=s:e["rocket"+i]=o=s}})}e(document,"onreadystatechange"),e(window,"onload"),e(window,"onpageshow");try{Object.defineProperty(document,"readyState",{get:()=>t.rocketReadyState,set(e){t.rocketReadyState=e},configurable:!0}),document.readyState="loading"}catch(t){console.log("WPRocket DJE readyState conflict, bypassing")}}l(t){this.originalAddEventListener=EventTarget.prototype.addEventListener,this.originalRemoveEventListener=EventTarget.prototype.removeEventListener,this.savedEventListeners=[],EventTarget.prototype.addEventListener=function(e,i,o){o&&o.isRocket||!t.B(e,this)&&!t.userEvents.includes(e)||t.B(e,this)&&!t.userActionTriggered||e.startsWith("rocket-")||t.everythingLoaded?t.originalAddEventListener.call(this,e,i,o):(t.savedEventListeners.push({target:this,remove:!1,type:e,func:i,options:o}),"mouseenter"!==e&&"mouseleave"!==e||t.originalAddEventListener.call(this,e,t.savedUserEvents.push,o))},EventTarget.prototype.removeEventListener=function(e,i,o){o&&o.isRocket||!t.B(e,this)&&!t.userEvents.includes(e)||t.B(e,this)&&!t.userActionTriggered||e.startsWith("rocket-")||t.everythingLoaded?t.originalRemoveEventListener.call(this,e,i,o):t.savedEventListeners.push({target:this,remove:!0,type:e,func:i,options:o})}}J(t,e){this.savedEventListeners=this.savedEventListeners.filter(i=>{let o=i.type,s=i.target||window;return e!==o||t!==s||(this.B(o,s)&&(i.type="rocket-"+o),this.$(i),!1)})}H(){EventTarget.prototype.addEventListener=this.originalAddEventListener,EventTarget.prototype.removeEventListener=this.originalRemoveEventListener,this.savedEventListeners.forEach(t=>this.$(t))}$(t){t.remove?this.originalRemoveEventListener.call(t.target,t.type,t.func,t.options):this.originalAddEventListener.call(t.target,t.type,t.func,t.options)}p(t){let e;function i(e){return t.everythingLoaded?e:e.split(" ").map(t=>"load"===t||t.startsWith("load.")?"rocket-jquery-load":t).join(" ")}function o(o){function s(e){const s=o.fn[e];o.fn[e]=o.fn.init.prototype[e]=function(){return this[0]===window&&t.userActionTriggered&&("string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=i(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach(t=>{const e=arguments[0][t];delete arguments[0][t],arguments[0][i(t)]=e})),s.apply(this,arguments),this}}if(o&&o.fn&&!t.allJQueries.includes(o)){const e={DOMContentLoaded:[],"rocket-DOMContentLoaded":[]};for(const t in e)document.addEventListener(t,()=>{e[t].forEach(t=>t())},{isRocket:!0});o.fn.ready=o.fn.init.prototype.ready=function(i){function s(){parseInt(o.fn.jquery)>2?setTimeout(()=>i.bind(document)(o)):i.bind(document)(o)}return"function"==typeof i&&(t.realDomReadyFired?!t.userActionTriggered||t.fauxDomReadyFired?s():e["rocket-DOMContentLoaded"].push(s):e.DOMContentLoaded.push(s)),this},s("on"),s("one"),s("off"),t.allJQueries.push(o)}e=o}t.allJQueries=[],o(window.jQuery),Object.defineProperty(window,"jQuery",{get:()=>e,set(t){o(t)}})}P(){const t=new Map;document.write=document.writeln=function(e){const i=document.currentScript,o=document.createRange(),s=i.parentElement;let n=t.get(i);void 0===n&&(n=i.nextSibling,t.set(i,n));const c=document.createDocumentFragment();o.setStart(c,0),c.appendChild(o.createContextualFragment(e)),s.insertBefore(c,n)}}async R(){return new Promise(t=>{this.userActionTriggered?t():this.onFirstUserAction=t})}async L(){return new Promise(t=>{document.addEventListener("DOMContentLoaded",()=>{this.realDomReadyFired=!0,t()},{isRocket:!0})})}async j(){return this.realWindowLoadedFired?Promise.resolve():new Promise(t=>{window.addEventListener("load",t,{isRocket:!0})})}M(){this.pendingScripts=[];this.scriptsMutationObserver=new MutationObserver(t=>{for(const e of t)e.addedNodes.forEach(t=>{"SCRIPT"!==t.tagName||!t.src||t.noModule||t.isWPRocket||this.pendingScripts.push({script:t,promise:new Promise(e=>{const i=()=>{const i=this.pendingScripts.findIndex(e=>e.script===t);i>=0&&this.pendingScripts.splice(i,1),e()};t.addEventListener("load",i,{isRocket:!0}),t.addEventListener("error",i,{isRocket:!0}),setTimeout(i,1e3)})})})}),this.scriptsMutationObserver.observe(document,{childList:!0,subtree:!0})}async F(){await this.X(),this.pendingScripts.length?(await this.pendingScripts[0].promise,await this.F()):this.scriptsMutationObserver.disconnect()}D(){this.delayedScripts={normal:[],async:[],defer:[]},document.querySelectorAll("script[type$=rocketlazyloadscript]").forEach(t=>{t.hasAttribute("data-rocket-src")?t.hasAttribute("async")&&!1!==t.async?this.delayedScripts.async.push(t):t.hasAttribute("defer")&&!1!==t.defer||"module"===t.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(t):this.delayedScripts.normal.push(t):this.delayedScripts.normal.push(t)})}async _(){await this.L();let t=[];document.querySelectorAll("script[type$=rocketlazyloadscript][data-rocket-src]").forEach(e=>{let i=e.getAttribute("data-rocket-src");if(i&&!i.startsWith("data:")){i.startsWith("//")&&(i=location.protocol+i);try{const o=new URL(i).origin;o!==location.origin&&t.push({src:o,crossOrigin:e.crossOrigin||"module"===e.getAttribute("data-rocket-type")})}catch(t){}}}),t=[...new Map(t.map(t=>[JSON.stringify(t),t])).values()],this.Y(t,"preconnect")}async G(t){if(await this.K(),!0!==t.noModule||!("noModule"in HTMLScriptElement.prototype))return new Promise(e=>{let i;function o(){(i||t).setAttribute("data-rocket-status","executed"),e()}try{if(navigator.userAgent.includes("Firefox/")||""===navigator.vendor||this.CSPIssue)i=document.createElement("script"),[...t.attributes].forEach(t=>{let e=t.nodeName;"type"!==e&&("data-rocket-type"===e&&(e="type"),"data-rocket-src"===e&&(e="src"),i.setAttribute(e,t.nodeValue))}),t.text&&(i.text=t.text),t.nonce&&(i.nonce=t.nonce),i.hasAttribute("src")?(i.addEventListener("load",o,{isRocket:!0}),i.addEventListener("error",()=>{i.setAttribute("data-rocket-status","failed-network"),e()},{isRocket:!0}),setTimeout(()=>{i.isConnected||e()},1)):(i.text=t.text,o()),i.isWPRocket=!0,t.parentNode.replaceChild(i,t);else{const i=t.getAttribute("data-rocket-type"),s=t.getAttribute("data-rocket-src");i?(t.type=i,t.removeAttribute("data-rocket-type")):t.removeAttribute("type"),t.addEventListener("load",o,{isRocket:!0}),t.addEventListener("error",i=>{this.CSPIssue&&i.target.src.startsWith("data:")?(console.log("WPRocket: CSP fallback activated"),t.removeAttribute("src"),this.G(t).then(e)):(t.setAttribute("data-rocket-status","failed-network"),e())},{isRocket:!0}),s?(t.fetchPriority="high",t.removeAttribute("data-rocket-src"),t.src=s):t.src="data:text/javascript;base64,"+window.btoa(unescape(encodeURIComponent(t.text)))}}catch(i){t.setAttribute("data-rocket-status","failed-transform"),e()}});t.setAttribute("data-rocket-status","skipped")}async C(t){const e=t.shift();return e?(e.isConnected&&await this.G(e),this.C(t)):Promise.resolve()}O(){this.Y([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}Y(t,e){this.trash=this.trash||[];let i=!0;var o=document.createDocumentFragment();t.forEach(t=>{const s=t.getAttribute&&t.getAttribute("data-rocket-src")||t.src;if(s&&!s.startsWith("data:")){const n=document.createElement("link");n.href=s,n.rel=e,"preconnect"!==e&&(n.as="script",n.fetchPriority=i?"high":"low"),t.getAttribute&&"module"===t.getAttribute("data-rocket-type")&&(n.crossOrigin=!0),t.crossOrigin&&(n.crossOrigin=t.crossOrigin),t.integrity&&(n.integrity=t.integrity),t.nonce&&(n.nonce=t.nonce),o.appendChild(n),this.trash.push(n),i=!1}}),document.head.appendChild(o)}W(){this.trash.forEach(t=>t.remove())}async T(){try{document.readyState="interactive"}catch(t){}this.fauxDomReadyFired=!0;try{await this.K(),this.J(document,"readystatechange"),document.dispatchEvent(new Event("rocket-readystatechange")),await this.K(),document.rocketonreadystatechange&&document.rocketonreadystatechange(),await this.K(),this.J(document,"DOMContentLoaded"),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this.K(),this.J(window,"DOMContentLoaded"),window.dispatchEvent(new Event("rocket-DOMContentLoaded"))}catch(t){console.error(t)}}async A(){try{document.readyState="complete"}catch(t){}try{await this.K(),this.J(document,"readystatechange"),document.dispatchEvent(new Event("rocket-readystatechange")),await this.K(),document.rocketonreadystatechange&&document.rocketonreadystatechange(),await this.K(),this.J(window,"load"),window.dispatchEvent(new Event("rocket-load")),await this.K(),window.rocketonload&&window.rocketonload(),await this.K(),this.allJQueries.forEach(t=>t(window).trigger("rocket-jquery-load")),await this.K(),this.J(window,"pageshow");const t=new Event("rocket-pageshow");t.persisted=this.persisted,window.dispatchEvent(t),await this.K(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}catch(t){console.error(t)}}async K(){Date.now()-this.lastBreath>45&&(await this.X(),this.lastBreath=Date.now())}async X(){return document.hidden?new Promise(t=>setTimeout(t)):new Promise(t=>requestAnimationFrame(t))}B(t,e=window){return e===document&&"readystatechange"===t||(e===document&&"DOMContentLoaded"===t||(e===window&&"DOMContentLoaded"===t||(e===window&&"load"===t||e===window&&"pageshow"===t)))}static run(){(new RocketLazyLoadScripts).t()}}RocketLazyLoadScripts.run()})();
+</script>
+	
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- This site is optimized with the Yoast SEO plugin v27.5 - https://yoast.com/product/yoast-seo-wordpress/ -->
+	<title>LyricsRaag: Lyrics &amp; Translations – Indian, K-Pop &amp; Global Hits</title>
+<link data-rocket-prefetch href="https://www.googletagmanager.com" rel="dns-prefetch">
+<link data-rocket-prefetch href="https://pagead2.googlesyndication.com" rel="dns-prefetch">
+<link data-rocket-prefetch href="https://fundingchoicesmessages.google.com" rel="dns-prefetch">
+<link crossorigin data-rocket-preload as="font" href="https://lyricsraag.com/wp-content/themes/lyricsraag-custom/fonts/roboto-v18-latin-regular.woff2" rel="preload">
+<style id="wpr-usedcss">img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}.meilisearch-results{position:absolute;top:calc(100% + 5px);left:0;right:0;background-color:#fff;border:1px solid #e0e0e0;border-radius:5px;box-shadow:0 8px 20px rgba(0,0,0,.12);z-index:9999;max-height:400px;overflow-y:auto;display:none;text-align:left}.meilisearch-results ul{list-style:none;margin:0;padding:6px}.meilisearch-results li a{display:block;text-decoration:none;color:#3a3a3a;border-radius:4px;transition:background-color .15s ease-out,color .15s ease-out;padding:10px 15px;font-size:16px;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.meilisearch-results li a:hover{background-color:#f0f5f7;color:#06597a}.meili-error,.meili-no-results{padding:20px;color:#777;text-align:center;font-style:italic}.meili-spinner{display:block;width:25px;height:25px;margin:25px auto;border:3px solid rgba(0,0,0,.1);border-top-color:#06597a;border-radius:50%;animation:.8s linear infinite meili-spin}@keyframes meili-spin{to{transform:rotate(360deg)}}.footer-widgets-container{padding:40px}.inside-footer-widgets{display:flex}.inside-footer-widgets>div{flex:1 1 0}.site-footer .footer-widgets-container .inner-padding{padding:0 0 0 40px}.site-footer .footer-widgets-container .inside-footer-widgets{margin-left:-40px}.site-footer:not(.footer-bar-active) .copyright-bar{margin:0 auto}@media (max-width:768px){.inside-footer-widgets{flex-direction:column}.inside-footer-widgets>div:not(:last-child){margin-bottom:40px}.site-footer .footer-widgets .footer-widgets-container .inside-footer-widgets{margin:0}.site-footer .footer-widgets .footer-widgets-container .inner-padding{padding:0}}body,dl,dt,fieldset,h1,h2,h3,html,iframe,legend,li,p,textarea,ul{margin:0;padding:0;border:0}html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}main{display:block}progress{vertical-align:baseline}html{box-sizing:border-box}*,::after,::before{box-sizing:inherit}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;margin:0}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-moz-focus-inner{border-style:none;padding:0}body,button,input,select,textarea{font-family:-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";font-weight:400;text-transform:none;font-size:17px;line-height:1.5}p{margin-bottom:1.5em}h1,h2,h3{font-family:inherit;font-size:100%;font-style:inherit;font-weight:inherit}table{border:1px solid rgba(0,0,0,.1)}table{border-collapse:separate;border-spacing:0;border-width:1px 0 0 1px;margin:0 0 1.5em;width:100%}fieldset{padding:0;border:0;min-width:inherit}fieldset legend{padding:0;margin-bottom:1.5em}h1{font-size:42px;margin-bottom:20px;line-height:1.2em;font-weight:400;text-transform:none}h2{font-size:35px;margin-bottom:20px;line-height:1.2em;font-weight:400;text-transform:none}h3{font-size:29px;margin-bottom:20px;line-height:1.2em;font-weight:400;text-transform:none}ul{margin:0 0 1.5em 3em}ul{list-style:disc}li>ul{margin-bottom:0;margin-left:1.5em}dt{font-weight:700}cite,em{font-style:italic}address{margin:0 0 1.5em}code,tt{font:15px Monaco,Consolas,"Andale Mono","DejaVu Sans Mono",monospace}ins{text-decoration:none}table{margin:0 0 1.5em;width:100%}img{height:auto;max-width:100%}button,input[type=button],input[type=submit]{background:#55555e;color:#fff;border:1px solid transparent;cursor:pointer;-webkit-appearance:button;padding:10px 20px}input[type=email],input[type=number],input[type=password],input[type=search],input[type=text],input[type=url],select,textarea{border:1px solid;border-radius:0;padding:10px 15px;max-width:100%}textarea{width:100%}a,button,input{transition:color .1s ease-in-out,background-color .1s ease-in-out}a{text-decoration:none}.button{padding:10px 20px;display:inline-block}.using-mouse :focus{outline:0}.using-mouse ::-moz-focus-inner{border:0}.screen-reader-text{border:0;clip:rect(1px,1px,1px,1px);clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute!important;width:1px;word-wrap:normal!important}.screen-reader-text:focus{background-color:#f1f1f1;border-radius:3px;box-shadow:0 0 2px 2px rgba(0,0,0,.6);clip:auto!important;clip-path:none;color:#21759b;display:block;font-size:.875rem;font-weight:700;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}.main-navigation{z-index:100;padding:0;clear:both;display:block}.main-navigation a{display:block;text-decoration:none;font-weight:400;text-transform:none;font-size:15px}.main-navigation ul{list-style:none;margin:0;padding-left:0}.main-navigation .main-nav ul li a{padding-left:20px;padding-right:20px;line-height:60px}.inside-navigation{position:relative}.main-navigation .inside-navigation{display:flex;align-items:center;flex-wrap:wrap;justify-content:space-between}.main-navigation .main-nav>ul{display:flex;flex-wrap:wrap;align-items:center}.main-navigation li{position:relative}.main-navigation .menu-bar-items{display:flex;align-items:center;font-size:15px}.main-navigation .menu-bar-items a{color:inherit}.main-navigation .menu-bar-item{position:relative}.main-navigation .menu-bar-item.search-item{z-index:20}.main-navigation .menu-bar-item>a{padding-left:20px;padding-right:20px;line-height:60px}.nav-align-right .inside-navigation{justify-content:flex-end}.main-navigation ul ul{display:block;box-shadow:1px 1px 0 rgba(0,0,0,.1);float:left;position:absolute;left:-99999px;opacity:0;z-index:99999;width:200px;text-align:left;top:auto;transition:opacity 80ms linear;transition-delay:0s;pointer-events:none;height:0;overflow:hidden}.main-navigation ul ul a{display:block}.main-navigation ul ul li{width:100%}.main-navigation .main-nav ul ul li a{line-height:normal;padding:10px 20px;font-size:14px}.main-navigation .main-nav ul li.menu-item-has-children>a{padding-right:0;position:relative}.main-navigation.sub-menu-left ul ul{box-shadow:-1px 1px 0 rgba(0,0,0,.1)}.main-navigation.sub-menu-left .sub-menu{right:0}.main-navigation:not(.toggled) ul li.sfHover>ul,.main-navigation:not(.toggled) ul li:hover>ul{left:auto;opacity:1;transition-delay:150ms;pointer-events:auto;height:auto;overflow:visible}.main-navigation:not(.toggled) ul ul li.sfHover>ul,.main-navigation:not(.toggled) ul ul li:hover>ul{left:100%;top:0}.main-navigation.sub-menu-left:not(.toggled) ul ul li.sfHover>ul,.main-navigation.sub-menu-left:not(.toggled) ul ul li:hover>ul{right:100%;left:auto}.menu-item-has-children .dropdown-menu-toggle{display:inline-block;height:100%;clear:both;padding-right:20px;padding-left:10px}.menu-item-has-children ul .dropdown-menu-toggle{padding-top:10px;padding-bottom:10px;margin-top:-10px}nav ul ul .menu-item-has-children .dropdown-menu-toggle{float:right}.site-header{position:relative}.site-logo{display:inline-block;max-width:100%}.site-header .header-image{vertical-align:middle}.site-content{word-wrap:break-word}iframe,object{max-width:100%}.widget select{max-width:100%}.footer-widgets .widget :last-child{margin-bottom:0}.widget ul{margin:0}.widget .search-field{width:100%}.footer-widgets .widget{margin-bottom:30px}.footer-widgets .widget:last-child{margin-bottom:0}.widget ul li{list-style-type:none;position:relative;margin-bottom:.5em}.widget ul li ul{margin-left:1em;margin-top:.5em}.site-content{display:flex}.grid-container{margin-left:auto;margin-right:auto;max-width:1200px}.one-container.archive .post:not(:last-child):not(.is-loop-template-item){padding-bottom:40px}.one-container .site-content{padding:40px}.inside-site-info{display:flex;align-items:center;justify-content:center;padding:20px 40px}.site-info{text-align:center;font-size:15px}.gp-icon{display:inline-flex;align-self:center}.gp-icon svg{height:1em;width:1em;top:.125em;position:relative;fill:currentColor}.close-search .icon-search svg:first-child,.icon-menu-bars svg:nth-child(2),.toggled .icon-menu-bars svg:first-child{display:none}.close-search .icon-search svg:nth-child(2),.toggled .icon-menu-bars svg:nth-child(2){display:block}nav.toggled .icon-arrow-right svg{transform:rotate(90deg)}nav.toggled .sfHover>a>.dropdown-menu-toggle .gp-icon svg{transform:rotate(180deg)}nav.toggled .sfHover>a>.dropdown-menu-toggle .gp-icon.icon-arrow-right svg{transform:rotate(270deg)}.container.grid-container{width:auto}.menu-toggle,.sidebar-nav-mobile{display:none}.menu-toggle{padding:0 20px;line-height:60px;margin:0;font-weight:400;text-transform:none;font-size:15px;cursor:pointer}.menu-toggle .mobile-menu{padding-left:3px}.menu-toggle .gp-icon+.mobile-menu{padding-left:9px}.menu-toggle .mobile-menu:empty{display:none}button.menu-toggle{background-color:transparent;flex-grow:1;border:0;text-align:center}button.menu-toggle:active,button.menu-toggle:focus,button.menu-toggle:hover{background-color:transparent}nav.toggled ul ul.sub-menu{width:100%}.toggled .menu-item-has-children .dropdown-menu-toggle{padding-left:20px}.main-navigation.toggled .main-nav{flex-basis:100%;order:3}.main-navigation.toggled .main-nav>ul{display:block}.main-navigation.toggled .main-nav li{width:100%;text-align:left}.main-navigation.toggled .main-nav ul ul{transition:0s;visibility:hidden;box-shadow:none;border-bottom:1px solid rgba(0,0,0,.05)}.main-navigation.toggled .main-nav ul ul li:last-child>ul{border-bottom:0}.main-navigation.toggled .main-nav ul ul.toggled-on{position:relative;top:0;left:auto!important;right:auto!important;width:100%;pointer-events:auto;height:auto;opacity:1;display:block;visibility:visible;float:none}.main-navigation.toggled .menu-item-has-children .dropdown-menu-toggle{float:right}.mobile-menu-control-wrapper{display:none;margin-left:auto;align-items:center}body{background-color:var(--base-2);color:var(--contrast)}a{color:#06597a}a{text-decoration:underline}.main-navigation a,a.button{text-decoration:none}.grid-container{max-width:1250px}:root{--contrast:#222222;--contrast-2:#575760;--contrast-3:#b2b2be;--base:#f0f0f0;--base-2:#f7f8f9;--base-3:#ffffff;--accent:#06597a}h2{font-size:24px}.site-header{background-color:#06597a;color:var(--base-3)}.site-header a{color:var(--base-3)}.site-header a:hover{color:var(--base-3)}.mobile-menu-control-wrapper .menu-toggle,.mobile-menu-control-wrapper .menu-toggle:focus,.mobile-menu-control-wrapper .menu-toggle:hover{background-color:rgba(0,0,0,.02)}.main-navigation,.main-navigation ul ul{background-color:#06597a}.main-navigation .main-nav ul li a,.main-navigation .menu-bar-items,.main-navigation .menu-toggle{color:var(--base-2)}.main-navigation .main-nav ul li.sfHover:not([class*=current-menu-])>a,.main-navigation .main-nav ul li:not([class*=current-menu-]):focus>a,.main-navigation .main-nav ul li:not([class*=current-menu-]):hover>a,.main-navigation .menu-bar-item.sfHover>a,.main-navigation .menu-bar-item:hover>a{color:var(--base)}button.menu-toggle:focus,button.menu-toggle:hover{color:var(--base-2)}.main-navigation .main-nav ul li[class*=current-menu-]>a{color:var(--base-2)}.main-navigation .main-nav ul li.search-item.active>a,.main-navigation .menu-bar-items .search-item.active>a,.navigation-search input[type=search],.navigation-search input[type=search]:active,.navigation-search input[type=search]:focus{color:var(--base)}.main-navigation ul ul{background-color:#06597a}.main-navigation .main-nav ul ul li a{color:var(--base-3)}.main-navigation .main-nav ul ul li.sfHover:not([class*=current-menu-])>a,.main-navigation .main-nav ul ul li:not([class*=current-menu-]):focus>a,.main-navigation .main-nav ul ul li:not([class*=current-menu-]):hover>a{color:#04364d;background-color:#b6edff}.one-container .container{background-color:var(--base-3)}.footer-widgets{color:#bdbdbd;background-color:#282d32}.footer-widgets a{color:var(--base-3)}.footer-widgets a:hover{color:#bdbdbd}.site-info{color:#bdbdbd;background-color:#282d32}input[type=email],input[type=number],input[type=password],input[type=search],input[type=text],input[type=url],select,textarea{color:var(--contrast);background-color:var(--base-2);border-color:var(--base)}input[type=email]:focus,input[type=number]:focus,input[type=password]:focus,input[type=search]:focus,input[type=text]:focus,input[type=url]:focus,select:focus,textarea:focus{color:var(--contrast);background-color:var(--base-2);border-color:var(--contrast-3)}a.button,button,html input[type=button],input[type=submit]{color:#fff;background-color:#55555e}a.button:focus,a.button:hover,button:focus,button:hover,html input[type=button]:focus,html input[type=button]:hover,input[type=submit]:focus,input[type=submit]:hover{color:#fff;background-color:#3f4047}:root{--gp-search-modal-bg-color:var(--base-3);--gp-search-modal-text-color:var(--contrast);--gp-search-modal-overlay-bg-color:rgba(0, 0, 0, .2)}.nav-below-header .main-navigation .inside-navigation.grid-container{padding:0 20px}.rtl .menu-item-has-children .dropdown-menu-toggle{padding-left:20px}.rtl .main-navigation .main-nav ul li.menu-item-has-children>a{padding-right:20px}@media (max-width:768px){a,body,button,input,select,textarea{transition:all 0s ease-in-out}.site-content{flex-direction:column}#main{margin-left:0;margin-right:0}body:not(.no-sidebar) #main{margin-bottom:0}.main-navigation .menu-bar-item.sfHover>a,.main-navigation .menu-bar-item:hover>a{background:0 0;color:var(--base-2)}.one-container .site-content{padding:30px}.footer-widgets-container{padding-top:30px;padding-right:30px;padding-bottom:30px;padding-left:30px}.inside-site-info{padding-right:30px;padding-left:30px}.main-navigation .menu-toggle,.sidebar-nav-mobile:not(#sticky-placeholder){display:block}.gen-sidebar-nav,.main-navigation ul,.main-navigation:not(.slideout-navigation):not(.toggled) .main-nav>ul{display:none}.nav-align-right .inside-navigation{justify-content:space-between}.one-container .site-content{padding:10px}}.main-navigation .main-nav ul li a,.main-navigation .menu-bar-item>a,.menu-toggle{transition:line-height .3s ease}.main-navigation.toggled .main-nav>ul{background-color:#06597a}.sticky-enabled .gen-sidebar-nav.is_stuck .main-navigation{margin-bottom:0}.sticky-enabled .gen-sidebar-nav.is_stuck{z-index:500}.sticky-enabled .main-navigation.is_stuck{box-shadow:0 2px 2px -2px rgba(0,0,0,.2)}.navigation-stick:not(.gen-sidebar-nav){left:0;right:0;width:100%!important}.main-navigation.has-sticky-branding:not(.grid-container) .inside-navigation:not(.grid-container) .navigation-branding{margin-left:10px}@font-face{font-family:Roboto;font-style:normal;font-weight:400;src:url("https://lyricsraag.com/wp-content/themes/lyricsraag-custom/fonts/roboto-v18-latin-regular.woff2") format("woff2"),url("https://lyricsraag.com/wp-content/themes/lyricsraag-custom/fonts/roboto-v18-latin-regular.woff") format("woff");font-display:swap}body{font-family:Roboto,Roboto-fallback,sans-serif!important;font-weight:400;font-size:16px!important;color:#1a1a1a!important}a:not([href*="lyricsraag.com"]):not([href^="/"]):not([href^="#"]):not( [href^=mailto] ):after{content:" ↗️"}img{border-radius:5px}.widget li{list-style-type:none;margin-left:0}table{border:none!important}h1{font-size:22px}ul li{list-style-type:none;margin-left:0;padding-left:0}a:link{text-decoration:none}tbody>tr>:first-child{color:inherit}div.textwidget{padding:20px}.caption{background-color:#f5fcff;color:#04364d}caption{text-align:left}.search-field{width:100%;height:45px;border-radius:4px 0 0 4px;border-right:none;padding-right:35px}.search-field::-webkit-search-cancel-button{display:none}.search-clear{position:absolute;top:50%;right:5px;transform:translateY(-50%);background:0 0;border:none;cursor:pointer;font-size:24px;line-height:1;color:#aaa;padding:0 10px;display:none;z-index:5;border-radius:50%;width:28px;height:28px}.search-clear:hover{color:#333;background-color:#e9e9e9}.grad-1{background:linear-gradient(115deg,#004ff9,#000)}.grad-2{background:linear-gradient(115deg,#62cff4,#2c67f2)}.grad-3{background:linear-gradient(115deg,#2c3e52,#fd746a)}.grad-4{background:linear-gradient(115deg,#12063b,#09555c)}.grad-5{background:linear-gradient(115deg,#00bf8f,#001510)}.grad-6{background:linear-gradient(115deg,#000,#444)}.grad-7{background:linear-gradient(115deg,#f97794,#6200ff,#3498db)}.grad-8{background:linear-gradient(115deg,#f97794,#623aa2,#111)}.grad-9{background:linear-gradient(115deg,#141e30,#243b55)}.footer-widgets{background-color:#1f2937;color:#9ca3af}.footer-widget-title{font-family:'Source Serif 4',serif;font-size:1.25rem;font-weight:700;color:#f9fafb;margin-bottom:1.25rem;letter-spacing:.5px}.footer-widget-content p{margin:0;line-height:1.6}.footer-widget-about p{font-size:.9375rem}.footer-widget-links ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.75rem}.footer-widget-links ul li{margin:0;padding:0}.footer-widget-links a{color:#9ca3af;text-decoration:none;display:inline-flex;align-items:center;gap:.75rem;transition:color .3s ease-in-out}.footer-widget-links a:hover{color:#3b82f6}.footer-widget-links a svg{flex-shrink:0;transition:color .3s ease-in-out}.footer-widget-links a:hover svg{color:#3b82f6}.link-underline{position:relative;display:inline-block}.link-underline::after{content:'';position:absolute;width:0;height:1px;bottom:-3px;left:0;background-color:#3b82f6;transition:width .3s ease-in-out}.footer-widget-links a:hover .link-underline::after{width:100%}.footer-widget-links ul li a{display:flex;align-items:center;gap:.5em}.footer-widget-links ul li a::before{content:'';flex-shrink:0;display:inline-block;width:20px;height:20px;background-color:currentColor;-webkit-mask-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M5 12h14M12 5l7 7-7 7'/%3e%3c/svg%3e");mask-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M5 12h14M12 5l7 7-7 7'/%3e%3c/svg%3e");-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}.footer-widget a[title=About]::before{-webkit-mask-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3ccircle cx='12' cy='12' r='10'%3e%3c/circle%3e%3cline x1='12' y1='16' x2='12' y2='12'%3e%3c/line%3e%3cline x1='12' y1='8' x2='12.01' y2='8'%3e%3c/line%3e%3c/svg%3e");mask-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3ccircle cx='12' cy='12' r='10'%3e%3c/circle%3e%3cline x1='12' y1='16' x2='12' y2='12'%3e%3c/line%3e%3cline x1='12' y1='8' x2='12.01' y2='8'%3e%3c/line%3e%3c/svg%3e")}.footer-widget a[title=Contact]::before{-webkit-mask-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z'%3e%3c/path%3e%3cpolyline points='22,6 12,13 2,6'%3e%3c/polyline%3e%3c/svg%3e");mask-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z'%3e%3c/path%3e%3cpolyline points='22,6 12,13 2,6'%3e%3c/polyline%3e%3c/svg%3e")}.footer-widget a[title=Disclaimer]::before{-webkit-mask-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'%3e%3c/path%3e%3c/svg%3e");mask-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'%3e%3c/path%3e%3c/svg%3e")}.navigation-branding,.site-logo.mobile-header-logo{display:flex;align-items:center;order:0;margin-right:10px}.navigation-branding img,.site-logo.mobile-header-logo img{position:relative;padding:10px 0;display:block;transition:height .3s ease}.main-navigation.mobile-header-navigation{display:none;float:none;margin-bottom:0}.mobile-header-navigation.is_stuck{box-shadow:0 2px 2px -2px rgba(0,0,0,.2)}.main-navigation .menu-toggle{flex-grow:1;width:auto}.main-navigation.has-branding .menu-toggle,.main-navigation.has-sticky-branding.navigation-stick .menu-toggle{flex-grow:0;padding-right:20px;order:2}.main-navigation:not(.slideout-navigation) .mobile-bar-items+.menu-toggle{text-align:left}.main-navigation.has-sticky-branding:not(.has-branding):not(.navigation-stick) .navigation-branding{display:none}.nav-align-right .navigation-branding{margin-right:auto}.main-navigation.has-branding:not([class*=nav-align-]):not(.mobile-header-navigation) .inside-navigation,.main-navigation.has-sticky-branding.navigation-stick:not([class*=nav-align-]):not(.mobile-header-navigation) .inside-navigation{justify-content:flex-start}.main-navigation.has-branding:not([class*=nav-align-]):not(.mobile-header-navigation) .menu-bar-items,.main-navigation.has-sticky-branding.navigation-stick:not([class*=nav-align-]):not(.mobile-header-navigation) .menu-bar-items{margin-left:auto}.mobile-header-navigation.has-menu-bar-items .mobile-header-logo{margin-right:auto}.rtl .main-navigation.nav-align-right:not(.mobile-header-navigation) .navigation-branding{order:-10}.rtl .nav-align-right .navigation-branding{margin-right:10px}.rtl .navigation-branding,.rtl .site-logo.mobile-header-logo{margin-left:auto;margin-right:0}.rtl .nav-align-right .navigation-branding,.rtl .nav-align-right .site-logo.mobile-header-logo{margin-left:10px}.rtl .nav-align-right .menu-bar-items{margin-right:auto}.main-navigation.has-branding .inside-navigation.grid-container,.main-navigation.has-branding.grid-container .inside-navigation:not(.grid-container){padding:0 40px}.main-navigation.has-branding:not(.grid-container) .inside-navigation:not(.grid-container) .navigation-branding{margin-left:10px}.navigation-branding img,.site-logo.mobile-header-logo img{height:60px;width:auto}@media (max-width:768px){#site-navigation,#sticky-navigation,.site-header{display:none!important;opacity:0}#mobile-header{display:block!important;width:100%!important}#mobile-header .main-nav>ul{display:none}#mobile-header .menu-toggle,#mobile-header .mobile-bar-items,#mobile-header.toggled .main-nav>ul{display:block}#mobile-header .main-nav{-ms-flex:0 0 100%;flex:0 0 100%;-webkit-box-ordinal-group:5;-ms-flex-order:4;order:4}.main-navigation.has-branding.nav-align-center .menu-bar-items,.main-navigation.has-sticky-branding.navigation-stick.nav-align-center .menu-bar-items{margin-left:auto}.navigation-branding{margin-right:auto;margin-left:10px}.mobile-header-navigation .site-logo{margin-left:10px}.main-navigation.has-branding .inside-navigation.grid-container{padding:0}}:root{--wp--preset--aspect-ratio--square:1;--wp--preset--aspect-ratio--4-3:4/3;--wp--preset--aspect-ratio--3-4:3/4;--wp--preset--aspect-ratio--3-2:3/2;--wp--preset--aspect-ratio--2-3:2/3;--wp--preset--aspect-ratio--16-9:16/9;--wp--preset--aspect-ratio--9-16:9/16;--wp--preset--color--black:#000000;--wp--preset--color--cyan-bluish-gray:#abb8c3;--wp--preset--color--white:#ffffff;--wp--preset--color--pale-pink:#f78da7;--wp--preset--color--vivid-red:#cf2e2e;--wp--preset--color--luminous-vivid-orange:#ff6900;--wp--preset--color--luminous-vivid-amber:#fcb900;--wp--preset--color--light-green-cyan:#7bdcb5;--wp--preset--color--vivid-green-cyan:#00d084;--wp--preset--color--pale-cyan-blue:#8ed1fc;--wp--preset--color--vivid-cyan-blue:#0693e3;--wp--preset--color--vivid-purple:#9b51e0;--wp--preset--color--contrast:var(--contrast);--wp--preset--color--contrast-2:var(--contrast-2);--wp--preset--color--contrast-3:var(--contrast-3);--wp--preset--color--base:var(--base);--wp--preset--color--base-2:var(--base-2);--wp--preset--color--base-3:var(--base-3);--wp--preset--color--accent:var(--accent);--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple:linear-gradient(135deg,rgb(6, 147, 227) 0%,rgb(155, 81, 224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan:linear-gradient(135deg,rgb(122, 220, 180) 0%,rgb(0, 208, 130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange:linear-gradient(135deg,rgb(252, 185, 0) 0%,rgb(255, 105, 0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red:linear-gradient(135deg,rgb(255, 105, 0) 0%,rgb(207, 46, 46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray:linear-gradient(135deg,rgb(238, 238, 238) 0%,rgb(169, 184, 195) 100%);--wp--preset--gradient--cool-to-warm-spectrum:linear-gradient(135deg,rgb(74, 234, 220) 0%,rgb(151, 120, 209) 20%,rgb(207, 42, 186) 40%,rgb(238, 44, 130) 60%,rgb(251, 105, 98) 80%,rgb(254, 248, 76) 100%);--wp--preset--gradient--blush-light-purple:linear-gradient(135deg,rgb(255, 206, 236) 0%,rgb(152, 150, 240) 100%);--wp--preset--gradient--blush-bordeaux:linear-gradient(135deg,rgb(254, 205, 165) 0%,rgb(254, 45, 45) 50%,rgb(107, 0, 62) 100%);--wp--preset--gradient--luminous-dusk:linear-gradient(135deg,rgb(255, 203, 112) 0%,rgb(199, 81, 192) 50%,rgb(65, 88, 208) 100%);--wp--preset--gradient--pale-ocean:linear-gradient(135deg,rgb(255, 245, 203) 0%,rgb(182, 227, 212) 50%,rgb(51, 167, 181) 100%);--wp--preset--gradient--electric-grass:linear-gradient(135deg,rgb(202, 248, 128) 0%,rgb(113, 206, 126) 100%);--wp--preset--gradient--midnight:linear-gradient(135deg,rgb(2, 3, 129) 0%,rgb(40, 116, 252) 100%);--wp--preset--font-size--small:13px;--wp--preset--font-size--medium:20px;--wp--preset--font-size--large:36px;--wp--preset--font-size--x-large:42px;--wp--preset--spacing--20:0.44rem;--wp--preset--spacing--30:0.67rem;--wp--preset--spacing--40:1rem;--wp--preset--spacing--50:1.5rem;--wp--preset--spacing--60:2.25rem;--wp--preset--spacing--70:3.38rem;--wp--preset--spacing--80:5.06rem;--wp--preset--shadow--natural:6px 6px 9px rgba(0, 0, 0, .2);--wp--preset--shadow--deep:12px 12px 50px rgba(0, 0, 0, .4);--wp--preset--shadow--sharp:6px 6px 0px rgba(0, 0, 0, .2);--wp--preset--shadow--outlined:6px 6px 0px -3px rgb(255, 255, 255),6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp:6px 6px 0px rgb(0, 0, 0)}:where(.is-layout-flex){gap:.5em}:where(.is-layout-grid){gap:.5em}:where(.wp-block-columns.is-layout-flex){gap:2em}:where(.wp-block-columns.is-layout-grid){gap:2em}:where(.wp-block-post-template.is-layout-flex){gap:1.25em}:where(.wp-block-post-template.is-layout-grid){gap:1.25em}:root{--bg-page:#f8f9fa;--bg-card:#ffffff;--text-primary:#1a1a1a;--text-secondary:#595959;--accent-color:#06597a;--border-color:#dee2e6}body{background-color:var(--bg-page);color:var(--text-primary);font-family:Roboto,sans-serif;font-size:16px}.font-serif{font-family:'Source Serif 4',serif}.vista-container{max-width:72rem;margin-left:auto;margin-right:auto;padding:1.5rem 1rem;overflow-x:hidden}@media (min-width:640px){.vista-container{padding:3rem 1.5rem}}.vista-hero{text-align:center;padding:2rem 0}.vista-hero__title{font-family:'Source Serif 4',serif;font-size:2.25rem;font-weight:700;letter-spacing:-.025em;color:var(--accent-color);line-height:1.2}@media (min-width:768px){.vista-hero{padding:3rem 0}.vista-hero__title{font-size:3.75rem}}.vista-hero__subtitle{margin-top:1rem;max-width:42rem;margin-left:auto;margin-right:auto;font-size:1.125rem;line-height:1.75rem;color:#4b5563}.vista-section-title{font-family:'Source Serif 4',serif;font-size:1.75rem;font-weight:700;text-align:center;margin-bottom:2rem}.vista-recommendations{margin-bottom:3rem}.vista-recommendations__grid{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:1.5rem}@media (min-width:768px){.vista-section-title{font-size:1.875rem}.vista-recommendations__grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem}}.vista-rec-card{background-color:var(--bg-card);border-radius:.5rem;box-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);transition:box-shadow .3s ease-in-out;overflow:hidden}.vista-rec-card:hover{box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1)}.vista-rec-card a{display:block;text-decoration:none}.vista-rec-card__image-wrapper{position:relative;width:100%;padding-top:56.25%}.vista-rec-card__image-wrapper img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:transform .3s ease-in-out}.vista-rec-card:hover .vista-rec-card__image-wrapper img{transform:scale(1.05)}.vista-rec-card__placeholder-img{background-color:#e5e7eb;width:100%;height:100%;position:absolute;top:0;left:0}.vista-rec-card__content{padding:1rem}.vista-rec-card__title{font-size:1.125rem;font-weight:700;color:var(--text-primary);transition:color .3s ease-in-out}.vista-rec-card a:hover .vista-rec-card__title{color:var(--accent-color)}.vista-rec-card__category{margin-top:.25rem;font-size:.875rem;color:var(--text-secondary)}.vista-artists{margin-bottom:3rem}.vista-artists__slider{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:1.5rem;justify-items:center}.vista-artists__slider .vista-artist-card{display:block;text-decoration:none;color:inherit}@media (min-width:768px){.vista-artists__slider{display:flex;overflow-x:auto;justify-content:flex-start;padding-bottom:1rem;scrollbar-width:thin;scrollbar-color:#9ca3af #e5e7eb;-webkit-overflow-scrolling:touch;grid-template-columns:unset}.vista-artists__slider::-webkit-scrollbar{height:8px}.vista-artists__slider::-webkit-scrollbar-track{background:#e5e7eb;border-radius:10px}.vista-artists__slider::-webkit-scrollbar-thumb{background-color:#9ca3af;border-radius:10px;border:2px solid #e5e7eb}.vista-artists__slider::-webkit-scrollbar-thumb:hover{background-color:#6b7280}.vista-artist-card{flex-shrink:0}}.vista-artist-card__gradient-placeholder{width:128px;height:128px;border-radius:50%;display:flex;align-items:center;justify-content:center;padding:10px;box-sizing:border-box;margin:0 auto;transition:transform .3s ease,box-shadow .3s ease;box-shadow:0 4px 12px rgba(0,0,0,.1)}.vista-artist-card:hover .vista-artist-card__gradient-placeholder{transform:scale(1.07);box-shadow:0 8px 20px rgba(0,0,0,.15)}.vista-artist-card__name{color:#fff;font-size:1rem;font-weight:600;line-height:1.3;text-align:center;text-shadow:1px 1px 3px rgba(0,0,0,.4);word-break:break-word}@media (max-width:767px){.vista-artist-card__gradient-placeholder{width:100px;height:100px;padding:8px}.vista-artist-card__name{font-size:.875rem}}.vista-category-grid{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:1.5rem}@media (min-width:768px){.vista-category-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:2rem}}@media (min-width:1024px){.vista-category-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}.vista-cat-card{background-color:var(--bg-card);border-radius:.5rem;box-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);border:1px solid var(--border-color);display:flex;flex-direction:column}.vista-cat-card__header{padding:1rem;border-bottom:1px solid var(--border-color)}.vista-cat-card__title{font-size:1.25rem;font-weight:700}.vista-cat-card__body{padding:1rem;flex-grow:1}.vista-cat-card__list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1rem}.vista-cat-card__list li{margin:0;padding:0}.vista-cat-card__list a{text-decoration:none;display:flex;flex-direction:column}.vista-cat-card__song-title{font-weight:700;color:var(--accent-color);transition:color .3s ease-in-out;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.vista-cat-card__list a:hover .vista-cat-card__song-title{color:var(--text-primary)}.vista-cat-card__song-artist{font-size:.875rem;color:var(--text-secondary)}.vista-cat-card__no-posts{font-size:.875rem;color:var(--text-secondary)}.vista-cat-card__footer{padding:1rem;background-color:#f9fafb;border-top:1px solid var(--border-color);border-bottom-left-radius:.5rem;border-bottom-right-radius:.5rem}.vista-cat-card__footer a.vista-cat-card__view-all{font-weight:500;color:var(--accent-color);text-decoration:none;transition:color .2s ease-in-out}.vista-cat-card__footer a.vista-cat-card__view-all:hover{color:var(--text-primary)}h3.vista-rec-card__title{margin-bottom:5px}</style>
+	<meta name="description" content="The definitive archive for song lyrics and English translations. Get accurate, line-by-line meanings for Bollywood, South Indian, K-Pop, Latin, and Global charts." />
+	<link rel="canonical" href="https://lyricsraag.com/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="LyricsRaag: Lyrics &amp; Translations – Indian, K-Pop &amp; Global Hits" />
+	<meta property="og:description" content="The definitive archive for song lyrics and English translations. Get accurate, line-by-line meanings for Bollywood, South Indian, K-Pop, Latin, and Global charts." />
+	<meta property="og:url" content="https://lyricsraag.com/" />
+	<meta property="og:site_name" content="LyricsRaag.Com" />
+	<meta property="article:publisher" content="https://www.facebook.com/lyricsraag/" />
+	<meta property="article:modified_time" content="2026-01-27T13:14:00+00:00" />
+	<meta property="og:image" content="https://lyricsraag.com/wp-content/uploads/2019/08/latest-lyrics-by-categories.jpg" />
+	<meta property="og:image:width" content="400" />
+	<meta property="og:image:height" content="225" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@lyricsraag" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https:\/\/schema.org","@graph":[{"@type":"WebPage","@id":"https:\/\/lyricsraag.com\/","url":"https:\/\/lyricsraag.com\/","name":"LyricsRaag: Lyrics & Translations – Indian, K-Pop & Global Hits","isPartOf":{"@id":"https:\/\/lyricsraag.com\/#website"},"about":{"@id":"https:\/\/lyricsraag.com\/#organization"},"primaryImageOfPage":{"@id":"https:\/\/lyricsraag.com\/#primaryimage"},"image":{"@id":"https:\/\/lyricsraag.com\/#primaryimage"},"thumbnailUrl":"https:\/\/lyricsraag.com\/wp-content\/uploads\/2019\/08\/latest-lyrics-by-categories.jpg","datePublished":"2019-08-11T08:35:09+00:00","dateModified":"2026-01-27T13:14:00+00:00","description":"The definitive archive for song lyrics and English translations. Get accurate, line-by-line meanings for Bollywood, South Indian, K-Pop, Latin, and Global charts.","breadcrumb":{"@id":"https:\/\/lyricsraag.com\/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https:\/\/lyricsraag.com\/"]}]},{"@type":"ImageObject","inLanguage":"en-US","@id":"https:\/\/lyricsraag.com\/#primaryimage","url":"https:\/\/lyricsraag.com\/wp-content\/uploads\/2019\/08\/latest-lyrics-by-categories.jpg","contentUrl":"https:\/\/lyricsraag.com\/wp-content\/uploads\/2019\/08\/latest-lyrics-by-categories.jpg","width":400,"height":225,"caption":"latest lyrics by categories"},{"@type":"BreadcrumbList","@id":"https:\/\/lyricsraag.com\/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home"}]},{"@type":"WebSite","@id":"https:\/\/lyricsraag.com\/#website","url":"https:\/\/lyricsraag.com\/","name":"LyricsRaag.Com","description":"Lyrics with Translations","publisher":{"@id":"https:\/\/lyricsraag.com\/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https:\/\/lyricsraag.com\/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"en-US"},{"@type":"Organization","@id":"https:\/\/lyricsraag.com\/#organization","name":"LyricsRaag.com","url":"https:\/\/lyricsraag.com\/","logo":{"@type":"ImageObject","inLanguage":"en-US","@id":"https:\/\/lyricsraag.com\/#\/schema\/logo\/image\/","url":"https:\/\/lyricsraag.com\/wp-content\/uploads\/2020\/08\/1280-logo-large.jpg","contentUrl":"https:\/\/lyricsraag.com\/wp-content\/uploads\/2020\/08\/1280-logo-large.jpg","width":1280,"height":1280,"caption":"LyricsRaag.com"},"image":{"@id":"https:\/\/lyricsraag.com\/#\/schema\/logo\/image\/"},"sameAs":["https:\/\/www.facebook.com\/lyricsraag\/","https:\/\/x.com\/lyricsraag","https:\/\/www.pinterest.com\/lyricsraagapp\/","https:\/\/www.instagram.com\/lyricsraagcom\/"]}]}</script>
+	<meta name="msvalidate.01" content="B5631E75E950C15F2DA935B2CAB426C4" />
+	<meta name="google-site-verification" content="uKwLKuMlrx3dJf1kgA9j5Q4P-UboIEgbtGNSbRSQAz4" />
+	<meta name="p:domain_verify" content="4f02be6cafde4e30947c8550d2bdf818" />
+	<meta name="yandex-verification" content="6c6eba6852a95abd" />
+	<!-- / Yoast SEO plugin. -->
+
+
+
+<link rel="alternate" type="application/rss+xml" title="LyricsRaag.Com &raquo; Feed" href="https://lyricsraag.com/feed/" />
+<style id='wp-img-auto-sizes-contain-inline-css'></style>
+<style id='classic-theme-styles-inline-css'></style>
+<style id='global-styles-inline-css'></style>
+
+
+
+
+
+
+<style id='generate-style-inline-css'></style>
+
+
+<style id='generate-navigation-branding-inline-css'></style>
+<style id='rocket-lazyload-inline-css'>
+.rll-youtube-player{position:relative;padding-bottom:56.23%;height:0;overflow:hidden;max-width:100%;}.rll-youtube-player:focus-within{outline: 2px solid currentColor;outline-offset: 5px;}.rll-youtube-player iframe{position:absolute;top:0;left:0;width:100%;height:100%;z-index:100;background:0 0}.rll-youtube-player img{bottom:0;display:block;left:0;margin:auto;max-width:100%;width:100%;position:absolute;right:0;top:0;border:none;height:auto;-webkit-transition:.4s all;-moz-transition:.4s all;transition:.4s all}.rll-youtube-player img:hover{-webkit-filter:brightness(75%)}.rll-youtube-player .play{height:100%;width:100%;left:0;top:0;position:absolute;background:var(--wpr-bg-6456b1e2-6eae-4666-beb5-67e77582572a) no-repeat center;background-color: transparent !important;cursor:pointer;border:none;}.wp-embed-responsive .wp-has-aspect-ratio .rll-youtube-player{position:absolute;padding-bottom:0;width:100%;height:100%;top:0;bottom:0;left:0;right:0}
+/*# sourceURL=rocket-lazyload-inline-css */
+</style>
+<script type="text/rocketlazyloadscript" data-handle="jquery-core" data-rocket-src="https://lyricsraag.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js" data-rocket-defer defer></script>
+ <script type="text/rocketlazyloadscript"> window.addEventListener("load",function(){ var c={script:false,link:false}; function ls(s) { if(!['script','link'].includes(s)||c[s]){return;}c[s]=true; var d=document,f=d.getElementsByTagName(s)[0],j=d.createElement(s); if(s==='script'){j.async=true;j.src='https://lyricsraag.com/wp-content/plugins/wp-views/vendor/toolset/blocks/public/js/frontend.js?v=1.6.0';}else{ j.rel='stylesheet';j.href='https://lyricsraag.com/wp-content/plugins/wp-views/vendor/toolset/blocks/public/css/style.css?v=1.6.0';} f.parentNode.insertBefore(j, f); }; function ex(){ls('script');ls('link')} window.addEventListener("scroll", ex, {once: true}); if (('IntersectionObserver' in window) && ('IntersectionObserverEntry' in window) && ('intersectionRatio' in window.IntersectionObserverEntry.prototype)) { var i = 0, fb = document.querySelectorAll("[class^='tb-']"), o = new IntersectionObserver(es => { es.forEach(e => { o.unobserve(e.target); if (e.intersectionRatio > 0) { ex();o.disconnect();}else{ i++;if(fb.length>i){o.observe(fb[i])}} }) }); if (fb.length) { o.observe(fb[i]) } } }) </script>
+	<noscript>
+		<link data-minify="1" rel="stylesheet" href="https://lyricsraag.com/wp-content/cache/min/1/wp-content/plugins/wp-views/vendor/toolset/blocks/public/css/style.css?ver=1778997119">
+	</noscript><meta name="p:domain_verify" content="4f02be6cafde4e30947c8550d2bdf818"/>
+<meta name='dailymotion-domain-verification' content='dmsucwhmtcve9011b' />
+<meta name="yandex-verification" content="060c0ab5e480f59a" />
+<meta name="p:domain_verify" content="b0eb7146794dd4492fc732f712b8c304"/>
+<!-- Google tag (gtag.js) -->
+<script type="text/rocketlazyloadscript" async data-rocket-src="https://www.googletagmanager.com/gtag/js?id=G-T5DJGEG6KJ"></script>
+<script type="text/rocketlazyloadscript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-T5DJGEG6KJ');
+</script>
+<script type="text/rocketlazyloadscript" async data-rocket-src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3882954045894572"
+     crossorigin="anonymous"></script>
+<script type="text/rocketlazyloadscript" async data-rocket-src="https://fundingchoicesmessages.google.com/i/pub-3882954045894572?ers=1"></script><script type="text/rocketlazyloadscript">(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script><link rel="icon" href="https://lyricsraag.com/wp-content/uploads/2023/05/cropped-favicon_r_duo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://lyricsraag.com/wp-content/uploads/2023/05/cropped-favicon_r_duo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://lyricsraag.com/wp-content/uploads/2023/05/cropped-favicon_r_duo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://lyricsraag.com/wp-content/uploads/2023/05/cropped-favicon_r_duo-270x270.png" />
+<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript><style id="wpr-lazyload-bg-container"></style><style id="wpr-lazyload-bg-exclusion"></style>
+<noscript>
+<style id="wpr-lazyload-bg-nostyle">.rll-youtube-player .play{--wpr-bg-6456b1e2-6eae-4666-beb5-67e77582572a: url('https://lyricsraag.com/wp-content/plugins/wp-rocket/assets/img/youtube.png');}</style>
+</noscript>
+<script type="application/javascript">const rocket_pairs = [{"selector":".rll-youtube-player .play","style":".rll-youtube-player .play{--wpr-bg-6456b1e2-6eae-4666-beb5-67e77582572a: url('https:\/\/lyricsraag.com\/wp-content\/plugins\/wp-rocket\/assets\/img\/youtube.png');}","hash":"6456b1e2-6eae-4666-beb5-67e77582572a","url":"https:\/\/lyricsraag.com\/wp-content\/plugins\/wp-rocket\/assets\/img\/youtube.png"}]; const rocket_excluded_pairs = [];</script><meta name="generator" content="WP Rocket 3.21.3" data-wpr-features="wpr_lazyload_css_bg_img wpr_remove_unused_css wpr_delay_js wpr_defer_js wpr_minify_js wpr_lazyload_iframes wpr_preconnect_external_domains wpr_auto_preload_fonts wpr_image_dimensions wpr_minify_css wpr_preload_links wpr_host_fonts_locally wpr_desktop" /></head>
+
+<body class="home wp-singular page-template page-template-homepage_v3_8 page-template-homepage_v3_8-php page page-id-99169 wp-custom-logo wp-embed-responsive wp-theme-generatepress wp-child-theme-generatepress_child post-image-aligned-center sticky-menu-slide sticky-enabled mobile-sticky-menu mobile-header mobile-header-logo no-sidebar nav-below-header one-container header-aligned-center dropdown-hover" itemtype="https://schema.org/WebPage" itemscope>
+	<a class="screen-reader-text skip-link" href="#content" title="Skip to content">Skip to content</a>		<nav id="mobile-header" data-auto-hide-sticky itemtype="https://schema.org/SiteNavigationElement" itemscope class="main-navigation mobile-header-navigation has-branding">
+			<div class="inside-navigation grid-container grid-parent">
+				<div class="site-logo mobile-header-logo">
+						<a href="https://lyricsraag.com/" title="LyricsRaag.Com" rel="home">
+							<img src="https://lyricsraag.com/wp-content/uploads/2024/01/300-70-logo.png" alt="LyricsRaag.Com" class="is-logo-image" width="300" height="71" />
+						</a>
+					</div>					<button class="menu-toggle" aria-controls="mobile-menu" aria-expanded="false">
+						<span class="gp-icon icon-menu-bars"><svg viewBox="0 0 512 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M0 96c0-13.255 10.745-24 24-24h464c13.255 0 24 10.745 24 24s-10.745 24-24 24H24c-13.255 0-24-10.745-24-24zm0 160c0-13.255 10.745-24 24-24h464c13.255 0 24 10.745 24 24s-10.745 24-24 24H24c-13.255 0-24-10.745-24-24zm0 160c0-13.255 10.745-24 24-24h464c13.255 0 24 10.745 24 24s-10.745 24-24 24H24c-13.255 0-24-10.745-24-24z" /></svg><svg viewBox="0 0 512 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M71.029 71.029c9.373-9.372 24.569-9.372 33.942 0L256 222.059l151.029-151.03c9.373-9.372 24.569-9.372 33.942 0 9.372 9.373 9.372 24.569 0 33.942L289.941 256l151.03 151.029c9.372 9.373 9.372 24.569 0 33.942-9.373 9.372-24.569 9.372-33.942 0L256 289.941l-151.029 151.03c-9.373 9.372-24.569 9.372-33.942 0-9.372-9.373-9.372-24.569 0-33.942L222.059 256 71.029 104.971c-9.372-9.373-9.372-24.569 0-33.942z" /></svg></span><span class="mobile-menu">Menu</span>					</button>
+					<div id="mobile-menu" class="main-nav"><ul id="menu-music-industry" class=" menu sf-menu"><li id="menu-item-175566" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-175566"><a href="#" title="Translated Lyrics from Indian Music Industries">Indian Beats<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow"><svg viewBox="0 0 330 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M305.913 197.085c0 2.266-1.133 4.815-2.833 6.514L171.087 335.593c-1.7 1.7-4.249 2.832-6.515 2.832s-4.815-1.133-6.515-2.832L26.064 203.599c-1.7-1.7-2.832-4.248-2.832-6.514s1.132-4.816 2.832-6.515l14.162-14.163c1.7-1.699 3.966-2.832 6.515-2.832 2.266 0 4.815 1.133 6.515 2.832l111.316 111.317 111.316-111.317c1.7-1.699 4.249-2.832 6.515-2.832s4.815 1.133 6.515 2.832l14.162 14.163c1.7 1.7 2.833 4.249 2.833 6.515z" /></svg></span></span></a>
+<ul class="sub-menu">
+	<li id="menu-item-175572" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-175572"><a href="#" title="Hindi, Punjabi, Urdu Songs Lyrics, Translations">Bollywood &#038; Pop<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow-right"><svg viewBox="0 0 192 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><path d="M178.425 256.001c0 2.266-1.133 4.815-2.832 6.515L43.599 394.509c-1.7 1.7-4.248 2.833-6.514 2.833s-4.816-1.133-6.515-2.833l-14.163-14.162c-1.699-1.7-2.832-3.966-2.832-6.515 0-2.266 1.133-4.815 2.832-6.515l111.317-111.316L16.407 144.685c-1.699-1.7-2.832-4.249-2.832-6.515s1.133-4.815 2.832-6.515l14.163-14.162c1.7-1.7 4.249-2.833 6.515-2.833s4.815 1.133 6.514 2.833l131.994 131.993c1.7 1.7 2.832 4.249 2.832 6.515z" fill-rule="nonzero" /></svg></span></span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-175571" class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175571"><a href="https://lyricsraag.com/language/hindi/" title="Latest Hindi Bollywood song lyrics with English translations">Hindi</a></li>
+		<li id="menu-item-175569" class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175569"><a href="https://lyricsraag.com/language/punjabi/" title="New Punjabi songs lyrics and meanings">Punjabi</a></li>
+		<li id="menu-item-175570" class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175570"><a href="https://lyricsraag.com/language/urdu/" title="Urdu songs, ghazals, and Coke Studio lyrics translations">Urdu</a></li>
+	</ul>
+</li>
+	<li id="menu-item-175597" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-175597"><a href="#" title="Folk &#038; Regional Indian songs lyrics translations">Folk &#038; Regional<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow-right"><svg viewBox="0 0 192 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><path d="M178.425 256.001c0 2.266-1.133 4.815-2.832 6.515L43.599 394.509c-1.7 1.7-4.248 2.833-6.514 2.833s-4.816-1.133-6.515-2.833l-14.163-14.162c-1.699-1.7-2.832-3.966-2.832-6.515 0-2.266 1.133-4.815 2.832-6.515l111.317-111.316L16.407 144.685c-1.699-1.7-2.832-4.249-2.832-6.515s1.133-4.815 2.832-6.515l14.163-14.162c1.7-1.7 4.249-2.833 6.515-2.833s4.815 1.133 6.514 2.833l131.994 131.993c1.7 1.7 2.832 4.249 2.832 6.515z" fill-rule="nonzero" /></svg></span></span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-175602" class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175602"><a href="https://lyricsraag.com/language/bhojpuri/" title="Bhojpuri Cinema and Superhit Song Translations">Bhojpuri</a></li>
+		<li id="menu-item-175605" class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175605"><a href="https://lyricsraag.com/language/haryanvi/" title="Haryanvi Pop and Desi Folk Song Meanings">Haryanvi</a></li>
+		<li id="menu-item-175603" class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175603"><a href="https://lyricsraag.com/language/marathi/" title="Marathi Film and Traditional Folk Lyrics Translated">Marathi</a></li>
+		<li id="menu-item-175604" class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175604"><a href="https://lyricsraag.com/language/nepali/" title="Nepali Pop, Modern, and Folk Music Lyrics">Nepali</a></li>
+	</ul>
+</li>
+	<li id="menu-item-175596" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-175596"><a href="#" title="South Cinema Songs Lyrics Translations">South Cinema<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow-right"><svg viewBox="0 0 192 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><path d="M178.425 256.001c0 2.266-1.133 4.815-2.832 6.515L43.599 394.509c-1.7 1.7-4.248 2.833-6.514 2.833s-4.816-1.133-6.515-2.833l-14.163-14.162c-1.699-1.7-2.832-3.966-2.832-6.515 0-2.266 1.133-4.815 2.832-6.515l111.317-111.316L16.407 144.685c-1.699-1.7-2.832-4.249-2.832-6.515s1.133-4.815 2.832-6.515l14.163-14.162c1.7-1.7 4.249-2.833 6.515-2.833s4.815 1.133 6.514 2.833l131.994 131.993c1.7 1.7 2.832 4.249 2.832 6.515z" fill-rule="nonzero" /></svg></span></span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-175601" class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175601"><a href="https://lyricsraag.com/language/kannada/" title="Sandalwood Kannada Song Lyrics and Meanings">Kannada</a></li>
+		<li id="menu-item-175600" class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175600"><a href="https://lyricsraag.com/language/malayalam/" title="Mollywood Malayalam Movie Songs Lyrics &#038; Translations">Malayalam</a></li>
+		<li id="menu-item-175598" class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175598"><a href="https://lyricsraag.com/language/tamil/" title="Kollywood Tamil Song Lyrics with English Translations">Tamil</a></li>
+		<li id="menu-item-175599" class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175599"><a href="https://lyricsraag.com/language/telugu/" title="Tollywood Telugu Hit Songs Translated to English">Telugu</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-175567" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-175567"><a href="#" title="International Song Lyrics Translated to English">World Hits<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow"><svg viewBox="0 0 330 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M305.913 197.085c0 2.266-1.133 4.815-2.833 6.514L171.087 335.593c-1.7 1.7-4.249 2.832-6.515 2.832s-4.815-1.133-6.515-2.832L26.064 203.599c-1.7-1.7-2.832-4.248-2.832-6.514s1.132-4.816 2.832-6.515l14.162-14.163c1.7-1.699 3.966-2.832 6.515-2.832 2.266 0 4.815 1.133 6.515 2.832l111.316 111.317 111.316-111.317c1.7-1.699 4.249-2.832 6.515-2.832s4.815 1.133 6.515 2.832l14.162 14.163c1.7 1.7 2.833 4.249 2.833 6.515z" /></svg></span></span></a>
+<ul class="sub-menu">
+	<li id="menu-item-175577" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-175577"><a href="#" title="Korean and Japanese Pop Music Translations (Romanized)">K-Pop &#038; J-Pop (East Asia)<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow-right"><svg viewBox="0 0 192 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><path d="M178.425 256.001c0 2.266-1.133 4.815-2.832 6.515L43.599 394.509c-1.7 1.7-4.248 2.833-6.514 2.833s-4.816-1.133-6.515-2.833l-14.163-14.162c-1.699-1.7-2.832-3.966-2.832-6.515 0-2.266 1.133-4.815 2.832-6.515l111.317-111.316L16.407 144.685c-1.699-1.7-2.832-4.249-2.832-6.515s1.133-4.815 2.832-6.515l14.163-14.162c1.7-1.7 4.249-2.833 6.515-2.833s4.815 1.133 6.514 2.833l131.994 131.993c1.7 1.7 2.832 4.249 2.832 6.515z" fill-rule="nonzero" /></svg></span></span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-175583" class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175583"><a href="https://lyricsraag.com/language/japanese/" title="J-Pop and Anime Song Translations (Romaji)">Japanese</a></li>
+		<li id="menu-item-175584" class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175584"><a href="https://lyricsraag.com/language/korean/" title="K-Pop Song Meanings, Hangul &#038; Romanized Lyrics">Korean</a></li>
+	</ul>
+</li>
+	<li id="menu-item-175578" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-175578"><a href="#" title="Latin Pop, Reggaeton, and Spanish Song Lyrics">Latin &#038; Hispanic<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow-right"><svg viewBox="0 0 192 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><path d="M178.425 256.001c0 2.266-1.133 4.815-2.832 6.515L43.599 394.509c-1.7 1.7-4.248 2.833-6.514 2.833s-4.816-1.133-6.515-2.833l-14.163-14.162c-1.699-1.7-2.832-3.966-2.832-6.515 0-2.266 1.133-4.815 2.832-6.515l111.317-111.316L16.407 144.685c-1.699-1.7-2.832-4.249-2.832-6.515s1.133-4.815 2.832-6.515l14.163-14.162c1.7-1.7 4.249-2.833 6.515-2.833s4.815 1.133 6.514 2.833l131.994 131.993c1.7 1.7 2.832 4.249 2.832 6.515z" fill-rule="nonzero" /></svg></span></span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-175587" class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175587"><a href="https://lyricsraag.com/language/italian/" title="Classic and Modern Italian Music Translations">Italian</a></li>
+		<li id="menu-item-175585" class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175585"><a href="https://lyricsraag.com/language/portuguese/" title="Brazilian Funk and Portuguese Lyrics Translated">Portuguese</a></li>
+		<li id="menu-item-175586" class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175586"><a href="https://lyricsraag.com/language/spanish/" title="Spanish to English Song Translations &#038; Meanings">Spanish</a></li>
+	</ul>
+</li>
+	<li id="menu-item-175579" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-175579"><a href="#" title="European Music Hits Translated to English">Euro Mix<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow-right"><svg viewBox="0 0 192 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><path d="M178.425 256.001c0 2.266-1.133 4.815-2.832 6.515L43.599 394.509c-1.7 1.7-4.248 2.833-6.514 2.833s-4.816-1.133-6.515-2.833l-14.163-14.162c-1.699-1.7-2.832-3.966-2.832-6.515 0-2.266 1.133-4.815 2.832-6.515l111.317-111.316L16.407 144.685c-1.699-1.7-2.832-4.249-2.832-6.515s1.133-4.815 2.832-6.515l14.163-14.162c1.7-1.7 4.249-2.833 6.515-2.833s4.815 1.133 6.514 2.833l131.994 131.993c1.7 1.7 2.832 4.249 2.832 6.515z" fill-rule="nonzero" /></svg></span></span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-175589" class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175589"><a href="https://lyricsraag.com/language/dutch/" title="Deutsch Rap and Pop Song Translations">Dutch</a></li>
+		<li id="menu-item-175590" class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175590"><a href="https://lyricsraag.com/language/french/" title="French Pop and Chanson Lyrics with Meanings">French</a></li>
+		<li id="menu-item-175588" class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175588"><a href="https://lyricsraag.com/language/russian/" title="Russian Hit Songs Translated to English">Russian</a></li>
+	</ul>
+</li>
+	<li id="menu-item-175591" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-175591"><a href="#" title="Middle Eastern and African Song Lyrics">Afro &#038; Arabesque<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow-right"><svg viewBox="0 0 192 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><path d="M178.425 256.001c0 2.266-1.133 4.815-2.832 6.515L43.599 394.509c-1.7 1.7-4.248 2.833-6.514 2.833s-4.816-1.133-6.515-2.833l-14.163-14.162c-1.699-1.7-2.832-3.966-2.832-6.515 0-2.266 1.133-4.815 2.832-6.515l111.317-111.316L16.407 144.685c-1.699-1.7-2.832-4.249-2.832-6.515s1.133-4.815 2.832-6.515l14.163-14.162c1.7-1.7 4.249-2.833 6.515-2.833s4.815 1.133 6.514 2.833l131.994 131.993c1.7 1.7 2.832 4.249 2.832 6.515z" fill-rule="nonzero" /></svg></span></span></a>
+	<ul class="sub-menu">
+		<li id="menu-item-175595" class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175595"><a href="https://lyricsraag.com/language/arabic/" title="Arabic Song Lyrics (transliterated) and Meanings">Arabic</a></li>
+		<li id="menu-item-175592" class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175592"><a href="https://lyricsraag.com/language/swahili/" title="Swahili Song Translations">Swahili</a></li>
+		<li id="menu-item-175593" class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175593"><a href="https://lyricsraag.com/language/twi/" title="Twi Song Lyrics Translations">Twi</a></li>
+		<li id="menu-item-175594" class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175594"><a href="https://lyricsraag.com/language/zulu/" title="Zulu Lyrics with Meanings">Zulu</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+</ul></div>			</div><!-- .inside-navigation -->
+		</nav><!-- #site-navigation -->
+				<nav class="auto-hide-sticky has-branding main-navigation nav-align-right sub-menu-right" id="site-navigation" aria-label="Primary"  itemtype="https://schema.org/SiteNavigationElement" itemscope>
+			<div class="inside-navigation grid-container">
+				<div class="navigation-branding"><div class="site-logo">
+						<a href="https://lyricsraag.com/" title="LyricsRaag.Com" rel="home">
+							<img  class="header-image is-logo-image" alt="LyricsRaag.Com" src="https://lyricsraag.com/wp-content/uploads/2024/02/40-logo.png" title="LyricsRaag.Com" width="221" height="40" />
+						</a>
+					</div></div>				<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+					<span class="gp-icon icon-menu-bars"><svg viewBox="0 0 512 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M0 96c0-13.255 10.745-24 24-24h464c13.255 0 24 10.745 24 24s-10.745 24-24 24H24c-13.255 0-24-10.745-24-24zm0 160c0-13.255 10.745-24 24-24h464c13.255 0 24 10.745 24 24s-10.745 24-24 24H24c-13.255 0-24-10.745-24-24zm0 160c0-13.255 10.745-24 24-24h464c13.255 0 24 10.745 24 24s-10.745 24-24 24H24c-13.255 0-24-10.745-24-24z" /></svg><svg viewBox="0 0 512 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M71.029 71.029c9.373-9.372 24.569-9.372 33.942 0L256 222.059l151.029-151.03c9.373-9.372 24.569-9.372 33.942 0 9.372 9.373 9.372 24.569 0 33.942L289.941 256l151.03 151.029c9.372 9.373 9.372 24.569 0 33.942-9.373 9.372-24.569 9.372-33.942 0L256 289.941l-151.029 151.03c-9.373 9.372-24.569 9.372-33.942 0-9.372-9.373-9.372-24.569 0-33.942L222.059 256 71.029 104.971c-9.372-9.373-9.372-24.569 0-33.942z" /></svg></span><span class="mobile-menu">Menu</span>				</button>
+				<div id="primary-menu" class="main-nav"><ul id="menu-music-industry-1" class=" menu sf-menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-175566"><a href="#" title="Translated Lyrics from Indian Music Industries">Indian Beats<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow"><svg viewBox="0 0 330 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M305.913 197.085c0 2.266-1.133 4.815-2.833 6.514L171.087 335.593c-1.7 1.7-4.249 2.832-6.515 2.832s-4.815-1.133-6.515-2.832L26.064 203.599c-1.7-1.7-2.832-4.248-2.832-6.514s1.132-4.816 2.832-6.515l14.162-14.163c1.7-1.699 3.966-2.832 6.515-2.832 2.266 0 4.815 1.133 6.515 2.832l111.316 111.317 111.316-111.317c1.7-1.699 4.249-2.832 6.515-2.832s4.815 1.133 6.515 2.832l14.162 14.163c1.7 1.7 2.833 4.249 2.833 6.515z" /></svg></span></span></a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-175572"><a href="#" title="Hindi, Punjabi, Urdu Songs Lyrics, Translations">Bollywood &#038; Pop<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow-right"><svg viewBox="0 0 192 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><path d="M178.425 256.001c0 2.266-1.133 4.815-2.832 6.515L43.599 394.509c-1.7 1.7-4.248 2.833-6.514 2.833s-4.816-1.133-6.515-2.833l-14.163-14.162c-1.699-1.7-2.832-3.966-2.832-6.515 0-2.266 1.133-4.815 2.832-6.515l111.317-111.316L16.407 144.685c-1.699-1.7-2.832-4.249-2.832-6.515s1.133-4.815 2.832-6.515l14.163-14.162c1.7-1.7 4.249-2.833 6.515-2.833s4.815 1.133 6.514 2.833l131.994 131.993c1.7 1.7 2.832 4.249 2.832 6.515z" fill-rule="nonzero" /></svg></span></span></a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175571"><a href="https://lyricsraag.com/language/hindi/" title="Latest Hindi Bollywood song lyrics with English translations">Hindi</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175569"><a href="https://lyricsraag.com/language/punjabi/" title="New Punjabi songs lyrics and meanings">Punjabi</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175570"><a href="https://lyricsraag.com/language/urdu/" title="Urdu songs, ghazals, and Coke Studio lyrics translations">Urdu</a></li>
+	</ul>
+</li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-175597"><a href="#" title="Folk &#038; Regional Indian songs lyrics translations">Folk &#038; Regional<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow-right"><svg viewBox="0 0 192 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><path d="M178.425 256.001c0 2.266-1.133 4.815-2.832 6.515L43.599 394.509c-1.7 1.7-4.248 2.833-6.514 2.833s-4.816-1.133-6.515-2.833l-14.163-14.162c-1.699-1.7-2.832-3.966-2.832-6.515 0-2.266 1.133-4.815 2.832-6.515l111.317-111.316L16.407 144.685c-1.699-1.7-2.832-4.249-2.832-6.515s1.133-4.815 2.832-6.515l14.163-14.162c1.7-1.7 4.249-2.833 6.515-2.833s4.815 1.133 6.514 2.833l131.994 131.993c1.7 1.7 2.832 4.249 2.832 6.515z" fill-rule="nonzero" /></svg></span></span></a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175602"><a href="https://lyricsraag.com/language/bhojpuri/" title="Bhojpuri Cinema and Superhit Song Translations">Bhojpuri</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175605"><a href="https://lyricsraag.com/language/haryanvi/" title="Haryanvi Pop and Desi Folk Song Meanings">Haryanvi</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175603"><a href="https://lyricsraag.com/language/marathi/" title="Marathi Film and Traditional Folk Lyrics Translated">Marathi</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175604"><a href="https://lyricsraag.com/language/nepali/" title="Nepali Pop, Modern, and Folk Music Lyrics">Nepali</a></li>
+	</ul>
+</li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-175596"><a href="#" title="South Cinema Songs Lyrics Translations">South Cinema<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow-right"><svg viewBox="0 0 192 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><path d="M178.425 256.001c0 2.266-1.133 4.815-2.832 6.515L43.599 394.509c-1.7 1.7-4.248 2.833-6.514 2.833s-4.816-1.133-6.515-2.833l-14.163-14.162c-1.699-1.7-2.832-3.966-2.832-6.515 0-2.266 1.133-4.815 2.832-6.515l111.317-111.316L16.407 144.685c-1.699-1.7-2.832-4.249-2.832-6.515s1.133-4.815 2.832-6.515l14.163-14.162c1.7-1.7 4.249-2.833 6.515-2.833s4.815 1.133 6.514 2.833l131.994 131.993c1.7 1.7 2.832 4.249 2.832 6.515z" fill-rule="nonzero" /></svg></span></span></a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175601"><a href="https://lyricsraag.com/language/kannada/" title="Sandalwood Kannada Song Lyrics and Meanings">Kannada</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175600"><a href="https://lyricsraag.com/language/malayalam/" title="Mollywood Malayalam Movie Songs Lyrics &#038; Translations">Malayalam</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175598"><a href="https://lyricsraag.com/language/tamil/" title="Kollywood Tamil Song Lyrics with English Translations">Tamil</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175599"><a href="https://lyricsraag.com/language/telugu/" title="Tollywood Telugu Hit Songs Translated to English">Telugu</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-175567"><a href="#" title="International Song Lyrics Translated to English">World Hits<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow"><svg viewBox="0 0 330 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"><path d="M305.913 197.085c0 2.266-1.133 4.815-2.833 6.514L171.087 335.593c-1.7 1.7-4.249 2.832-6.515 2.832s-4.815-1.133-6.515-2.832L26.064 203.599c-1.7-1.7-2.832-4.248-2.832-6.514s1.132-4.816 2.832-6.515l14.162-14.163c1.7-1.699 3.966-2.832 6.515-2.832 2.266 0 4.815 1.133 6.515 2.832l111.316 111.317 111.316-111.317c1.7-1.699 4.249-2.832 6.515-2.832s4.815 1.133 6.515 2.832l14.162 14.163c1.7 1.7 2.833 4.249 2.833 6.515z" /></svg></span></span></a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-175577"><a href="#" title="Korean and Japanese Pop Music Translations (Romanized)">K-Pop &#038; J-Pop (East Asia)<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow-right"><svg viewBox="0 0 192 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><path d="M178.425 256.001c0 2.266-1.133 4.815-2.832 6.515L43.599 394.509c-1.7 1.7-4.248 2.833-6.514 2.833s-4.816-1.133-6.515-2.833l-14.163-14.162c-1.699-1.7-2.832-3.966-2.832-6.515 0-2.266 1.133-4.815 2.832-6.515l111.317-111.316L16.407 144.685c-1.699-1.7-2.832-4.249-2.832-6.515s1.133-4.815 2.832-6.515l14.163-14.162c1.7-1.7 4.249-2.833 6.515-2.833s4.815 1.133 6.514 2.833l131.994 131.993c1.7 1.7 2.832 4.249 2.832 6.515z" fill-rule="nonzero" /></svg></span></span></a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175583"><a href="https://lyricsraag.com/language/japanese/" title="J-Pop and Anime Song Translations (Romaji)">Japanese</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175584"><a href="https://lyricsraag.com/language/korean/" title="K-Pop Song Meanings, Hangul &#038; Romanized Lyrics">Korean</a></li>
+	</ul>
+</li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-175578"><a href="#" title="Latin Pop, Reggaeton, and Spanish Song Lyrics">Latin &#038; Hispanic<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow-right"><svg viewBox="0 0 192 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><path d="M178.425 256.001c0 2.266-1.133 4.815-2.832 6.515L43.599 394.509c-1.7 1.7-4.248 2.833-6.514 2.833s-4.816-1.133-6.515-2.833l-14.163-14.162c-1.699-1.7-2.832-3.966-2.832-6.515 0-2.266 1.133-4.815 2.832-6.515l111.317-111.316L16.407 144.685c-1.699-1.7-2.832-4.249-2.832-6.515s1.133-4.815 2.832-6.515l14.163-14.162c1.7-1.7 4.249-2.833 6.515-2.833s4.815 1.133 6.514 2.833l131.994 131.993c1.7 1.7 2.832 4.249 2.832 6.515z" fill-rule="nonzero" /></svg></span></span></a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175587"><a href="https://lyricsraag.com/language/italian/" title="Classic and Modern Italian Music Translations">Italian</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175585"><a href="https://lyricsraag.com/language/portuguese/" title="Brazilian Funk and Portuguese Lyrics Translated">Portuguese</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175586"><a href="https://lyricsraag.com/language/spanish/" title="Spanish to English Song Translations &#038; Meanings">Spanish</a></li>
+	</ul>
+</li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-175579"><a href="#" title="European Music Hits Translated to English">Euro Mix<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow-right"><svg viewBox="0 0 192 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><path d="M178.425 256.001c0 2.266-1.133 4.815-2.832 6.515L43.599 394.509c-1.7 1.7-4.248 2.833-6.514 2.833s-4.816-1.133-6.515-2.833l-14.163-14.162c-1.699-1.7-2.832-3.966-2.832-6.515 0-2.266 1.133-4.815 2.832-6.515l111.317-111.316L16.407 144.685c-1.699-1.7-2.832-4.249-2.832-6.515s1.133-4.815 2.832-6.515l14.163-14.162c1.7-1.7 4.249-2.833 6.515-2.833s4.815 1.133 6.514 2.833l131.994 131.993c1.7 1.7 2.832 4.249 2.832 6.515z" fill-rule="nonzero" /></svg></span></span></a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175589"><a href="https://lyricsraag.com/language/dutch/" title="Deutsch Rap and Pop Song Translations">Dutch</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175590"><a href="https://lyricsraag.com/language/french/" title="French Pop and Chanson Lyrics with Meanings">French</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175588"><a href="https://lyricsraag.com/language/russian/" title="Russian Hit Songs Translated to English">Russian</a></li>
+	</ul>
+</li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-175591"><a href="#" title="Middle Eastern and African Song Lyrics">Afro &#038; Arabesque<span role="presentation" class="dropdown-menu-toggle"><span class="gp-icon icon-arrow-right"><svg viewBox="0 0 192 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><path d="M178.425 256.001c0 2.266-1.133 4.815-2.832 6.515L43.599 394.509c-1.7 1.7-4.248 2.833-6.514 2.833s-4.816-1.133-6.515-2.833l-14.163-14.162c-1.699-1.7-2.832-3.966-2.832-6.515 0-2.266 1.133-4.815 2.832-6.515l111.317-111.316L16.407 144.685c-1.699-1.7-2.832-4.249-2.832-6.515s1.133-4.815 2.832-6.515l14.163-14.162c1.7-1.7 4.249-2.833 6.515-2.833s4.815 1.133 6.514 2.833l131.994 131.993c1.7 1.7 2.832 4.249 2.832 6.515z" fill-rule="nonzero" /></svg></span></span></a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175595"><a href="https://lyricsraag.com/language/arabic/" title="Arabic Song Lyrics (transliterated) and Meanings">Arabic</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175592"><a href="https://lyricsraag.com/language/swahili/" title="Swahili Song Translations">Swahili</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175593"><a href="https://lyricsraag.com/language/twi/" title="Twi Song Lyrics Translations">Twi</a></li>
+		<li class="menu-item menu-item-type-taxonomy menu-item-object-language menu-item-175594"><a href="https://lyricsraag.com/language/zulu/" title="Zulu Lyrics with Meanings">Zulu</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+</ul></div>			</div>
+		</nav>
+		
+	<div  class="site grid-container container hfeed" id="page">
+				<div  class="site-content" id="content">
+			
+    
+    <div  class="vista-container">
+        <header class="vista-hero">
+            <h1 class="vista-hero__title">Understand the Meaning of Your Favourite Songs</h1>
+            <p class="vista-hero__subtitle">Explore accurate English translations for music across the globe. From Bollywood and South Indian hits to trending K-Pop, Latin, and European charts, we decode the lyrics to help you deepen your connection to the music you love.</p>
+        </header>
+        <main>
+                        <section class="vista-recommendations">
+                <h2 class="vista-section-title">LyricsRaag Recommendations</h2>
+                <div class="vista-recommendations__grid">
+                                        <div class="vista-rec-card">
+                        <a href="https://lyricsraag.com/moves-chapter-iv-ep-translation/">
+                            <div class="vista-rec-card__image-wrapper">
+                                                                    <img width="533" height="300" src="https://lyricsraag.com/wp-content/uploads/2026/04/moves-chapter-iv-ep-translation.webp" alt="" loading="lazy">
+                                                            </div>
+                            <div class="vista-rec-card__content">
+                                <h3 class="vista-rec-card__title">Moves</h3>
+                                <p class="vista-rec-card__category">Punjabi to English</p>
+                            </div>
+                        </a>
+                    </div>
+                                        <div class="vista-rec-card">
+                        <a href="https://lyricsraag.com/zhong-li-xun-ta-qian-bai-du-dian-shi-ju-zhu-yu-ai-qing-zhu-ti-translation/">
+                            <div class="vista-rec-card__image-wrapper">
+                                                                    <img width="533" height="300" src="https://lyricsraag.com/wp-content/uploads/2026/03/zhong-li-xun-ta-qian-bai-du-dian-shi-ju-zhu-yu-ai-qing-zhu-ti-translation.webp" alt="" loading="lazy">
+                                                            </div>
+                            <div class="vista-rec-card__content">
+                                <h3 class="vista-rec-card__title">众里寻他千百度(电视剧《逐玉》爱情主题曲)</h3>
+                                <p class="vista-rec-card__category">Chinese to English</p>
+                            </div>
+                        </a>
+                    </div>
+                                        <div class="vista-rec-card">
+                        <a href="https://lyricsraag.com/hawak-mo-ang-beat-nonstop-hataw-disco-translation/">
+                            <div class="vista-rec-card__image-wrapper">
+                                                                    <img width="533" height="300" src="https://lyricsraag.com/wp-content/uploads/2026/03/hawak-mo-ang-beat-nonstop-hataw-disco-translation.webp" alt="" loading="lazy">
+                                                            </div>
+                            <div class="vista-rec-card__content">
+                                <h3 class="vista-rec-card__title">Hawak Mo Ang Beat</h3>
+                                <p class="vista-rec-card__category">Tagalog to English</p>
+                            </div>
+                        </a>
+                    </div>
+                                    </div>
+            </section>
+            
+                        <section class="vista-artists">
+                <h2 class="vista-section-title">Featured Artists</h2>
+                <div class="vista-artists__slider">
+                                        <a href="https://lyricsraag.com/singer/arijit-singh/" class="vista-artist-card" aria-label="Arijit Singh">
+                        <div class="vista-artist-card__gradient-placeholder grad-1">
+                            <span class="vista-artist-card__name">Arijit Singh</span>
+                        </div>
+                    </a>
+                                        <a href="https://lyricsraag.com/singer/p-susheela/" class="vista-artist-card" aria-label="P. Susheela">
+                        <div class="vista-artist-card__gradient-placeholder grad-2">
+                            <span class="vista-artist-card__name">P. Susheela</span>
+                        </div>
+                    </a>
+                                        <a href="https://lyricsraag.com/singer/shreya-ghoshal/" class="vista-artist-card" aria-label="Shreya Ghoshal">
+                        <div class="vista-artist-card__gradient-placeholder grad-3">
+                            <span class="vista-artist-card__name">Shreya Ghoshal</span>
+                        </div>
+                    </a>
+                                        <a href="https://lyricsraag.com/singer/anirudh-ravichander/" class="vista-artist-card" aria-label="Anirudh Ravichander">
+                        <div class="vista-artist-card__gradient-placeholder grad-4">
+                            <span class="vista-artist-card__name">Anirudh Ravichander</span>
+                        </div>
+                    </a>
+                                        <a href="https://lyricsraag.com/singer/sid-sriram/" class="vista-artist-card" aria-label="Sid Sriram">
+                        <div class="vista-artist-card__gradient-placeholder grad-5">
+                            <span class="vista-artist-card__name">Sid Sriram</span>
+                        </div>
+                    </a>
+                                        <a href="https://lyricsraag.com/singer/diljit-dosanjh/" class="vista-artist-card" aria-label="Diljit Dosanjh">
+                        <div class="vista-artist-card__gradient-placeholder grad-6">
+                            <span class="vista-artist-card__name">Diljit Dosanjh</span>
+                        </div>
+                    </a>
+                                        <a href="https://lyricsraag.com/singer/karan-aujla/" class="vista-artist-card" aria-label="Karan Aujla">
+                        <div class="vista-artist-card__gradient-placeholder grad-7">
+                            <span class="vista-artist-card__name">Karan Aujla</span>
+                        </div>
+                    </a>
+                                        <a href="https://lyricsraag.com/singer/jubin-nautiyal/" class="vista-artist-card" aria-label="Jubin Nautiyal">
+                        <div class="vista-artist-card__gradient-placeholder grad-8">
+                            <span class="vista-artist-card__name">Jubin Nautiyal</span>
+                        </div>
+                    </a>
+                                        <a href="https://lyricsraag.com/singer/gurlej-akhtar/" class="vista-artist-card" aria-label="Gurlej Akhtar">
+                        <div class="vista-artist-card__gradient-placeholder grad-9">
+                            <span class="vista-artist-card__name">Gurlej Akhtar</span>
+                        </div>
+                    </a>
+                                    </div>
+            </section>
+            
+                                            
+                <h2 class="vista-section-title" style="margin-top: 40px; margin-bottom: 20px;">Global Charts &amp; Viral Hits</h2>
+                
+                <section class="vista-category-grid">
+                                        <div class="vista-cat-card">
+                        <div class="vista-cat-card__header">
+                            <h3 class="vista-cat-card__title">East Asian Hits</h3>
+                        </div>
+                        <div class="vista-cat-card__body">
+                                                        <ul class="vista-cat-card__list">
+                                                                <li>
+                                    <a href="https://lyricsraag.com/siganyi-ggeut-end-of-time-nebyulra-ost-nebula-shining-star-translation/" title="Read lyrics for 시간의 끝 (End Of Time)">
+                                        <span class="vista-cat-card__song-title">시간의 끝 (End Of Time)</span>
+                                        <span class="vista-cat-card__song-artist">Nebula</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/check-voice-translation/" title="Read lyrics for CHECK">
+                                        <span class="vista-cat-card__song-title">CHECK</span>
+                                        <span class="vista-cat-card__song-artist">Reiko</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/shout-it-out-daisycall-translation/" title="Read lyrics for Shout it out">
+                                        <span class="vista-cat-card__song-title">Shout it out</span>
+                                        <span class="vista-cat-card__song-artist">Daisycall</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/black-mist-anna-suzuki-translation/" title="Read lyrics for Black Mist">
+                                        <span class="vista-cat-card__song-title">Black Mist</span>
+                                        <span class="vista-cat-card__song-artist">Anna Suzuki</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/nemurihime-sekai-no-owari-translation/" title="Read lyrics for Nemurihime">
+                                        <span class="vista-cat-card__song-title">Nemurihime</span>
+                                        <span class="vista-cat-card__song-artist">Sekai No Owari</span>
+                                    </a>
+                                </li>
+                                                            </ul>
+                                                    </div>
+                        <div class="vista-cat-card__footer">
+                            <a href="https://lyricsraag.com/category/translations/korean-to-english/" class="vista-cat-card__view-all" style="font-size: 0.9em; margin-right: 5px;">Korean to English</a> / <a href="https://lyricsraag.com/category/translations/japanese-to-english/" class="vista-cat-card__view-all" style="font-size: 0.9em; margin-right: 5px;">Japanese to English</a> / <a href="https://lyricsraag.com/category/translations/vietnamese-to-english/" class="vista-cat-card__view-all" style="font-size: 0.9em; margin-right: 5px;">Vietnamese to English</a>                        </div>
+                    </div>
+                                        <div class="vista-cat-card">
+                        <div class="vista-cat-card__header">
+                            <h3 class="vista-cat-card__title">Latin &amp; Hispanic</h3>
+                        </div>
+                        <div class="vista-cat-card__body">
+                                                        <ul class="vista-cat-card__list">
+                                                                <li>
+                                    <a href="https://lyricsraag.com/e-ela-hernani-konfuzo-412-translation/" title="Read lyrics for É Ela">
+                                        <span class="vista-cat-card__song-title">É Ela</span>
+                                        <span class="vista-cat-card__song-artist">Hernani, Konfuzo_412</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/delorean-andry-kiddos-translation/" title="Read lyrics for delorean">
+                                        <span class="vista-cat-card__song-title">delorean</span>
+                                        <span class="vista-cat-card__song-artist">Andry Kiddos</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/bailemos-tito-nieves-translation/" title="Read lyrics for Bailemos">
+                                        <span class="vista-cat-card__song-title">Bailemos</span>
+                                        <span class="vista-cat-card__song-artist">Tito Nieves</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/tulum-marasi-playmen-translation/" title="Read lyrics for Tulum">
+                                        <span class="vista-cat-card__song-title">Tulum</span>
+                                        <span class="vista-cat-card__song-artist">Eleni Foureira, Marasi, Playmen</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/agradecio-dellafuente-translation/" title="Read lyrics for Agradecío">
+                                        <span class="vista-cat-card__song-title">Agradecío</span>
+                                        <span class="vista-cat-card__song-artist">Dellafuente</span>
+                                    </a>
+                                </li>
+                                                            </ul>
+                                                    </div>
+                        <div class="vista-cat-card__footer">
+                            <a href="https://lyricsraag.com/category/translations/spanish-to-english/" class="vista-cat-card__view-all" style="font-size: 0.9em; margin-right: 5px;">Spanish to English</a> / <a href="https://lyricsraag.com/category/translations/portuguese-to-english/" class="vista-cat-card__view-all" style="font-size: 0.9em; margin-right: 5px;">Portuguese to English</a>                        </div>
+                    </div>
+                                        <div class="vista-cat-card">
+                        <div class="vista-cat-card__header">
+                            <h3 class="vista-cat-card__title">Western &amp; European</h3>
+                        </div>
+                        <div class="vista-cat-card__body">
+                                                        <ul class="vista-cat-card__list">
+                                                                <li>
+                                    <a href="https://lyricsraag.com/napoli-queen-radio-liberato-translation/" title="Read lyrics for NAPOLI QUEEN">
+                                        <span class="vista-cat-card__song-title">NAPOLI QUEEN</span>
+                                        <span class="vista-cat-card__song-artist">Liberato</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/red-s-ma-in-a-sackl-caro-fux-translation/" title="Read lyrics for Red&#039;s ma in a Sackl">
+                                        <span class="vista-cat-card__song-title">Red&#039;s ma in a Sackl</span>
+                                        <span class="vista-cat-card__song-artist">Caro Fux</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/maltempo-baltimora-emma-nolde-translation/" title="Read lyrics for Maltempo">
+                                        <span class="vista-cat-card__song-title">Maltempo</span>
+                                        <span class="vista-cat-card__song-artist">Baltimora, Emma Nolde</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/nou-make-papi-jay-shah-frank-translation/" title="Read lyrics for NOU MAKE">
+                                        <span class="vista-cat-card__song-title">NOU MAKE</span>
+                                        <span class="vista-cat-card__song-artist">Papi Jay, Raccoon, Shah Frank</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/cattive-abitudini-with-colapesce-salmo-colapesce-mace-translation/" title="Read lyrics for Cattive Abitudini 𑿠 (with Colapesce &amp; Salmo)">
+                                        <span class="vista-cat-card__song-title">Cattive Abitudini 𑿠 (with Colapesce &amp; Salmo)</span>
+                                        <span class="vista-cat-card__song-artist">Colapesce, Mace, Salmo</span>
+                                    </a>
+                                </li>
+                                                            </ul>
+                                                    </div>
+                        <div class="vista-cat-card__footer">
+                            <a href="https://lyricsraag.com/category/french-to-english/" class="vista-cat-card__view-all" style="font-size: 0.9em; margin-right: 5px;">French to English</a> / <a href="https://lyricsraag.com/category/german-to-english/" class="vista-cat-card__view-all" style="font-size: 0.9em; margin-right: 5px;">German to English</a> / <a href="https://lyricsraag.com/category/translations/italian-to-english/" class="vista-cat-card__view-all" style="font-size: 0.9em; margin-right: 5px;">Italian to English</a>                        </div>
+                    </div>
+                                        <div class="vista-cat-card">
+                        <div class="vista-cat-card__header">
+                            <h3 class="vista-cat-card__title">Eurasian Beats</h3>
+                        </div>
+                        <div class="vista-cat-card__body">
+                                                        <ul class="vista-cat-card__list">
+                                                                <li>
+                                    <a href="https://lyricsraag.com/doamne-fereste-f-charm-theo-rose-translation/" title="Read lyrics for Doamne ferește">
+                                        <span class="vista-cat-card__song-title">Doamne ferește</span>
+                                        <span class="vista-cat-card__song-artist">F.Charm, Theo Rose</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/chernye-vorony-kirill-glich-translation/" title="Read lyrics for Чёрные вороны">
+                                        <span class="vista-cat-card__song-title">Чёрные вороны</span>
+                                        <span class="vista-cat-card__song-artist">Кирилл Глич</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/kruzhit-tkimali-translation/" title="Read lyrics for Кружит">
+                                        <span class="vista-cat-card__song-title">Кружит</span>
+                                        <span class="vista-cat-card__song-artist">Tkimali</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/zabrala-serdtse-krutakov-translation/" title="Read lyrics for Забрала сердце">
+                                        <span class="vista-cat-card__song-title">Забрала сердце</span>
+                                        <span class="vista-cat-card__song-artist">Krutakov</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/svet-sredi-tenei-light-among-shadows-vlad-sokolovskii-vlad-translation/" title="Read lyrics for свет среди теней (Light Among The Shadows)">
+                                        <span class="vista-cat-card__song-title">свет среди теней (Light Among The Shadows)</span>
+                                        <span class="vista-cat-card__song-artist">Влад Соколовский (Vlad Sokolovskiy)</span>
+                                    </a>
+                                </li>
+                                                            </ul>
+                                                    </div>
+                        <div class="vista-cat-card__footer">
+                            <a href="https://lyricsraag.com/category/translations/russian-to-english/" class="vista-cat-card__view-all" style="font-size: 0.9em; margin-right: 5px;">Russian to English</a> / <a href="https://lyricsraag.com/category/romanian-to-english/" class="vista-cat-card__view-all" style="font-size: 0.9em; margin-right: 5px;">Romanian to English</a>                        </div>
+                    </div>
+                                        <div class="vista-cat-card">
+                        <div class="vista-cat-card__header">
+                            <h3 class="vista-cat-card__title">Middle Eastern Gems</h3>
+                        </div>
+                        <div class="vista-cat-card__body">
+                                                        <ul class="vista-cat-card__list">
+                                                                <li>
+                                    <a href="https://lyricsraag.com/menich-lehi-sanfara-translation/" title="Read lyrics for Menich Lehi">
+                                        <span class="vista-cat-card__song-title">Menich Lehi</span>
+                                        <span class="vista-cat-card__song-artist">Sanfara</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/sadeet-met3amed-ayed-translation/" title="Read lyrics for Sadeet Met3amed">
+                                        <span class="vista-cat-card__song-title">Sadeet Met3amed</span>
+                                        <span class="vista-cat-card__song-artist">Ayed</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/tebaa-n-tebaa-n-sherine-translation/" title="Read lyrics for Tebaa&#039;n Tebaa&#039;n">
+                                        <span class="vista-cat-card__song-title">Tebaa&#039;n Tebaa&#039;n</span>
+                                        <span class="vista-cat-card__song-artist">Sherine</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/iki-tas-corba-mustafa-sandal-saygi-1-translation/" title="Read lyrics for İki Tas Çorba">
+                                        <span class="vista-cat-card__song-title">İki Tas Çorba</span>
+                                        <span class="vista-cat-card__song-artist">Mela Bedel, Mustafa Sandal</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/adi-intikamdi-mustafa-sandal-saygi-1-translation/" title="Read lyrics for Adı İntikamdı">
+                                        <span class="vista-cat-card__song-title">Adı İntikamdı</span>
+                                        <span class="vista-cat-card__song-artist">Afra, Mustafa Sandal</span>
+                                    </a>
+                                </li>
+                                                            </ul>
+                                                    </div>
+                        <div class="vista-cat-card__footer">
+                            <a href="https://lyricsraag.com/category/translations/arabic-to-english/" class="vista-cat-card__view-all" style="font-size: 0.9em; margin-right: 5px;">Arabic to English</a> / <a href="https://lyricsraag.com/category/translations/turkish-to-english/" class="vista-cat-card__view-all" style="font-size: 0.9em; margin-right: 5px;">Turkish to English</a>                        </div>
+                    </div>
+                                        <div class="vista-cat-card">
+                        <div class="vista-cat-card__header">
+                            <h3 class="vista-cat-card__title">African Rhythms</h3>
+                        </div>
+                        <div class="vista-cat-card__body">
+                                                        <ul class="vista-cat-card__list">
+                                                                <li>
+                                    <a href="https://lyricsraag.com/kama-sio-harmonize-kusah-translation/" title="Read lyrics for Kama Sio">
+                                        <span class="vista-cat-card__song-title">Kama Sio</span>
+                                        <span class="vista-cat-card__song-artist">Harmonize, Kusah</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/zamani-xouh-translation/" title="Read lyrics for Zamani">
+                                        <span class="vista-cat-card__song-title">Zamani</span>
+                                        <span class="vista-cat-card__song-artist">Xouh</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/umona-madlokovu-king-of-african-house-translation/" title="Read lyrics for Umona (feat. Mpumi)">
+                                        <span class="vista-cat-card__song-title">Umona (feat. Mpumi)</span>
+                                        <span class="vista-cat-card__song-artist">Tns</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/akulaleki-isphithiphithi-translation/" title="Read lyrics for Akulaleki">
+                                        <span class="vista-cat-card__song-title">Akulaleki</span>
+                                        <span class="vista-cat-card__song-artist">Dj Maphorisa, Kabza De Small, Samthing Soweto, Sha Sha</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/a-confession-of-a-mad-son-the-verteller-translation/" title="Read lyrics for A Confession of a Mad Son">
+                                        <span class="vista-cat-card__song-title">A Confession of a Mad Son</span>
+                                        <span class="vista-cat-card__song-artist">Dash, Dizasta Vina</span>
+                                    </a>
+                                </li>
+                                                            </ul>
+                                                    </div>
+                        <div class="vista-cat-card__footer">
+                            <a href="https://lyricsraag.com/category/translations/swahili-to-english/" class="vista-cat-card__view-all" style="font-size: 0.9em; margin-right: 5px;">Swahili to English</a> / <a href="https://lyricsraag.com/category/translations/zulu-to-english/" class="vista-cat-card__view-all" style="font-size: 0.9em; margin-right: 5px;">Zulu to English</a>                        </div>
+                    </div>
+                                    </section>
+                                                            
+                <h2 class="vista-section-title" style="margin-top: 40px; margin-bottom: 20px;">Bollywood &amp; Regional Favorites</h2>
+                
+                <section class="vista-category-grid">
+                                        <div class="vista-cat-card">
+                        <div class="vista-cat-card__header">
+                            <h3 class="vista-cat-card__title">Hindi to English</h3>
+                        </div>
+                        <div class="vista-cat-card__body">
+                                                        <ul class="vista-cat-card__list">
+                                                                <li>
+                                    <a href="https://lyricsraag.com/heeriye-kishore-mondal-krish-mondal-translation/" title="Read lyrics for Heeriye">
+                                        <span class="vista-cat-card__song-title">Heeriye</span>
+                                        <span class="vista-cat-card__song-artist">A.M. Turaz, Kishore Mondal, Krish Mondal, Shafaat Ali</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/mujhe-tu-chahiye-iqbal-khan-manasi-scott-translation/" title="Read lyrics for Mujhe Tu Chahiye">
+                                        <span class="vista-cat-card__song-title">Mujhe Tu Chahiye</span>
+                                        <span class="vista-cat-card__song-artist">Iqbal Khan, Manasi Scott, Rohini Srikumar</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/lipstick-adnan-sami-translation/" title="Read lyrics for Lipstick">
+                                        <span class="vista-cat-card__song-title">Lipstick</span>
+                                        <span class="vista-cat-card__song-artist">Adnan Sami</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/koi-baat-nahin-parivesh-singh-shahid-mallya-translation/" title="Read lyrics for Koi Baat Nahin">
+                                        <span class="vista-cat-card__song-title">Koi Baat Nahin</span>
+                                        <span class="vista-cat-card__song-artist">Parivesh Singh, Shahid Mallya, Vishal Vats</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/kaamil-sachet-parampara-translation/" title="Read lyrics for Kaamil">
+                                        <span class="vista-cat-card__song-title">Kaamil</span>
+                                        <span class="vista-cat-card__song-artist">Sachet-Parampara</span>
+                                    </a>
+                                </li>
+                                                            </ul>
+                                                    </div>
+                        <div class="vista-cat-card__footer">
+                            <a href="https://lyricsraag.com/category/translations/hindi-to-english/" class="vista-cat-card__view-all" style="font-size: 0.9em; margin-right: 5px;">Hindi to English</a>                        </div>
+                    </div>
+                                        <div class="vista-cat-card">
+                        <div class="vista-cat-card__header">
+                            <h3 class="vista-cat-card__title">Punjabi to English</h3>
+                        </div>
+                        <div class="vista-cat-card__body">
+                                                        <ul class="vista-cat-card__list">
+                                                                <li>
+                                    <a href="https://lyricsraag.com/jaiye-sajana-recreated-jasmine-sandlas-satinder-sartaaj-translation/" title="Read lyrics for Jaiye Sajana (Recreated)">
+                                        <span class="vista-cat-card__song-title">Jaiye Sajana (Recreated)</span>
+                                        <span class="vista-cat-card__song-artist">Jasmine Sandlas, Satinder Sartaaj</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/yaarian-hustinder-translation/" title="Read lyrics for Yaarian">
+                                        <span class="vista-cat-card__song-title">Yaarian</span>
+                                        <span class="vista-cat-card__song-artist">Hustinder</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/pagal-nayi-hona-khan-saab-translation/" title="Read lyrics for Pagal Nayi Hona">
+                                        <span class="vista-cat-card__song-title">Pagal Nayi Hona</span>
+                                        <span class="vista-cat-card__song-artist">Khan Saab</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/peengh-teri-preet-harpal-translation/" title="Read lyrics for Peengh Teri">
+                                        <span class="vista-cat-card__song-title">Peengh Teri</span>
+                                        <span class="vista-cat-card__song-artist">Preet Harpal</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/lost-in-you-arjun-sahota-gagan-dhillon-translation/" title="Read lyrics for Lost In You">
+                                        <span class="vista-cat-card__song-title">Lost In You</span>
+                                        <span class="vista-cat-card__song-artist">Arjun Sahota, Gagan Dhillon</span>
+                                    </a>
+                                </li>
+                                                            </ul>
+                                                    </div>
+                        <div class="vista-cat-card__footer">
+                            <a href="https://lyricsraag.com/category/translations/punjabi-to-english/" class="vista-cat-card__view-all" style="font-size: 0.9em; margin-right: 5px;">Punjabi to English</a>                        </div>
+                    </div>
+                                        <div class="vista-cat-card">
+                        <div class="vista-cat-card__header">
+                            <h3 class="vista-cat-card__title">Haryanvi to English</h3>
+                        </div>
+                        <div class="vista-cat-card__body">
+                                                        <ul class="vista-cat-card__list">
+                                                                <li>
+                                    <a href="https://lyricsraag.com/safar-amar-kharakiya-yama-buddha-translation/" title="Read lyrics for Safar">
+                                        <span class="vista-cat-card__song-title">Safar</span>
+                                        <span class="vista-cat-card__song-artist">Amar Kharakiya, Yama Buddha</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/pyar-nahi-karna-tha-asees-kaur-krrish-rao-translation/" title="Read lyrics for Pyar Nahi Karna Tha">
+                                        <span class="vista-cat-card__song-title">Pyar Nahi Karna Tha</span>
+                                        <span class="vista-cat-card__song-artist">Asees Kaur, Krrish Rao</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/ghoont-gulzaar-chhaniwala-translation/" title="Read lyrics for Ghoont">
+                                        <span class="vista-cat-card__song-title">Ghoont</span>
+                                        <span class="vista-cat-card__song-artist">Gulzaar Chhaniwala</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/kabze-bintu-pabra-shiva-choudhary-translation/" title="Read lyrics for Kabze">
+                                        <span class="vista-cat-card__song-title">Kabze</span>
+                                        <span class="vista-cat-card__song-artist">Bintu Pabra, Shiva Choudhary</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/teri-meri-jodi-jassi-kirarkot-shiva-choudhary-translation/" title="Read lyrics for Teri Meri Jodi">
+                                        <span class="vista-cat-card__song-title">Teri Meri Jodi</span>
+                                        <span class="vista-cat-card__song-artist">Jassi Kirarkot, Shiva Choudhary</span>
+                                    </a>
+                                </li>
+                                                            </ul>
+                                                    </div>
+                        <div class="vista-cat-card__footer">
+                            <a href="https://lyricsraag.com/category/translations/haryanvi-to-english/" class="vista-cat-card__view-all" style="font-size: 0.9em; margin-right: 5px;">Haryanvi to English</a>                        </div>
+                    </div>
+                                    </section>
+                                                            
+                <h2 class="vista-section-title" style="margin-top: 40px; margin-bottom: 20px;">South Cinema</h2>
+                
+                <section class="vista-category-grid">
+                                        <div class="vista-cat-card">
+                        <div class="vista-cat-card__header">
+                            <h3 class="vista-cat-card__title">Tamil to English</h3>
+                        </div>
+                        <div class="vista-cat-card__body">
+                                                        <ul class="vista-cat-card__list">
+                                                                <li>
+                                    <a href="https://lyricsraag.com/uyire-uyire-sattendru-maarudhu-vaanilai-translation/" title="Read lyrics for Uyire Uyire">
+                                        <span class="vista-cat-card__song-title">Uyire Uyire</span>
+                                        <span class="vista-cat-card__song-artist">Jairam Balasubramanian</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/naan-dhaan-king-con-city-translation/" title="Read lyrics for Naan Dhaan King">
+                                        <span class="vista-cat-card__song-title">Naan Dhaan King</span>
+                                        <span class="vista-cat-card__song-artist">Kelithee, Lalitha Sudha, Mohan Rajan, Sean Roldan</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/uyire-double-occupancy-translation/" title="Read lyrics for Uyire">
+                                        <span class="vista-cat-card__song-title">Uyire</span>
+                                        <span class="vista-cat-card__song-artist">Aditya RK</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/silent-influencer-silent-influencer-album-translation/" title="Read lyrics for Silent Influencer">
+                                        <span class="vista-cat-card__song-title">Silent Influencer</span>
+                                        <span class="vista-cat-card__song-artist">G. V. Prakash, Iykki Berry</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/reengara-nooru-sami-translation/" title="Read lyrics for Reengara">
+                                        <span class="vista-cat-card__song-title">Reengara</span>
+                                        <span class="vista-cat-card__song-artist">Anurag Kulkarni, Darini Hariharan</span>
+                                    </a>
+                                </li>
+                                                            </ul>
+                                                    </div>
+                        <div class="vista-cat-card__footer">
+                            <a href="https://lyricsraag.com/category/translations/tamil-to-english/" class="vista-cat-card__view-all" style="font-size: 0.9em; margin-right: 5px;">Tamil to English</a>                        </div>
+                    </div>
+                                        <div class="vista-cat-card">
+                        <div class="vista-cat-card__header">
+                            <h3 class="vista-cat-card__title">Telugu to English</h3>
+                        </div>
+                        <div class="vista-cat-card__body">
+                                                        <ul class="vista-cat-card__list">
+                                                                <li>
+                                    <a href="https://lyricsraag.com/manga-manga-srinivasa-mangapuram-translation/" title="Read lyrics for Manga Manga">
+                                        <span class="vista-cat-card__song-title">Manga Manga</span>
+                                        <span class="vista-cat-card__song-artist">L. V. Revanth</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/ramani-kalyanam-title-track-haricharan-ramya-behara-translation/" title="Read lyrics for Ramani Kalyanam Title Track">
+                                        <span class="vista-cat-card__song-title">Ramani Kalyanam Title Track</span>
+                                        <span class="vista-cat-card__song-artist">Haricharan, Ramya Behara</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/maruvaali-thoota-translation/" title="Read lyrics for Maruvaali">
+                                        <span class="vista-cat-card__song-title">Maruvaali</span>
+                                        <span class="vista-cat-card__song-artist">Darbuka Siva, Sid Sriram</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/waka-waka-telugu-valmiki-translation/" title="Read lyrics for Waka Waka (Telugu)">
+                                        <span class="vista-cat-card__song-title">Waka Waka (Telugu)</span>
+                                        <span class="vista-cat-card__song-artist">Anurag Kulkarni, Mickey J. Meyer</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/naaku-nuvvani-mallesham-translation/" title="Read lyrics for Naaku Nuvvani">
+                                        <span class="vista-cat-card__song-title">Naaku Nuvvani</span>
+                                        <span class="vista-cat-card__song-artist">Chandra Bose, Ramya Behara, Sri Krishna</span>
+                                    </a>
+                                </li>
+                                                            </ul>
+                                                    </div>
+                        <div class="vista-cat-card__footer">
+                            <a href="https://lyricsraag.com/category/translations/telugu-to-english/" class="vista-cat-card__view-all" style="font-size: 0.9em; margin-right: 5px;">Telugu to English</a>                        </div>
+                    </div>
+                                        <div class="vista-cat-card">
+                        <div class="vista-cat-card__header">
+                            <h3 class="vista-cat-card__title">Malayalam to English</h3>
+                        </div>
+                        <div class="vista-cat-card__body">
+                                                        <ul class="vista-cat-card__list">
+                                                                <li>
+                                    <a href="https://lyricsraag.com/old-monk-baby-jean-rxzor-translation/" title="Read lyrics for OLD MONK">
+                                        <span class="vista-cat-card__song-title">OLD MONK</span>
+                                        <span class="vista-cat-card__song-artist">Baby Jean, Rxzor</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/chorkk-abraw-mbl-translation/" title="Read lyrics for Chorkk">
+                                        <span class="vista-cat-card__song-title">Chorkk</span>
+                                        <span class="vista-cat-card__song-artist">Abraw, Mbl_</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/chellam-chellam-brothers-day-translation/" title="Read lyrics for Chellam Chellam">
+                                        <span class="vista-cat-card__song-title">Chellam Chellam</span>
+                                        <span class="vista-cat-card__song-artist">4 Musics, Abhijith Kollam, B.K. Harinarayanan</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/thalolam-thumbippennale-brother-s-day-translation/" title="Read lyrics for Thalolam Thumbippennale">
+                                        <span class="vista-cat-card__song-title">Thalolam Thumbippennale</span>
+                                        <span class="vista-cat-card__song-artist">4 Musics, Biby Mathew, Dr. Madhu Vasudevan, Haritha Balakrishnan, Judith Ann, Vijay Yesudas, Vrinda Shameek Ghosh, Zia Ul Haq</span>
+                                    </a>
+                                </li>
+                                                                <li>
+                                    <a href="https://lyricsraag.com/oru-swapnam-pole-love-action-drama-translation/" title="Read lyrics for Oru Swapnam Pole">
+                                        <span class="vista-cat-card__song-title">Oru Swapnam Pole</span>
+                                        <span class="vista-cat-card__song-artist">Aswin Vijayan, Bharath Sajikumar, Manu Manjith, Nanda J Devan, Narayani Gopan, Shaan Rahman, Sreejish C.S.</span>
+                                    </a>
+                                </li>
+                                                            </ul>
+                                                    </div>
+                        <div class="vista-cat-card__footer">
+                            <a href="https://lyricsraag.com/category/translations/malayalam-to-english/" class="vista-cat-card__view-all" style="font-size: 0.9em; margin-right: 5px;">Malayalam to English</a>                        </div>
+                    </div>
+                                    </section>
+                            
+        </main>
+    </div>
+
+    
+	</div>
+</div>
+
+
+<div class="no-wpr-lazyrender site-footer">
+				<div id="footer-widgets" class="site footer-widgets">
+				<div class="footer-widgets-container grid-container">
+					<div class="inside-footer-widgets">
+							<div class="footer-widget-1">
+		<aside id="text-14" class="widget inner-padding widget_text">			<div class="textwidget"><div class="footer-widget footer-widget-about">
+<h3 class="footer-widget-title">About</h3>
+<div class="footer-widget-content">
+<p>LyricsRaag.com is the definitive source for song meanings and translations. Grounded in our authority on Indian cinema, we decode music for a global audience. From Hindi, Punjabi, and Tamil hits to K-Pop, Latin, and European charts, we deliver accurate, line-by-line English interpretations verified for cultural depth and context.</p>
+</div>
+</div>
+</div>
+		</aside>	</div>
+		<div class="footer-widget-2">
+		<aside id="text-11" class="widget inner-padding widget_text">			<div class="textwidget"><div class="footer-widget footer-widget-links">
+<h3 class=footer-widget-title>Indian &#038; Regional</h3>
+<div class=footer-widget-content>
+<ul>
+<li><a href=https://lyricsraag.com/translations-hindi/ title="Hindi Song Meanings and Translations"><span class=link-underline>Hindi Song Meanings</span></a></li>
+<li><a href=https://lyricsraag.com/translations-punjabi/ title="Punjabi Hit Songs Translated"><span class=link-underline>Punjabi Translations</span></a></li>
+<li><a href=https://lyricsraag.com/tamil-translations/ title="Tamil Lyrics with English Meaning"><span class=link-underline>Tamil Lyrics &#038; Meaning</span></a></li>
+<li><a href=https://lyricsraag.com/translations-telugu/ title="Telugu Song Translations"><span class=link-underline>Telugu Song Translations</span></a></li>
+<li><a href=https://lyricsraag.com/translations-malayalam/ title="Malayalam Lyrics to English"><span class=link-underline>Malayalam Song Meanings</span></a></li>
+<li><a href=https://lyricsraag.com/translations-kannada/ title="Kannada Song Lyrics Meanings"><span class=link-underline>Kannada Lyrics</span></a></li>
+</ul>
+</div>
+</div>
+</div>
+		</aside>	</div>
+		<div class="footer-widget-3">
+		<aside id="text-15" class="widget inner-padding widget_text">			<div class="textwidget"><div class="footer-widget footer-widget-links">
+<h3 class=footer-widget-title>Global &#038; World Hits</h3>
+<div class=footer-widget-content>
+<ul>
+<li><a href=https://lyricsraag.com/category/translations/korean-to-english/ title="K-Pop Song Meanings and Lyrics"><span class=link-underline>K-Pop (Korean) Meanings</span></a></li>
+<li><a href=https://lyricsraag.com/category/translations/spanish-to-english/ title="Spanish and Latin Song Translations"><span class=link-underline>Spanish / Latin Hits</span></a></li>
+<li><a href=https://lyricsraag.com/category/translations/japanese-to-english/ title="Japanese and Anime Lyrics"><span class=link-underline>Japanese / Anime Lyrics</span></a></li>
+<li><a href=https://lyricsraag.com/category/french-to-english/ title="French Pop Song Translations"><span class=link-underline>French Translations</span></a></li>
+<li><a href=https://lyricsraag.com/category/translations/arabic-to-english/ title="Arabic Song Meanings and Lyrics"><span class=link-underline>Arabic Hit Songs</span></a></li>
+<li><a href=https://lyricsraag.com/category/translations/turkish-to-english/ title="Turkish Pop and Folk Translations"><span class=link-underline>Turkish Translations</span></a></li>
+</ul>
+</div>
+</div>
+</div>
+		</aside>	</div>
+		<div class="footer-widget-4">
+		<aside id="text-12" class="widget inner-padding widget_text">			<div class="textwidget"><div class="footer-widget footer-widget-links">
+<h3 class=footer-widget-title>Site Information</h3>
+<div class=footer-widget-content>
+<ul>
+<li><a href=https://lyricsraag.com/about/ title="About LyricsRaag"><span class=link-underline>About Us</span></a></li>
+<li><a href=https://lyricsraag.com/contact-us/ title="Contact Team"><span class=link-underline>Contact Support</span></a></li>
+<li><a href=https://lyricsraag.com/disclaimer/ title=Disclaimer rel=nofollow><span class=link-underline>Disclaimer</span></a></li>
+<li><a href=https://lyricsraag.com/legal-statement-2/ title="Legal Statement"rel=nofollow><span class=link-underline>Legal Statement</span></a></li>
+<li><a href=https://lyricsraag.com/terms-of-use/ title="Terms of Use"rel=nofollow><span class=link-underline>Terms of Use</span></a></li>
+<li><a href=https://lyricsraag.com/privacy-policy/ title="Privacy Policy"rel=nofollow><span class=link-underline>Privacy Policy</span></a></li>
+<li><a href=https://lyricsraag.com/cookie-policy/ title="Cookie Policy"rel=nofollow><span class=link-underline>Cookie Policy</span></a></li>
+</ul>
+</div>
+</div>
+</div>
+		</aside>	</div>
+						</div>
+				</div>
+			</div>
+					<footer class="site-info" aria-label="Site"  itemtype="https://schema.org/WPFooter" itemscope>
+			<div class="inside-site-info grid-container">
+								<div class="copyright-bar">
+					&copy; 2026 LyricsRaag.com				</div>
+			</div>
+		</footer>
+		</div>
+
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/generatepress_child/*","/wp-content/themes/generatepress/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script type="text/rocketlazyloadscript" id="generate-a11y">
+!function(){"use strict";if("querySelector"in document&&"addEventListener"in window){var e=document.body;e.addEventListener("pointerdown",(function(){e.classList.add("using-mouse")}),{passive:!0}),e.addEventListener("keydown",(function(){e.classList.remove("using-mouse")}),{passive:!0})}}();
+</script>
+<script type="text/rocketlazyloadscript" data-rocket-type="text/javascript">
+function addLink() {
+  const selection = window.getSelection();
+  if (!selection.toString().trim()) {
+    return;
+  }
+
+  // Check if selection is from the intended element (if applicable)
+  // ... add your check here based on your website structure
+
+  const pageUrl = document.location.href;
+  const pageTitle = document.title;
+
+  // Remove formatting from selected content
+  let selectedText = selection.toString()
+    .replace(/<[^>]*>/g, '') // Remove HTML tags
+    .replace(/\s+/g, ' ') // Replace multiple spaces with single space
+    .trim();
+
+  // Limit selection if needed (same logic as before)
+  const selectionLimit = 500;
+  if (selectionLimit > -1) {
+    selectedText = selectedText.substring(0, selectionLimit) + '...';
+  }
+
+  // Combine content, URL, and title into a single line
+  const copyText = `${selectedText} - Full article: ${pageTitle} - ${pageUrl}`;
+
+  const new_div = document.createElement('div');
+  new_div.style.left = '-99999px';
+  new_div.style.position = 'absolute';
+  document.body.appendChild(new_div);
+
+  new_div.textContent = copyText;
+  selection.selectAllChildren(new_div);
+
+  window.setTimeout(() => document.body.removeChild(new_div), 0); // Use arrow function
+}
+
+document.oncopy = addLink;
+</script><script type="text/rocketlazyloadscript" data-handle="generate-sticky" data-rocket-src="https://lyricsraag.com/wp-content/plugins/gp-premium/menu-plus/functions/js/sticky.min.js?ver=2.5.5" id="generate-sticky-js" data-rocket-defer defer></script>
+<script id="lyricsraag-meili-script-js-extra">
+var meili_search_vars = {"rest_url":"https://lyricsraag.com/wp-json/lyricsraag/v1/search","nonce":"7926ccf6f1"};
+//# sourceURL=lyricsraag-meili-script-js-extra
+</script>
+<script type="text/rocketlazyloadscript" data-minify="1" data-handle="lyricsraag-meili-script" data-rocket-src="https://lyricsraag.com/wp-content/cache/min/1/wp-content/plugins/lyricsraag-meilisearch/assets/meili-autocomplete.js?ver=1778997119" id="lyricsraag-meili-script-js" data-rocket-defer defer></script>
+<script type="text/rocketlazyloadscript" id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+//# sourceURL=rocket-browser-checker-js-after
+</script>
+<script id="rocket-preload-links-js-extra">
+var RocketPreloadLinksConfig = {"excludeUris":"/wp-admin/|/anuv-jain-inaam-english-translation/|/(?:.+/)?feed(?:/(?:.+/?)?)?$|/(?:.+/)?embed/|/(index.php/)?(.*)wp-json(/.*|$)|/refer/|/go/|/recommend/|/recommends/","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php|html|htm","siteUrl":"https://lyricsraag.com","onHoverDelay":"100","rateThrottle":"3"};
+//# sourceURL=rocket-preload-links-js-extra
+</script>
+<script type="text/rocketlazyloadscript" id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+
+//# sourceURL=rocket-preload-links-js-after
+</script>
+<script id="rocket_lazyload_css-js-extra">
+var rocket_lazyload_css_data = {"threshold":"300"};
+//# sourceURL=rocket_lazyload_css-js-extra
+</script>
+<script id="rocket_lazyload_css-js-after">
+!function o(n,c,a){function u(t,e){if(!c[t]){if(!n[t]){var r="function"==typeof require&&require;if(!e&&r)return r(t,!0);if(s)return s(t,!0);throw(e=new Error("Cannot find module '"+t+"'")).code="MODULE_NOT_FOUND",e}r=c[t]={exports:{}},n[t][0].call(r.exports,function(e){return u(n[t][1][e]||e)},r,r.exports,o,n,c,a)}return c[t].exports}for(var s="function"==typeof require&&require,e=0;e<a.length;e++)u(a[e]);return u}({1:[function(e,t,r){"use strict";{const c="undefined"==typeof rocket_pairs?[]:rocket_pairs,a=(("undefined"==typeof rocket_excluded_pairs?[]:rocket_excluded_pairs).map(t=>{var e=t.selector;document.querySelectorAll(e).forEach(e=>{e.setAttribute("data-rocket-lazy-bg-"+t.hash,"excluded")})}),document.querySelector("#wpr-lazyload-bg-container"));var o=rocket_lazyload_css_data.threshold||300;const u=new IntersectionObserver(e=>{e.forEach(t=>{t.isIntersecting&&c.filter(e=>t.target.matches(e.selector)).map(t=>{var e;t&&((e=document.createElement("style")).textContent=t.style,a.insertAdjacentElement("afterend",e),t.elements.forEach(e=>{u.unobserve(e),e.setAttribute("data-rocket-lazy-bg-"+t.hash,"loaded")}))})})},{rootMargin:o+"px"});function n(){0<(0<arguments.length&&void 0!==arguments[0]?arguments[0]:[]).length&&c.forEach(t=>{try{document.querySelectorAll(t.selector).forEach(e=>{"loaded"!==e.getAttribute("data-rocket-lazy-bg-"+t.hash)&&"excluded"!==e.getAttribute("data-rocket-lazy-bg-"+t.hash)&&(u.observe(e),(t.elements||=[]).push(e))})}catch(e){console.error(e)}})}n(),function(){const r=window.MutationObserver;return function(e,t){if(e&&1===e.nodeType)return(t=new r(t)).observe(e,{attributes:!0,childList:!0,subtree:!0}),t}}()(document.querySelector("body"),n)}},{}]},{},[1]);
+//# sourceURL=rocket_lazyload_css-js-after
+</script>
+<script type="text/rocketlazyloadscript" data-handle="generate-menu" id="generate-menu-js-before">
+var generatepressMenu = {"toggleOpenedSubMenus":true,"openSubMenuLabel":"Open Sub-Menu","closeSubMenuLabel":"Close Sub-Menu"};
+//# sourceURL=generate-menu-js-before
+</script>
+<script type="text/rocketlazyloadscript" data-handle="generate-menu" data-rocket-src="https://lyricsraag.com/wp-content/themes/generatepress/assets/js/menu.min.js?ver=3.6.1" id="generate-menu-js" data-rocket-defer defer></script>
+<script type="text/rocketlazyloadscript" data-handle="heartbeat" data-rocket-src="https://lyricsraag.com/wp-content/plugins/wp-rocket/assets/js/heartbeat.js?ver=3.21.3" id="heartbeat-js" data-rocket-defer defer></script>
+<script>window.lazyLoadOptions={elements_selector:"iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async src="https://lyricsraag.com/wp-content/plugins/wp-rocket/assets/js/lazyload/17.8.3/lazyload.min.js"></script><script>function lazyLoadThumb(e,alt,l){var t='<img src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360">',a='<button class="play" aria-label="Play Youtube video"></button>';if(l){t=t.replace('data-lazy-','');t=t.replace('loading="lazy"','');t=t.replace(/<noscript>.*?<\/noscript>/g,'');}t=t.replace('alt=""','alt="'+alt+'"');return t.replace("ID",e)+a}function lazyLoadYoutubeIframe(){var e=document.createElement("iframe"),t="ID?autoplay=1";t+=0===this.parentNode.dataset.query.length?"":"&"+this.parentNode.dataset.query;e.setAttribute("src",t.replace("ID",this.parentNode.dataset.src)),e.setAttribute("frameborder","0"),e.setAttribute("allowfullscreen","1"),e.setAttribute("allow","accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"),this.parentNode.parentNode.replaceChild(e,this.parentNode)}document.addEventListener("DOMContentLoaded",function(){var exclusions=["aligncenter","size-full","300-70-logo.png","40-logo.png"];var e,t,p,u,l,a=document.getElementsByClassName("rll-youtube-player");for(t=0;t<a.length;t++)(e=document.createElement("div")),(u='https://i.ytimg.com/vi/ID/hqdefault.jpg'),(u=u.replace('ID',a[t].dataset.id)),(l=exclusions.some(exclusion=>u.includes(exclusion))),e.setAttribute("data-id",a[t].dataset.id),e.setAttribute("data-query",a[t].dataset.query),e.setAttribute("data-src",a[t].dataset.src),(e.innerHTML=lazyLoadThumb(a[t].dataset.id,a[t].dataset.alt,l)),a[t].appendChild(e),(p=e.querySelector(".play")),(p.onclick=lazyLoadYoutubeIframe)});</script>
+</body>
+</html>
+<!--
+Performance optimized by Redis Object Cache. Learn more: https://wprediscache.com
+
+Retrieved 3714 objects (1 MB) from Redis using PhpRedis (v6.3.0).
+-->
+
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1779158695 -->
