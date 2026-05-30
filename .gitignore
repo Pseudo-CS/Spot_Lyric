@@ -1,0 +1,46 @@
+# Python
+.venv/
+venv/
+env/
+*.pyc
+__pycache__/
+*.egg-info/
+dist/
+build/
+
+# Android/Gradle
+.gradle/
+.kotlin/
+build/
+app/build/
+*.apk
+*.aab
+*.jks
+local.properties
+secrets.properties
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.zip
+*.bak
+*.tmp
+
+# Test/Build artifacts
+**/test*.html
+vocabulary_backup.ab
+diatree_extracted/
+plans/
+
+# Environment
+.env
+.env.local
