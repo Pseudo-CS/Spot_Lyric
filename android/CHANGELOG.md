@@ -1,7 +1,8 @@
 # Changelog
 
-## 2026-05-30 (documentation improvement)
-- **Monorepo Documentation**: Created a detailed, comprehensive [README.md](file:///home/pseudo/work/README.md) at the root of the project to document the unified system architecture, core features (real-time Spotify sync, SerpAPI composite ranking, multi-stage parser, Gemini translation & romanization), setup and setup parameters for both Android and Django platforms, and developer guidelines.
+## 2026-05-30 (extraction update & docs)
+- **Extraction Behavior**: Removed automatic fallback/shifting to subsequent candidate sources during extraction in `PlayerViewModel`. The app now runs the multi-stage extraction pipeline (Stage 1 -> Stage 2 -> Stage 3) strictly on the user-selected source.
+- **Monorepo Documentation**: Created a detailed, comprehensive [README.md](file:///home/pseudo/work/README.md) at the root of the project.
 
 ## 2026-05-30 (backup & import implementation)
 - **Backup & Import Service**: Introduced [BackupRepository](file:///home/pseudo/work/spotlyric-android/app/src/main/java/com/spotlyric/app/domain/repository/BackupRepository.kt) interface and [BackupRepositoryImpl](file:///home/pseudo/work/spotlyric-android/app/src/main/java/com/spotlyric/app/data/repository/BackupRepositoryImpl.kt) implementation to handle complete JSON-based serialization/deserialization of user data.

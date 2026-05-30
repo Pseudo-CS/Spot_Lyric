@@ -143,38 +143,23 @@ class PlayerViewModel @Inject constructor(
         val current = _state.value
         if (current !is PlayerUiState.ShowingSources) return
 
-        // Build ordered list: selected source first, then remaining sources as fallbacks
-        val startIndex = current.sources.indexOfFirst { it.url == source.url }
-        val orderedSources = if (startIndex > 0) {
-            current.sources.subList(startIndex, current.sources.size) +
-                current.sources.subList(0, startIndex)
-        } else {
-            current.sources
-        }
-
         viewModelScope.launch {
-            var lastError = "Extraction failed"
-            for (candidate in orderedSources) {
-                val activeState = _state.value
-                if (activeState is PlayerUiState.ShowingSources) {
-                    _state.value = activeState.copy(extractingUrl = candidate.url)
-                }
-                try {
-                    extractAndTranslateUseCase(
-                        url = candidate.url,
-                        songName = current.song.songName,
-                        artistName = current.song.artistName,
-                    )
-                    _state.value = PlayerUiState.HasLyrics(current.song)
-                    return@launch
-                } catch (e: Exception) {
-                    android.util.Log.w("PlayerViewModel", "Failed for ${candidate.url}: ${e.message} — trying next source")
-                    lastError = e.message ?: "Extraction failed"
-                }
+            val activeState = _state.value
+            if (activeState is PlayerUiState.ShowingSources) {
+                _state.value = activeState.copy(extractingUrl = source.url)
             }
-            // All sources exhausted
-            _state.value = current.copy(extractingUrl = null)
-            _uiEvent.send(PlayerUiEvent.ShowToast("All sources failed: $lastError"))
+            try {
+                extractAndTranslateUseCase(
+                    url = source.url,
+                    songName = current.song.songName,
+                    artistName = current.song.artistName,
+                )
+                _state.value = PlayerUiState.HasLyrics(current.song)
+            } catch (e: Exception) {
+                android.util.Log.w("PlayerViewModel", "Failed for ${source.url}: ${e.message}")
+                _state.value = current.copy(extractingUrl = null)
+                _uiEvent.send(PlayerUiEvent.ShowToast("Extraction failed: ${e.message ?: "Unknown error"}"))
+            }
         }
     }
 
