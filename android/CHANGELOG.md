@@ -1,5 +1,8 @@
 # Changelog
 
+## 2026-05-30 (documentation improvement)
+- **Monorepo Documentation**: Created a detailed, comprehensive [README.md](file:///home/pseudo/work/README.md) at the root of the project to document the unified system architecture, core features (real-time Spotify sync, SerpAPI composite ranking, multi-stage parser, Gemini translation & romanization), setup and setup parameters for both Android and Django platforms, and developer guidelines.
+
 ## 2026-05-30 (backup & import implementation)
 - **Backup & Import Service**: Introduced [BackupRepository](file:///home/pseudo/work/spotlyric-android/app/src/main/java/com/spotlyric/app/domain/repository/BackupRepository.kt) interface and [BackupRepositoryImpl](file:///home/pseudo/work/spotlyric-android/app/src/main/java/com/spotlyric/app/data/repository/BackupRepositoryImpl.kt) implementation to handle complete JSON-based serialization/deserialization of user data.
 - **Natural-Key Mapping**: JSON schema structures backup details (bookmarks, lyrics, preferred sources, and settings) cleanly and maps lyrics back to bookmarks using natural keys (`songName`, `artistName`) to prevent database primary key clashes on different devices.
