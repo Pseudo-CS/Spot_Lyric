@@ -15,6 +15,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -44,7 +45,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel()) {
+fun SettingsScreen(
+    onNavigateToSourcesOverview: () -> Unit,
+    viewModel: SettingsViewModel = hiltViewModel()
+) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val scrollState = rememberScrollState()
     val context = androidx.compose.ui.platform.LocalContext.current
@@ -54,8 +58,14 @@ fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel()) {
         onResult = { uri ->
             if (uri != null) {
                 try {
-                    context.contentResolver.openOutputStream(uri)?.use { outputStream ->
+                    val outputStream = context.contentResolver.openOutputStream(uri)
+                    if (outputStream != null) {
                         viewModel.exportBackup(outputStream) { result ->
+                            try {
+                                outputStream.close()
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
                             if (result.isSuccess) {
                                 Toast.makeText(context, "Backup exported successfully!", Toast.LENGTH_LONG).show()
                             } else {
@@ -63,6 +73,8 @@ fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel()) {
                                 Toast.makeText(context, "Export failed: $err", Toast.LENGTH_LONG).show()
                             }
                         }
+                    } else {
+                        Toast.makeText(context, "Failed to open output stream", Toast.LENGTH_LONG).show()
                     }
                 } catch (e: Exception) {
                     Toast.makeText(context, "Error saving backup: ${e.localizedMessage}", Toast.LENGTH_LONG).show()
@@ -76,8 +88,14 @@ fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel()) {
         onResult = { uri ->
             if (uri != null) {
                 try {
-                    context.contentResolver.openInputStream(uri)?.use { inputStream ->
+                    val inputStream = context.contentResolver.openInputStream(uri)
+                    if (inputStream != null) {
                         viewModel.importBackup(inputStream) { result ->
+                            try {
+                                inputStream.close()
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
                             if (result.isSuccess) {
                                 Toast.makeText(context, "Backup imported successfully!", Toast.LENGTH_LONG).show()
                             } else {
@@ -85,6 +103,8 @@ fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel()) {
                                 Toast.makeText(context, "Import failed: $err", Toast.LENGTH_LONG).show()
                             }
                         }
+                    } else {
+                        Toast.makeText(context, "Failed to open input stream", Toast.LENGTH_LONG).show()
                     }
                 } catch (e: Exception) {
                     Toast.makeText(context, "Error loading backup: ${e.localizedMessage}", Toast.LENGTH_LONG).show()
@@ -424,6 +444,39 @@ fun SettingsScreen(viewModel: SettingsViewModel = hiltViewModel()) {
                         modifier = Modifier.padding(vertical = 12.dp)
                     )
                     UsageRow(label = "SerpAPI Search Requests", value = "${state.serpApiRequests} requests")
+
+                    HorizontalDivider(
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f),
+                        modifier = Modifier.padding(vertical = 12.dp)
+                    )
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { onNavigateToSourcesOverview() }
+                            .padding(vertical = 4.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column {
+                            Text(
+                                text = "Sources Overview",
+                                style = MaterialTheme.typography.bodyMedium,
+                                fontWeight = FontWeight.Bold,
+                                color = SpotifyGreen
+                            )
+                            Text(
+                                text = "View metrics on all bookmarked lyrics sources",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = TextSecondary
+                            )
+                        }
+                        Icon(
+                            imageVector = Icons.Default.KeyboardArrowRight,
+                            contentDescription = "Navigate to Sources Overview",
+                            tint = SpotifyGreen
+                        )
+                    }
 
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(

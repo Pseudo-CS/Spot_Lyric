@@ -126,29 +126,12 @@ class LyricsExtractorService @Inject constructor(
             if (geniusContainers.isNotEmpty()) {
                 val text = geniusContainers.joinToString("\n\n") { extractTextWithLineBreaks(it) }
                 android.util.Log.d("LyricsExtractor", "Genius container text length: ${text.length}")
-                android.util.Log.d("LyricsExtractor", "Preview: ${text.take(200)}")
                 if (text.length > 50) {
                     return cleanAndTruncate(text)
                 }
             }
 
-            // 2. Try CSS class keyword heuristics
-            val lyricsContainers = doc.select("div, section, article")
-                .filter { element ->
-                    val classes = element.className().lowercase()
-                    LYRICS_CLASS_KEYWORDS.any { keyword -> classes.contains(keyword) }
-                }
-            android.util.Log.d("LyricsExtractor", "CSS keyword containers: ${lyricsContainers.size}")
-            if (lyricsContainers.isNotEmpty()) {
-                val contentTexts = lyricsContainers
-                    .map { extractTextWithLineBreaks(it) }
-                    .filter { it.length > 50 }
-                if (contentTexts.isNotEmpty()) {
-                    return cleanAndTruncate(contentTexts.joinToString("\n\n"))
-                }
-            }
-
-            // 3. Fallback: main/article/body
+            // 2. Fallback: main/article/body (Strategy B)
             android.util.Log.d("LyricsExtractor", "Falling back to main/body extraction")
             val main = doc.selectFirst("main") ?: doc.selectFirst("article") ?: doc.body()
             val fallbackText = main?.let { extractTextWithLineBreaks(it) } ?: ""
@@ -170,6 +153,9 @@ class LyricsExtractorService @Inject constructor(
             when {
                 url.contains("genius.com", ignoreCase = true) -> tryGeniusParser(doc)
                 url.contains("lyricsraag.com", ignoreCase = true) -> tryLyricsRaagParser(doc)
+                url.contains("lyricswiz.com", ignoreCase = true) -> tryLyricsWizParser(doc)
+                url.contains("lyricsdecoder.com", ignoreCase = true) -> tryLyricsDecoderParser(doc)
+                url.contains("bollymeaning.com", ignoreCase = true) || url.contains("bollywoodmeaning.com", ignoreCase = true) -> tryBollyMeaningParser(doc)
                 else -> null
             }
         } catch (e: Exception) {
@@ -201,6 +187,166 @@ class LyricsExtractorService @Inject constructor(
         return ExtractionResult(
             originalLyrics = original,
             translatedLyrics = translated,
+            stage = "Domain Parser",
+            confidence = 0.95f
+        )
+    }
+
+    private fun tryLyricsWizParser(doc: Document): ExtractionResult? {
+        val grid = doc.selectFirst(".grid") ?: return null
+        val col1 = grid.children().firstOrNull() ?: return null
+        
+        val originalDivs = col1.select("div.bg-gray-100")
+        val translatedDivs = col1.select("div.bg-blue-100")
+        
+        if (originalDivs.isEmpty()) return null
+        
+        val originalText = originalDivs.joinToString("\n\n") { extractTextWithLineBreaks(it) }.trim()
+        val translatedText = translatedDivs.joinToString("\n\n") { extractTextWithLineBreaks(it) }.trim()
+        
+        if (originalText.length < 50) return null
+        
+        android.util.Log.d("LyricsExtractor", "LyricsWiz domain parser succeeded, original length: ${originalText.length}")
+        return ExtractionResult(
+            originalLyrics = originalText,
+            translatedLyrics = translatedText,
+            stage = "Domain Parser",
+            confidence = 0.95f
+        )
+    }
+
+    private fun tryLyricsDecoderParser(doc: Document): ExtractionResult? {
+        val article = doc.selectFirst("article") ?: return null
+        val originalContainer = article.select("div").find {
+            val cls = it.className()
+            cls.contains("md:text-center") && cls.contains("text-lg")
+        } ?: article.selectFirst("div.md\\:text-center")
+        
+        if (originalContainer == null) return null
+        val originalText = extractTextWithLineBreaks(originalContainer).trim()
+        if (originalText.length < 50) return null
+        
+        val heading = article.select("h2").find {
+            val t = it.text()
+            t.contains("Meaning in English", ignoreCase = true) || t.contains("Translation", ignoreCase = true)
+        }
+        
+        var translatedText = ""
+        if (heading != null) {
+            val translatedParagraphs = mutableListOf<String>()
+            var next = heading.nextElementSibling()
+            while (next != null) {
+                val tag = next.tagName().lowercase()
+                if (tag == "h2" || tag == "h3" || tag == "div" || tag == "footer") {
+                    break
+                }
+                if (tag == "p") {
+                    val pText = extractTextWithLineBreaks(next).trim()
+                    if (pText.isNotEmpty()) {
+                        translatedParagraphs.add(pText)
+                    }
+                }
+                next = next.nextElementSibling()
+            }
+            translatedText = translatedParagraphs.joinToString("\n\n")
+        }
+        
+        android.util.Log.d("LyricsExtractor", "LyricsDecoder domain parser succeeded, original length: ${originalText.length}")
+        return ExtractionResult(
+            originalLyrics = originalText,
+            translatedLyrics = translatedText,
+            stage = "Domain Parser",
+            confidence = 0.95f
+        )
+    }
+
+    private fun tryBollyMeaningParser(doc: Document): ExtractionResult? {
+        val postBody = doc.selectFirst(".post-body") ?: doc.selectFirst(".entry-content") ?: return null
+        
+        val originalStanzas = mutableListOf<String>()
+        val translatedStanzas = mutableListOf<String>()
+        
+        var currentTranslated = StringBuilder()
+        var hasLyricsStarted = false
+        
+        for (node in postBody.childNodes()) {
+            if (node is Element && node.tagName().lowercase() == "b") {
+                val transStr = currentTranslated.toString().trim()
+                if (transStr.isNotEmpty()) {
+                    val cleanTrans = transStr.lines()
+                        .map { it.trim() }
+                        .filter { it.isNotEmpty() }
+                        .joinToString("\n")
+                    if (cleanTrans.isNotEmpty()) {
+                        translatedStanzas.add(cleanTrans)
+                    }
+                    currentTranslated = StringBuilder()
+                }
+                
+                val boldText = node.text().trim()
+                if (node.select("a").isNotEmpty() || 
+                    boldText.startsWith("Check ", ignoreCase = true) || 
+                    boldText.contains("Birth of a Song", ignoreCase = true) ||
+                    boldText.contains("Love Gulzar", ignoreCase = true)) {
+                    continue
+                }
+                
+                if (boldText.length > 5) {
+                    hasLyricsStarted = true
+                    val cleanOriginal = extractTextWithLineBreaks(node).trim()
+                    originalStanzas.add(cleanOriginal)
+                }
+            } else if (hasLyricsStarted) {
+                if (node is TextNode) {
+                    val text = node.text().trim()
+                    if (text.isNotEmpty()) {
+                        currentTranslated.append(text).append("\n")
+                    }
+                } else if (node is Element) {
+                    val tagName = node.tagName().lowercase()
+                    val text = node.text().trim()
+                    
+                    if (tagName == "a" && (text.startsWith("Check ", ignoreCase = true) || text.contains("Gulzar", ignoreCase = true))) {
+                        break
+                    }
+                    
+                    if (tagName == "br") {
+                        currentTranslated.append("\n")
+                    } else if (tagName == "div" || tagName == "p") {
+                        val blockText = extractTextWithLineBreaks(node).trim()
+                        if (blockText.isNotEmpty()) {
+                            currentTranslated.append(blockText).append("\n")
+                        }
+                    } else {
+                        val inlineText = node.text().trim()
+                        if (inlineText.isNotEmpty()) {
+                            currentTranslated.append(inlineText).append("\n")
+                        }
+                    }
+                }
+            }
+        }
+        
+        val finalTransStr = currentTranslated.toString().trim()
+        if (finalTransStr.isNotEmpty()) {
+            val cleanTrans = finalTransStr.lines()
+                .map { it.trim() }
+                .filter { it.isNotEmpty() }
+                .joinToString("\n")
+            if (cleanTrans.isNotEmpty()) {
+                translatedStanzas.add(cleanTrans)
+            }
+        }
+        
+        val originalText = originalStanzas.joinToString("\n\n")
+        val translatedText = translatedStanzas.joinToString("\n\n")
+        
+        if (originalText.length < 50) return null
+        
+        android.util.Log.d("LyricsExtractor", "BollyMeaning domain parser succeeded, original length: ${originalText.length}")
+        return ExtractionResult(
+            originalLyrics = originalText,
+            translatedLyrics = translatedText,
             stage = "Domain Parser",
             confidence = 0.95f
         )

@@ -216,8 +216,7 @@ class PlayerViewModelTest {
         viewModel.uiEvent.test {
             viewModel.extractAndTranslate(source)
             val event = awaitItem()
-            assertTrue(event is PlayerUiEvent.ShowToast)
-            assertEquals(exceptionMessage, (event as PlayerUiEvent.ShowToast).message)
+            assertEquals("Extraction failed: $exceptionMessage", (event as PlayerUiEvent.ShowToast).message)
             cancelAndConsumeRemainingEvents()
         }
     }

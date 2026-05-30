@@ -28,6 +28,7 @@ import com.spotlyric.app.presentation.manage.ManageScreen
 import com.spotlyric.app.presentation.player.PlayerScreen
 import com.spotlyric.app.presentation.settings.SettingsScreen
 import com.spotlyric.app.presentation.sources.SourcesScreen
+import com.spotlyric.app.presentation.sourcesoverview.SourcesOverviewScreen
 import com.spotlyric.app.presentation.theme.DarkSurface
 
 @Composable
@@ -156,7 +157,19 @@ fun SpotLyricNavHost(modifier: Modifier = Modifier) {
             }
 
             composable(Screen.Settings.route) {
-                SettingsScreen()
+                SettingsScreen(
+                    onNavigateToSourcesOverview = {
+                        navController.navigate(Screen.SourcesOverview.route)
+                    }
+                )
+            }
+
+            composable(Screen.SourcesOverview.route) {
+                SourcesOverviewScreen(
+                    onBack = {
+                        navController.popBackStack()
+                    }
+                )
             }
         }
     }

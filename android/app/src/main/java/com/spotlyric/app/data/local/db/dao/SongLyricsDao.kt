@@ -7,6 +7,8 @@ import androidx.room.Query
 import androidx.room.Update
 import com.spotlyric.app.data.local.db.entity.SongLyricsEntity
 
+import kotlinx.coroutines.flow.Flow
+
 @Dao
 interface SongLyricsDao {
 
@@ -37,4 +39,7 @@ interface SongLyricsDao {
 
     @Query("SELECT * FROM song_lyrics")
     suspend fun getAll(): List<SongLyricsEntity>
+
+    @Query("SELECT * FROM song_lyrics")
+    fun getAllFlow(): Flow<List<SongLyricsEntity>>
 }

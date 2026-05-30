@@ -1,6 +1,15 @@
 # Changelog
 
-## 2026-05-30 (extraction update & docs)
+## 2026-05-30 (stage 1 parsers update)
+- **New Stage 1 Domain Parsers**: Implemented native on-device domain-specific parsers for `lyricsdecoder.com` and `bollymeaning.com` (also supporting `bollywoodmeaning.com`).
+  - **LyricsDecoder Parser**: Extracts original lyrics from the `.md:text-center.text-lg` container and dynamically retrieves English translations by scanning paragraphs following the "Meaning in English" or "Translation" `h2` headings until a terminating section is encountered.
+  - **BollyMeaning Parser**: Traverses the Blogger post body elements to separate original verses (bolded `<b>` tags) and English translations (sequential sibling text nodes/paragraphs) on a stanza-by-stanza basis.
+- **Unit Tests**: Added robust HTML fixture tests verifying full accuracy of these parsers under `testLyricsDecoderExtraction` and `testBollyMeaningExtraction`.
+- **Sources Overview Screen**: Added a new metrics screen accessible from Settings showing overall and domain-specific extraction statistics (bookmark count, success rate, stage breakdown, translation coverage, and average confidence) for all imported song sources.
+
+## 2026-05-30 (bugfix, extraction update & docs)
+- **Strategy B AI Fallback**: Simplified the Gemini extraction text cleaning pipeline. Instead of relying on fragile CSS class keyword matching (which caused false positives on utility classes like `text-gray-800` and stripped actual lyrics), the cleaner now strips structural noise and directly sends the full text body fallback to Gemini.
+- **Backup/Import Stream Lifecycle Fix**: Fixed a bug in `SettingsScreen` where the file Input/Output streams were closed prematurely via Kotlin's `.use` block before the asynchronous coroutines could read/write backup data. The streams are now safely closed inside the async callbacks after execution completes.
 - **Extraction Behavior**: Removed automatic fallback/shifting to subsequent candidate sources during extraction in `PlayerViewModel`. The app now runs the multi-stage extraction pipeline (Stage 1 -> Stage 2 -> Stage 3) strictly on the user-selected source.
 - **Monorepo Documentation**: Created a detailed, comprehensive [README.md](file:///home/pseudo/work/README.md) at the root of the project.
 

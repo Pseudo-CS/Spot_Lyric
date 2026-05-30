@@ -112,26 +112,8 @@ def clean_html_for_gemini(html_content):
             ):
                 element.decompose()
 
-            lyrics_containers = soup.find_all(
-                ["div", "section", "article"],
-                class_=lambda x: x and any(word in x.lower() for word in ["lyric", "song", "verse", "text"]),
-            )
-
-            if lyrics_containers:
-                content_texts = []
-                for container in lyrics_containers:
-                    text = container.get_text(separator="\n", strip=True)
-                    if text and len(text) > 50:
-                        content_texts.append(text)
-
-                if content_texts:
-                    cleaned_content = "\n\n".join(content_texts)
-                else:
-                    main_content = soup.find(["main", "article", "div"]) or soup
-                    cleaned_content = main_content.get_text(separator="\n", strip=True)
-            else:
-                main_content = soup.find(["main", "article", "div"]) or soup
-                cleaned_content = main_content.get_text(separator="\n", strip=True)
+            main_content = soup.find(["main", "article", "div"]) or soup
+            cleaned_content = main_content.get_text(separator="\n", strip=True)
 
             lines = [line.strip() for line in cleaned_content.split("\n") if line.strip()]
             cleaned_content = "\n".join(lines)

@@ -24,6 +24,8 @@ sealed class Screen(val route: String) {
     data object Sources : Screen("sources")
 
     data object Settings : Screen("settings")
+
+    data object SourcesOverview : Screen("sources_overview")
 }
 
 data class BottomNavItem(
