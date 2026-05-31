@@ -1,75 +1,67 @@
 # SpotLyric: Real-Time Spotify Lyrics, Translations & Romanization
 
-SpotLyric is a personal companion app that enhances your music listening experience on Spotify. It automatically tracks your currently playing song, fetches the original lyrics, and uses Gemini AI to translate them and provide easy-to-read phonetic romanization (transliteration) for foreign language tracks (such as Hindi, Punjabi, Korean, Russian, etc.) so you can sing along instantly.
+SpotLyric is a personal companion app that automatically tracks what you are currently playing on Spotify, fetches the original lyrics, and uses Gemini AI to translate and romanize them on the fly. 
 
-SpotLyric is available as a **native Android app** and a **responsive Web dashboard**.
+It is designed for multilingual music fans, making it easy to sing along to foreign language tracks (such as Hindi, Punjabi, Korean, Russian, Spanish, etc.) with line-by-line transliterations and translations.
+
+SpotLyric is available as a **native Android app** and a **cross-platform Desktop GUI app**.
 
 ---
 
 ## Key Features
 
-### 🎧 Real-Time Spotify Syncing
-Simply play a song in Spotify and open SpotLyric. The app immediately detects the active track and displays your lyrics without any manual typing or search queries.
-
-### 🧠 AI-Powered Translation & Romanization
-* **Sing Along in Any Language**: For non-English songs in non-Latin scripts, the app automatically generates line-by-line translations and romanizations side-by-side.
-* **Smart Language Detection**: Skips translations when the song is already in English or when translated lyrics are already available.
-* **Trimming & Safeguards**: AI processing is split for longer tracks so lyrics are never cut off.
-
-### 🔍 Multi-Stage Lyric Extraction
-The app searches the web using high-accuracy queries and extracts lyrics from pages through a 3-stage intelligence system:
-1. **Official Site Parsers**: Tailored extraction for major platforms like Genius and LyricsRaag.
-2. **Structural Heuristics**: Smart code patterns that isolate song text from other page clutter.
-3. **Generative AI Parsing**: A fallback mechanism that uses Gemini AI to clean up raw web text.
-
-### ⚡ Seamless Control & Tuning
-* **Adjustable Autoscroll**: Choose between Slow, Fast, or manual scrolling to match the song's tempo.
-* **Instant Source Swapping**: If you don't like the look of a lyric source, tap the swap button (⇕) to select other search results and re-extract on the fly.
-* **Screen Wake Lock**: Keep your phone's screen from turning off while reading lyrics.
-
-### 💾 Safe Data Management & Backups
-* **Bookmarks & Offline Cache**: Save your favorite song lyrics to access them offline.
-* **Privacy-First Backups**: Export and import your settings and translation history using Android's native file picker without giving the app permission to read your device's files.
-* **Data Safeguard Shield**: If the app updates its database, it automatically migrates and restores your saved tracks so you never lose your library.
+* **🎧 Real-Time Spotify Syncing**: Play a song in Spotify and open SpotLyric. The active track is detected automatically.
+* **🧠 AI-Powered Translation & Romanization**: For non-English songs in non-Latin scripts, the app displays original lyrics, romanization, and translations side-by-side or stacked.
+* **🔍 Multi-Stage Lyric Extraction**: Scrapes official lyrics platforms (Genius, LyricsRaag, LyricsWiz, LyricsDecoder, BollyMeaning) first, and falls back to Gemini AI for cleanup if needed.
+* **⚡ Seamless Controls**: Adjust autoscroll speed (Slow, Fast, or manual) and swap lyric search sources on the fly.
+* **💾 Data Backup & Portability**: Export and import your bookmarks, settings, and lyric history easily to transfer them between your phone and desktop.
 
 ---
 
-## Setup & Run
+## How to Install and Run
 
-To run SpotLyric, you need API keys from **Spotify (Developer Account)**, **SerpAPI (Google Search)**, and **Google AI Studio (Gemini API)**.
+To use SpotLyric on either platform, you will need to input your API keys in the **Settings** screen (see the Setup guide below).
 
-### Android Application
-1. Download or import the project directory `/android` in Android Studio.
-2. In your root `local.properties` (or `secrets.properties`), insert your credentials:
-   ```properties
-   SPOTIFY_CLIENT_ID=your_spotify_client_id
-   SERPAPI_KEY=your_serpapi_key
-   GEMINI_API_KEY=your_gemini_api_key
+### 1. Android Application (Mobile)
+A pre-compiled build is available in this repository:
+1. Copy [app-debug.apk](file:///home/pseudo/work/app-debug.apk) to your Android device.
+2. Install the APK (you may need to allow installations from unknown sources in your browser or file manager settings).
+3. Alternatively, if your phone is plugged in with USB debugging enabled, you can install it from your computer by running:
+   ```bash
+   ./install_app.sh
    ```
-3. Run the app on your Android device or emulator. Go to settings inside the app to customize search preferences.
 
-### Web Dashboard (Django)
-1. Navigate to the `web` directory:
-   ```bash
-   cd web
-   ```
-2. Set up your virtual environment and install dependencies:
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # Or .venv\Scripts\activate on Windows
-   pip install -r requirements.txt
-   ```
-3. Copy `.env.example` to `.env` and fill in your keys:
-   ```env
-   SPOTIFY_CLIENT_ID=your_spotify_client_id
-   SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
-   SPOTIFY_REDIRECT_URI=http://127.0.0.1:8000/spotify/callback
-   SERPAPI_KEY=your_serpapi_key
-   GEMINI_API_KEY=your_gemini_api_key
-   ```
-4. Run migrations and start the Django server:
-   ```bash
-   python manage.py migrate
-   python manage.py runserver
-   ```
-5. Open your browser and navigate to `http://127.0.0.1:8000/spotify/` to log in and start syncing.
+### 2. Desktop GUI Application (Python)
+Ensure Python 3.10+ and system-level **Tkinter** are installed:
+* **Debian/Ubuntu**: `sudo apt-get install python3-tk`
+* **Fedora**: `sudo dnf install python3-tkinter`
+* **macOS**: `brew install python-tk`
+* **Windows**: Bundled automatically with official Python installers.
+
+Launch the app from the terminal using the launcher script:
+```bash
+./run_desktop.sh
+```
+
+---
+
+## Setup & Configuration (First Time Run)
+
+Both the Android and Desktop apps allow you to paste your custom credentials directly on their **Settings** page. All API keys are free.
+
+### A. Spotify Integration
+To allow SpotLyric to see what is playing:
+1. Log in to the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard).
+2. Click **Create app**. Set **Redirect URI** to `http://localhost:8888/callback` (or your callback port).
+3. Save the app and copy the **Client ID** and **Client Secret**.
+4. Paste these into the settings page inside SpotLyric, save, and tap **Authorize**.
+
+### B. Google Search (SerpAPI) Key
+For finding lyrics links:
+1. Get a free API key at [SerpAPI](https://serpapi.com).
+2. Paste the key into settings (provides 100 free searches per month).
+
+### C. Gemini AI Key
+For translation and romanization:
+1. Get a free API key at [Google AI Studio](https://aistudio.google.com).
+2. Paste the key into settings.
