@@ -27,37 +27,21 @@ def extract_and_translate_lyrics(url, song_name, artist_name):
     confidence = 1.0
     original_language = ""
 
-    # Stage 1: Domain Parser
-    domain_result = extractor.try_domain_parser(html, url)
-    if domain_result:
-        original_lyrics = domain_result["original_lyrics"]
-        translated_lyrics = domain_result["translated_lyrics"]
-        extraction_stage = domain_result["stage"]
-        confidence = domain_result["confidence"]
-    else:
-        # Stage 2: Heuristics
-        heuristic_result = extractor.try_heuristics(html)
-        if heuristic_result:
-            original_lyrics = heuristic_result["original_lyrics"]
-            translated_lyrics = heuristic_result["translated_lyrics"]
-            extraction_stage = heuristic_result["stage"]
-            confidence = heuristic_result["confidence"]
-        else:
-            # Stage 3: Gemini fallback
-            clean_content = extractor.clean_html_for_gemini(html)
-            if not clean_content:
-                raise Exception("Failed to extract readable text from this webpage. Please try another source.")
-                
-            gemini_result = translator.extract_lyrics_from_content(clean_content, song_name, artist_name)
-            if not gemini_result.get("success"):
-                error_msg = gemini_result.get("extraction_notes") or gemini_result.get("error") or "Gemini extraction failed."
-                raise Exception(error_msg)
-                
-            original_lyrics = gemini_result.get("original_lyrics", "")
-            translated_lyrics = gemini_result.get("translated_lyrics", "")
-            extraction_stage = "AI"
-            confidence = gemini_result.get("confidence_score", 0.5)
-            original_language = gemini_result.get("original_language", "")
+    # Stage 3: Gemini fallback (Domain parser and heuristics bypassed)
+    clean_content = extractor.clean_html_for_gemini(html)
+    if not clean_content:
+        raise Exception("Failed to extract readable text from this webpage. Please try another source.")
+        
+    gemini_result = translator.extract_lyrics_from_content(clean_content, song_name, artist_name)
+    if not gemini_result.get("success"):
+        error_msg = gemini_result.get("extraction_notes") or gemini_result.get("error") or "Gemini extraction failed."
+        raise Exception(error_msg)
+        
+    original_lyrics = gemini_result.get("original_lyrics", "")
+    translated_lyrics = gemini_result.get("translated_lyrics", "")
+    extraction_stage = "AI"
+    confidence = gemini_result.get("confidence_score", 0.5)
+    original_language = gemini_result.get("original_language", "")
 
     if not original_lyrics or not original_lyrics.strip():
         raise Exception("No lyrics found in the extracted content. Please try another source.")

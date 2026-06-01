@@ -135,46 +135,35 @@ class PlayerRepositoryImpl @Inject constructor(
             throw Exception("This source is protected by Cloudflare bot protection. Please choose another source from the list.")
         }
 
-        // Step 2: Multi-stage extraction
+        // Step 2: Multi-stage extraction - Only AI parsing is active
         val originalLyrics: String
         val translatedLyrics: String
         val extractionStage: String
         val confidence: Float
         var originalLanguage: String = ""
 
-        val domainResult = lyricsExtractorService.tryDomainParser(html, url)
-        val heuristicResult = if (domainResult == null) lyricsExtractorService.tryHeuristics(html) else null
+        // Stage 3: Gemini fallback (Domain parser and heuristics bypassed)
+        val cleanContent = lyricsExtractorService.cleanHtmlForGemini(html)
+            ?: throw Exception("Failed to extract readable text from this webpage. Please try another source.")
 
-        val offDeviceResult = domainResult ?: heuristicResult
-        if (offDeviceResult != null) {
-            originalLyrics = offDeviceResult.originalLyrics
-            translatedLyrics = offDeviceResult.translatedLyrics
-            extractionStage = offDeviceResult.stage
-            confidence = offDeviceResult.confidence
-        } else {
-            // Stage 3: Gemini fallback
-            val cleanContent = lyricsExtractorService.cleanHtmlForGemini(html)
-                ?: throw Exception("Failed to extract readable text from this webpage. Please try another source.")
-
-            val geminiResult = geminiLyricsService.extractLyricsFromContent(cleanContent, songName, artistName)
-            val extractedData = when (geminiResult) {
-                is LyricsResult.Success -> geminiResult.data
-                is LyricsResult.Error -> throw Exception(geminiResult.message)
-            }
-
-            if (!extractedData.success) {
-                throw Exception(extractedData.extractionNotes.takeIf { it.isNotBlank() } ?: "Lyrics extraction failed")
-            }
-            if (extractedData.originalLyrics.isBlank()) {
-                throw Exception("No lyrics found in the extracted content")
-            }
-
-            originalLyrics = extractedData.originalLyrics
-            translatedLyrics = extractedData.translatedLyrics
-            extractionStage = "AI"
-            confidence = extractedData.confidenceScore
-            originalLanguage = extractedData.originalLanguage
+        val geminiResult = geminiLyricsService.extractLyricsFromContent(cleanContent, songName, artistName)
+        val extractedData = when (geminiResult) {
+            is LyricsResult.Success -> geminiResult.data
+            is LyricsResult.Error -> throw Exception(geminiResult.message)
         }
+
+        if (!extractedData.success) {
+            throw Exception(extractedData.extractionNotes.takeIf { it.isNotBlank() } ?: "Lyrics extraction failed")
+        }
+        if (extractedData.originalLyrics.isBlank()) {
+            throw Exception("No lyrics found in the extracted content")
+        }
+
+        originalLyrics = extractedData.originalLyrics
+        translatedLyrics = extractedData.translatedLyrics
+        extractionStage = "AI"
+        confidence = extractedData.confidenceScore
+        originalLanguage = extractedData.originalLanguage
 
         if (originalLyrics.isBlank()) {
             throw Exception("No lyrics found in the extracted content")
