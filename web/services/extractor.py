@@ -243,7 +243,7 @@ def try_lyrics_decoder_parser(soup):
         translated_paragraphs = []
         next_sibling = heading.next_sibling
         while next_sibling:
-            if hasattr(next_sibling, "name"):
+            if hasattr(next_sibling, "name") and next_sibling.name is not None:
                 tag = next_sibling.name.lower()
                 if tag in ["h2", "h3", "div", "footer"]:
                     break
@@ -274,7 +274,7 @@ def try_bolly_meaning_parser(soup):
     
     # Iterate direct children of post_body
     for node in post_body.contents:
-        if hasattr(node, "name") and node.name.lower() == "b":
+        if hasattr(node, "name") and node.name is not None and node.name.lower() == "b":
             trans_str = "".join(current_translated).strip()
             if trans_str:
                 clean_trans = "\n".join(line.strip() for line in trans_str.split("\n") if line.strip())
@@ -299,7 +299,7 @@ def try_bolly_meaning_parser(soup):
                 text = str(node).strip()
                 if text:
                     current_translated.append(text + "\n")
-            elif hasattr(node, "name"):
+            elif hasattr(node, "name") and node.name is not None:
                 tag = node.name.lower()
                 text = node.get_text().strip()
                 

@@ -45,13 +45,23 @@ class AuthPreferences @Inject constructor(
         return context.dataStore.data.map { it[SPOTIFY_REFRESH_TOKEN] }.first()
     }
 
+    suspend fun getExpiresAt(): Long? {
+        return context.dataStore.data.map { it[SPOTIFY_EXPIRES_AT] }.first()
+    }
+
     /**
      * Token validity check with 60-second buffer — mirrors Django's is_token_expired().
+     * A session is valid if we have an access token and it's either not expired or we have a refresh token.
      */
     fun isTokenValid(): Flow<Boolean> = context.dataStore.data.map { prefs ->
-        val expiresAt = prefs[SPOTIFY_EXPIRES_AT] ?: return@map false
+        val expiresAt = prefs[SPOTIFY_EXPIRES_AT]
         val now = System.currentTimeMillis() / 1000
-        now < (expiresAt - 60)
+        val hasAccessToken = !prefs[SPOTIFY_TOKEN].isNullOrBlank()
+        val isExpired = expiresAt == null || now >= (expiresAt - 60)
+        
+        val hasRefreshToken = !prefs[SPOTIFY_REFRESH_TOKEN].isNullOrBlank()
+        
+        hasAccessToken && (!isExpired || hasRefreshToken)
     }
 
     suspend fun clearToken() {

@@ -1,5 +1,31 @@
 from services import database, extractor, translator, search
 
+def is_text_romanized(text):
+    """
+    Returns True if the text is primarily written in Latin script (e.g. Romaji/English/Spanish).
+    """
+    if not text:
+        return True
+    
+    latin_chars = 0
+    non_latin_chars = 0
+    
+    for char in text:
+        if not char.isalpha():
+            continue
+        # Check if the character is in the Latin range U+0000 to U+024F
+        if ord(char) <= 0x024F:
+            latin_chars += 1
+        else:
+            non_latin_chars += 1
+            
+    total = latin_chars + non_latin_chars
+    if total == 0:
+        return True
+        
+    # If more than 15% of the alphabetic characters are non-Latin, it's NOT romanized.
+    return (non_latin_chars / total) < 0.15
+
 def extract_and_translate_lyrics(url, song_name, artist_name):
     """
     Full pipeline matching Android:
@@ -42,23 +68,36 @@ def extract_and_translate_lyrics(url, song_name, artist_name):
     extraction_stage = "AI"
     confidence = gemini_result.get("confidence_score", 0.5)
     original_language = gemini_result.get("original_language", "")
-
     if not original_lyrics or not original_lyrics.strip():
         raise Exception("No lyrics found in the extracted content. Please try another source.")
 
-    # 3. Conditional AI Translation
-    # Skip if we already have translated lyrics, or if original language is English
-    skip_ai_translation = bool(translated_lyrics.strip()) or original_language.lower() == "en"
+    # 3. Conditional AI Translation and Romanization
+    original_is_romanized = is_text_romanized(original_lyrics)
+    has_source_translation = bool(translated_lyrics and translated_lyrics.strip())
+    
+    # We need translation if:
+    # - There is no source translation, AND
+    # - The original language is not English
+    need_translation = not has_source_translation and original_language.lower() != "en"
+    
+    # We need romanization if:
+    # - The original lyrics are NOT romanized
+    need_romanization = not original_is_romanized
+    
+    # We need to call AI if we need translation OR if we need romanization
+    need_ai = need_translation or need_romanization
     
     ai_romanized = None
     ai_translation = None
     
-    if not skip_ai_translation:
+    if need_ai:
         try:
             ai_result = translator.generate_ai_translation_chunked(original_lyrics, song_name, artist_name)
             if ai_result.get("success"):
-                ai_romanized = ai_result.get("romanized_lyrics")
-                ai_translation = ai_result.get("word_to_word_translation")
+                if need_romanization:
+                    ai_romanized = ai_result.get("romanized_lyrics")
+                if need_translation:
+                    ai_translation = ai_result.get("word_to_word_translation")
                 if not original_language:
                     original_language = ai_result.get("detected_language", "")
         except Exception as e:
@@ -148,15 +187,31 @@ def generate_ai_translation_manual(song_name, artist_name, source_url):
         
         lyrics = database.get_lyrics(song_name, artist_name)
 
-    # 2. Generate translation
+    # 2. Generate translation and romanization
     original_lyrics = lyrics["original_lyrics"]
-    ai_result = translator.generate_ai_translation(original_lyrics, song_name, artist_name)
-    if not ai_result.get("success"):
-        raise Exception(ai_result.get("error", "AI translation failed."))
+    translated_lyrics = lyrics.get("translated_lyrics", "")
+    original_language = lyrics.get("original_language", "") or ""
 
-    ai_romanized = ai_result.get("romanized_lyrics", "")
-    ai_translation = ai_result.get("word_to_word_translation", "")
-    
+    original_is_romanized = is_text_romanized(original_lyrics)
+    has_source_translation = bool(translated_lyrics and translated_lyrics.strip())
+
+    need_translation = not has_source_translation and original_language.lower() != "en"
+    need_romanization = not original_is_romanized
+    need_ai = need_translation or need_romanization
+
+    ai_romanized = None
+    ai_translation = None
+
+    if need_ai:
+        ai_result = translator.generate_ai_translation(original_lyrics, song_name, artist_name)
+        if not ai_result.get("success"):
+            raise Exception(ai_result.get("error", "AI translation failed."))
+        
+        if need_romanization:
+            ai_romanized = ai_result.get("romanized_lyrics", "")
+        if need_translation:
+            ai_translation = ai_result.get("word_to_word_translation", "")
+
     database.update_ai_fields(lyrics["bookmark_id"], ai_romanized, ai_translation)
     
     lyrics["ai_romanized"] = ai_romanized

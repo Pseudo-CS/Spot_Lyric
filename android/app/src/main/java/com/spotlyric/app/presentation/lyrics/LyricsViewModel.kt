@@ -150,30 +150,10 @@ class LyricsViewModel @Inject constructor(
         val current = _state.value
         if (current !is LyricsUiState.Loaded) return
 
-        viewModelScope.launch {
-            _state.update {
-                if (it is LyricsUiState.Loaded) it.copy(
-                    showAiSourcesDialog = true,
-                    isLoadingAiSources = true,
-                ) else it
-            }
-            try {
-                val sources = searchLyricsSourcesUseCase(currentSongName, currentArtistName)
-                _state.update {
-                    if (it is LyricsUiState.Loaded) it.copy(
-                        aiSources = sources,
-                        isLoadingAiSources = false,
-                    ) else it
-                }
-            } catch (e: Exception) {
-                _state.update {
-                    if (it is LyricsUiState.Loaded) it.copy(
-                        showAiSourcesDialog = false,
-                        isLoadingAiSources = false,
-                    ) else it
-                }
-            }
-        }
+        val sourceUrl = current.lyrics.sourceUrl
+        if (sourceUrl.isNullOrBlank()) return
+
+        extractAndTranslate(sourceUrl)
     }
 
     fun dismissAiSourcesDialog() {

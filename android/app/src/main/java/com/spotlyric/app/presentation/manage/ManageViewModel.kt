@@ -91,31 +91,27 @@ class ManageViewModel @Inject constructor(
     }
 
     fun startAiTranslate(song: BookmarkedSong) {
+        val sourceUrl = song.bookmarkedUrl
+        if (sourceUrl.isBlank()) {
+            viewModelScope.launch {
+                _uiEvent.send(ManageUiEvent.ShowToast("No source URL available for this bookmark."))
+            }
+            return
+        }
+
         viewModelScope.launch {
             _state.update {
                 it.copy(
-                    pendingAiSongId = song.id,
-                    showAiSourcesDialog = true,
-                    isLoadingAiSources = true,
+                    aiTranslatingId = song.id
                 )
             }
             try {
-                val sources = searchLyricsSourcesUseCase(song.songName, song.artistName)
-                _state.update {
-                    it.copy(
-                        aiSources = sources,
-                        isLoadingAiSources = false,
-                    )
-                }
-            } catch (_: Exception) {
-                _state.update {
-                    it.copy(
-                        showAiSourcesDialog = false,
-                        isLoadingAiSources = false,
-                        pendingAiSongId = null,
-                    )
-                }
+                manageRepository.generateAiTranslation(song.id, sourceUrl)
+            } catch (e: Exception) {
+                android.util.Log.e("ManageViewModel", "Error generating AI translation", e)
+                _uiEvent.send(ManageUiEvent.ShowToast(e.message ?: "AI translation failed"))
             }
+            _state.update { it.copy(aiTranslatingId = null) }
         }
     }
 

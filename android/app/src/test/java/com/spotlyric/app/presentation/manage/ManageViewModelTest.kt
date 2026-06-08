@@ -106,12 +106,11 @@ class ManageViewModelTest {
     }
 
     @Test
-    fun `startAiTranslate - updates pending state and searches sources`() = runTest {
+    fun `startAiTranslate - success calls generateAiTranslation`() = runTest {
         val song = BookmarkedSong(1L, "Song A", "Artist A", "http://a.com", "Title A", true)
-        val sources = listOf(LyricsSource("Source A", "http://a-lyrics.com"))
 
         coEvery { getSongsUseCase.search("") } returns flowOf(emptyList())
-        coEvery { searchLyricsSourcesUseCase(song.songName, song.artistName) } returns sources
+        coEvery { manageRepository.generateAiTranslation(1L, "http://a.com") } returns true
 
         val viewModel = ManageViewModel(
             getSongsUseCase,
@@ -122,45 +121,17 @@ class ManageViewModelTest {
 
         viewModel.startAiTranslate(song)
 
-        assertEquals(1L, viewModel.state.value.pendingAiSongId)
-        assertEquals(sources, viewModel.state.value.aiSources)
-        assertEquals(false, viewModel.state.value.isLoadingAiSources)
-    }
-
-    @Test
-    fun `confirmAiTranslate - success calls generateAiTranslation`() = runTest {
-        val song = BookmarkedSong(1L, "Song A", "Artist A", "http://a.com", "Title A", true)
-        val sourceUrl = "http://a-lyrics.com"
-
-        coEvery { getSongsUseCase.search("") } returns flowOf(emptyList())
-        coEvery { searchLyricsSourcesUseCase(song.songName, song.artistName) } returns emptyList()
-        coEvery { manageRepository.generateAiTranslation(1L, sourceUrl) } returns mockk()
-
-        val viewModel = ManageViewModel(
-            getSongsUseCase,
-            deleteSongUseCase,
-            searchLyricsSourcesUseCase,
-            manageRepository
-        )
-
-        // First set the pending song ID
-        viewModel.startAiTranslate(song)
-
-        viewModel.confirmAiTranslate(sourceUrl)
-
-        coVerify { manageRepository.generateAiTranslation(1L, sourceUrl) }
+        coVerify { manageRepository.generateAiTranslation(1L, "http://a.com") }
         assertNull(viewModel.state.value.aiTranslatingId)
     }
 
     @Test
-    fun `confirmAiTranslate - failure emits ShowToast event`() = runTest {
+    fun `startAiTranslate - failure emits ShowToast event`() = runTest {
         val song = BookmarkedSong(1L, "Song A", "Artist A", "http://a.com", "Title A", true)
-        val sourceUrl = "http://a-lyrics.com"
         val exceptionMessage = "API Limit Exceeded"
 
         coEvery { getSongsUseCase.search("") } returns flowOf(emptyList())
-        coEvery { searchLyricsSourcesUseCase(song.songName, song.artistName) } returns emptyList()
-        coEvery { manageRepository.generateAiTranslation(1L, sourceUrl) } throws Exception(exceptionMessage)
+        coEvery { manageRepository.generateAiTranslation(1L, "http://a.com") } throws Exception(exceptionMessage)
 
         val viewModel = ManageViewModel(
             getSongsUseCase,
@@ -169,15 +140,13 @@ class ManageViewModelTest {
             manageRepository
         )
 
-        // Set the pending song ID
-        viewModel.startAiTranslate(song)
-
         viewModel.uiEvent.test {
-            viewModel.confirmAiTranslate(sourceUrl)
+            viewModel.startAiTranslate(song)
             val event = awaitItem()
             assertTrue(event is ManageUiEvent.ShowToast)
             assertEquals(exceptionMessage, (event as ManageUiEvent.ShowToast).message)
             cancelAndConsumeRemainingEvents()
         }
+        assertNull(viewModel.state.value.aiTranslatingId)
     }
 }

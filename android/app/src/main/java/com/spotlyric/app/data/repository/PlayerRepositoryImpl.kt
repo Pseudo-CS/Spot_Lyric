@@ -169,11 +169,23 @@ class PlayerRepositoryImpl @Inject constructor(
             throw Exception("No lyrics found in the extracted content")
         }
 
-        // Step 3: Conditional AI translation — skip if already translated or original is English
-        val skipAiTranslation = translatedLyrics.isNotBlank() || originalLanguage == "en"
-        android.util.Log.d("PlayerRepository", "skipAiTranslation=$skipAiTranslation (translatedBlank=${translatedLyrics.isBlank()}, lang=$originalLanguage)")
+        // Step 3: Conditional AI translation & romanization
+        val originalIsRomanized = com.spotlyric.app.domain.util.TextUtil.isTextRomanized(originalLyrics)
+        val hasSourceTranslation = translatedLyrics.isNotBlank()
+        
+        // We need translation if:
+        // - There is no source translation, AND
+        // - The original language is not English
+        val needTranslation = !hasSourceTranslation && originalLanguage != "en"
+        
+        // We need romanization if:
+        // - The original lyrics are NOT romanized
+        val needRomanization = !originalIsRomanized
+        
+        val needAi = needTranslation || needRomanization
+        android.util.Log.d("PlayerRepository", "originalIsRomanized=$originalIsRomanized, needTranslation=$needTranslation, needRomanization=$needRomanization, needAi=$needAi")
 
-        val aiResult = if (!skipAiTranslation) {
+        val aiResult = if (needAi) {
             geminiLyricsService.generateAiTranslationChunked(originalLyrics, songName, artistName)
         } else null
 
@@ -195,7 +207,11 @@ class PlayerRepositoryImpl @Inject constructor(
         songLyricsDao.deleteByBookmarkId(bookmark.id)
 
         val (aiRomanized, aiTranslation) = when (aiResult) {
-            is LyricsResult.Success -> aiResult.data.romanizedLyrics to aiResult.data.wordToWordTranslation
+            is LyricsResult.Success -> {
+                val rom = if (needRomanization) aiResult.data.romanizedLyrics else null
+                val trans = if (needTranslation) aiResult.data.wordToWordTranslation else null
+                rom to trans
+            }
             is LyricsResult.Error -> {
                 android.util.Log.w("PlayerRepository", "AI translation failed: ${aiResult.message}")
                 null to null
@@ -303,23 +319,40 @@ class PlayerRepositoryImpl @Inject constructor(
             lyrics = songLyricsDao.findBySongAndArtist(songName, artistName)!!
         }
 
-        // Generate AI translation
-        val aiResult = geminiLyricsService.generateAiTranslation(
-            lyrics.originalLyrics, songName, artistName
-        )
+        // Generate AI translation and romanization
+        val originalIsRomanized = com.spotlyric.app.domain.util.TextUtil.isTextRomanized(lyrics.originalLyrics)
+        val hasSourceTranslation = lyrics.translatedLyrics.isNotBlank()
+        val originalLanguage = lyrics.originalLanguage ?: ""
 
-        val translationData = when (aiResult) {
-            is LyricsResult.Success -> aiResult.data
-            is LyricsResult.Error -> 
-                throw Exception(aiResult.message)
+        val needTranslation = !hasSourceTranslation && originalLanguage != "en"
+        val needRomanization = !originalIsRomanized
+        val needAi = needTranslation || needRomanization
+
+        var aiRomanized: String? = null
+        var aiTranslation: String? = null
+
+        if (needAi) {
+            val aiResult = geminiLyricsService.generateAiTranslation(
+                lyrics.originalLyrics, songName, artistName
+            )
+
+            val translationData = when (aiResult) {
+                is LyricsResult.Success -> aiResult.data
+                is LyricsResult.Error -> 
+                    throw Exception(aiResult.message)
+            }
+
+            if (!translationData.success) {
+                throw Exception("AI translation failed")
+            }
+
+            if (needRomanization) {
+                aiRomanized = translationData.romanizedLyrics
+            }
+            if (needTranslation) {
+                aiTranslation = translationData.wordToWordTranslation
+            }
         }
-
-        if (!translationData.success) {
-            throw Exception("AI translation failed")
-        }
-
-        val aiRomanized = translationData.romanizedLyrics
-        val aiTranslation = translationData.wordToWordTranslation
 
         songLyricsDao.updateAiFields(lyrics.bookmarkId, aiRomanized, aiTranslation)
 

@@ -112,6 +112,7 @@ class GeminiLyricsService @Inject constructor(
             val prompt = createLyricsExtractionPrompt(songName, artistName) + content
             
             val response = getExtractionModel().generateContent(prompt)
+            settingsPreferences.incrementGeminiRequests()
             val responseText = response.text
                 ?: return LyricsResult.Error(
                     code = ErrorCode.INVALID_JSON_RESPONSE,
@@ -155,6 +156,7 @@ class GeminiLyricsService @Inject constructor(
             val prompt = createAiTranslationPrompt(originalLyrics, songName, artistName)
             
             val response = getTranslationModel().generateContent(prompt)
+            settingsPreferences.incrementGeminiRequests()
             val responseText = response.text
                 ?: return LyricsResult.Error(
                     code = ErrorCode.INVALID_JSON_RESPONSE,

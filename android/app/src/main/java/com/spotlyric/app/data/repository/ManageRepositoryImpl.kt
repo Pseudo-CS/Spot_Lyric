@@ -6,6 +6,7 @@ import com.spotlyric.app.data.local.db.entity.BookmarkedSongEntity
 import com.spotlyric.app.data.local.db.entity.SongLyricsEntity
 import com.spotlyric.app.data.remote.extractor.LyricsExtractorService
 import com.spotlyric.app.data.remote.gemini.GeminiLyricsService
+import com.spotlyric.app.data.remote.gemini.ExtractionResponse
 import com.spotlyric.app.domain.error.LyricsResult
 import com.spotlyric.app.domain.model.BookmarkedSong
 import com.spotlyric.app.domain.repository.ManageRepository
@@ -47,6 +48,7 @@ class ManageRepositoryImpl @Inject constructor(
         val lyrics = songLyricsDao.findByBookmarkId(bookmarkId)
 
         val originalLyrics: String
+        var extractedData: ExtractionResponse? = null
         if (lyrics == null || lyrics.originalLyrics.isBlank()) {
             // Need to extract lyrics from source URL first
             val html = lyricsExtractorService.fetchPageContent(sourceUrl)
@@ -72,17 +74,17 @@ class ManageRepositoryImpl @Inject constructor(
                 cleanContent, songName, artistName
             )
             
-            val extractedData = when (extractionResult) {
+            val data = when (extractionResult) {
                 is LyricsResult.Success -> extractionResult.data
                 is LyricsResult.Error -> 
                     throw Exception(extractionResult.message)
             }
             
-            if (!extractedData.success) {
-                throw Exception(extractedData.extractionNotes.takeIf { it.isNotBlank() } ?: "Lyrics extraction failed")
+            if (!data.success) {
+                throw Exception(data.extractionNotes.takeIf { it.isNotBlank() } ?: "Lyrics extraction failed")
             }
 
-            originalLyrics = extractedData.originalLyrics
+            originalLyrics = data.originalLyrics
             if (originalLyrics.isBlank()) {
                 throw Exception("No lyrics found")
             }
@@ -91,29 +93,59 @@ class ManageRepositoryImpl @Inject constructor(
                 SongLyricsEntity(
                     bookmarkId = bookmarkId,
                     originalLyrics = originalLyrics,
-                    translatedLyrics = extractedData.translatedLyrics
+                    translatedLyrics = data.translatedLyrics
                 )
             )
+            extractedData = data
         } else {
             originalLyrics = lyrics.originalLyrics
         }
 
-        // Generate AI translation
-        val aiResult = geminiLyricsService.generateAiTranslation(
-            originalLyrics, "", ""  // song/artist not strictly needed for translation
-        )
-
-        val translationData = when (aiResult) {
-            is LyricsResult.Success -> aiResult.data
-            is LyricsResult.Error -> 
-                throw Exception(aiResult.message)
+        val currentTranslatedLyrics = if (lyrics == null) {
+            extractedData?.translatedLyrics ?: ""
+        } else {
+            lyrics.translatedLyrics ?: ""
+        }
+        val currentOriginalLanguage = if (lyrics == null) {
+            extractedData?.originalLanguage ?: ""
+        } else {
+            lyrics.originalLanguage ?: ""
         }
 
-        if (!translationData.success) {
-            throw Exception(translationData.translationNotes.takeIf { it.isNotBlank() } ?: "AI translation failed")
+        // Generate AI translation and romanization
+        val originalIsRomanized = com.spotlyric.app.domain.util.TextUtil.isTextRomanized(originalLyrics)
+        val hasSourceTranslation = currentTranslatedLyrics.isNotBlank()
+        val needTranslation = !hasSourceTranslation && currentOriginalLanguage != "en"
+        val needRomanization = !originalIsRomanized
+        val needAi = needTranslation || needRomanization
+
+        var aiRomanized: String? = null
+        var aiTranslation: String? = null
+
+        if (needAi) {
+            val aiResult = geminiLyricsService.generateAiTranslation(
+                originalLyrics, "", ""  // song/artist not strictly needed for translation
+            )
+
+            val translationData = when (aiResult) {
+                is LyricsResult.Success -> aiResult.data
+                is LyricsResult.Error -> 
+                    throw Exception(aiResult.message)
+            }
+
+            if (!translationData.success) {
+                throw Exception(translationData.translationNotes.takeIf { it.isNotBlank() } ?: "AI translation failed")
+            }
+
+            if (needRomanization) {
+                aiRomanized = translationData.romanizedLyrics
+            }
+            if (needTranslation) {
+                aiTranslation = translationData.wordToWordTranslation
+            }
         }
 
-        songLyricsDao.updateAiFields(bookmarkId, translationData.romanizedLyrics, translationData.wordToWordTranslation)
+        songLyricsDao.updateAiFields(bookmarkId, aiRomanized, aiTranslation)
         true
     }
 

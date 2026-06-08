@@ -15,6 +15,8 @@ import net.openid.appauth.AuthorizationResponse
 import net.openid.appauth.AuthorizationService
 import net.openid.appauth.ResponseTypeValues
 import net.openid.appauth.TokenResponse
+import net.openid.appauth.TokenRequest
+import net.openid.appauth.GrantTypeValues
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.coroutines.resume
@@ -36,7 +38,16 @@ class AuthRepositoryImpl @Inject constructor(
 
     override fun isTokenValid(): Flow<Boolean> = authPreferences.isTokenValid()
 
-    override suspend fun getToken(): String? = authPreferences.getToken()
+    override suspend fun getToken(): String? {
+        val expiresAt = authPreferences.getExpiresAt() ?: 0L
+        val now = System.currentTimeMillis() / 1000
+        val isExpired = now >= (expiresAt - 60)
+        
+        if (isExpired && authPreferences.getRefreshToken() != null) {
+            refreshToken()
+        }
+        return authPreferences.getToken()
+    }
 
     override suspend fun buildAuthIntent(): Intent {
         val clientId = settingsPreferences.spotifyCustomClientId.first()
@@ -90,9 +101,51 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun refreshToken(): Boolean {
         // Spotify PKCE public clients can refresh tokens if we have a refresh token
         val refreshToken = authPreferences.getRefreshToken() ?: return false
-        // AppAuth doesn't directly expose refresh for PKCE without a saved AuthState.
-        // For simplicity, we redirect to login when token expires.
-        return false
+        val clientId = settingsPreferences.spotifyCustomClientId.first()
+        if (clientId.isNullOrBlank()) return false
+
+        val tokenRequest = TokenRequest.Builder(
+            SpotifyAuthConfig.SERVICE_CONFIG,
+            clientId
+        )
+            .setGrantType(GrantTypeValues.REFRESH_TOKEN)
+            .setRefreshToken(refreshToken)
+            .build()
+
+        return try {
+            val tokenResponse = suspendCoroutine<TokenResponse?> { continuation ->
+                authService.performTokenRequest(tokenRequest) { tokenResponse, tokenException ->
+                    if (tokenResponse != null) {
+                        continuation.resume(tokenResponse)
+                    } else {
+                        continuation.resumeWithException(tokenException ?: Exception("Token refresh failed"))
+                    }
+                }
+            }
+
+            if (tokenResponse != null) {
+                val accessToken = tokenResponse.accessToken ?: throw Exception("No access token returned")
+                val newRefreshToken = tokenResponse.refreshToken ?: refreshToken
+                val expiresIn = tokenResponse.accessTokenExpirationTime?.let {
+                    (it - System.currentTimeMillis()) / 1000
+                } ?: 3600L
+
+                authPreferences.saveToken(accessToken, newRefreshToken, expiresIn)
+                true
+            } else {
+                false
+            }
+        } catch (e: AuthorizationException) {
+            android.util.Log.e("AuthRepository", "AuthException refreshing token: ${e.message}")
+            if (e.type == AuthorizationException.TYPE_OAUTH_TOKEN_ERROR) {
+                // The refresh token is invalid / revoked, clear to force re-login
+                clearToken()
+            }
+            false
+        } catch (e: Exception) {
+            android.util.Log.e("AuthRepository", "Failed to refresh token: ${e.message}")
+            false
+        }
     }
 
     override suspend fun clearToken() {
